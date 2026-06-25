@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco Pichincha – Agencias 2.0 | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #5B4CFF;
+      --dark: #111;
+      --text: #333;
+      --muted: #777;
+      --border: #e5e5e5;
+      --accent: #E65100;
+      --accent-light: #ff9800;
+      --yellow: #FFC400;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    body .en { display: none; }
+    body.lang-en .es { display: none; }
+    body.lang-en .en { display: block; }
+    span.en, a.en { display: none; }
+    body.lang-en span.es, body.lang-en a.es { display: none; }
+    body.lang-en span.en, body.lang-en a.en { display: inline; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    .process-section { border-top: 1px solid var(--border); padding: 64px 24px; }
+    .process-inner { max-width: 900px; margin: 0 auto; }
+    .section-num { font-family: 'Poppins', sans-serif; font-size: 96px; font-weight: 700; color: var(--accent); opacity: 0.08; line-height: 1; margin-bottom: -32px; }
+    .section-divider { height: 4px; background: var(--purple); border-radius: 2px; max-width: 48px; margin-bottom: 20px; }
+    .section-heading { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+    .section-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+    .sub-heading { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--dark); margin: 40px 0 10px; }
+
+    .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+    .insight-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .insight-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; }
+    .insight-card-icon { font-size: 22px; margin-bottom: 10px; }
+    .insight-card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 8px; }
+    .insight-card-text { font-size: 13px; color: #555; line-height: 1.65; }
+    .stats-row { display: flex; gap: 0; margin: 24px 0; background: #f8f8f8; border-radius: 12px; overflow: hidden; }
+    .stat-item { flex: 1; text-align: center; padding: 28px 16px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.4; }
+    .hmw-box { background: var(--yellow); color: #111; border-radius: 12px; padding: 32px 36px; margin: 24px 0; }
+    .hmw-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-bottom: 12px; }
+    .hmw-text { font-family: 'Poppins', sans-serif; font-size: 21px; font-weight: 600; line-height: 1.45; }
+    .finding-card { background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:22px; }
+    .finding-card .ico { width:42px;height:42px;border-radius:10px;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px; }
+    .finding-card h5 { font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;color:var(--accent);margin-bottom:8px; }
+    .finding-card ul { list-style:none;padding:0;margin:0; }
+    .finding-card li { font-size:13px;color:#555;line-height:1.55;padding:5px 0 5px 14px;position:relative; }
+    .finding-card li::before { content:"–";position:absolute;left:0;color:var(--accent); }
+
+    .case-img { width: 100%; border-radius: 12px; margin: 18px 0 6px; box-shadow: 0 6px 24px rgba(0,0,0,0.10); display: block; border: 1px solid var(--border); background:#fff; }
+    .img-caption { font-size: 12px; color: #999; text-align: center; margin-bottom: 24px; line-height: 1.5; }
+
+    /* Pyramid */
+    .pyramid { display:flex; flex-direction:column; align-items:center; gap:6px; margin:24px 0 8px; }
+    .tier { color:#fff; font-weight:700; font-family:'Poppins',sans-serif; text-align:center; padding:14px 8px; border-radius:6px; font-size:15px; }
+    .tier.t1 { width:42%; background:#E65100; }
+    .tier.t2 { width:64%; background:#1a3a6b; }
+    .tier.t3 { width:86%; background:#FFC400; color:#111; }
+    .tier small { display:block; font-weight:500; font-size:11px; opacity:0.85; margin-top:3px; }
+
+    .hub { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:24px 0; }
+    .hub-card { border:1.5px solid var(--border); border-radius:12px; padding:18px; }
+    .hub-card h5 { font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+    .hub-card p { font-size:13px; color:#555; line-height:1.55; }
+
+    .result-banner { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .result-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .result-text { font-size: 14px; opacity: 0.95; line-height: 1.8; }
+
+    @media (max-width: 760px) { .main-layout { grid-template-columns: 1fr !important; } .sidebar { position: static !important; } }
+    @media (max-width: 640px) {
+      .insight-grid, .insight-grid-2, .hub { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .section-num { font-size: 60px; }
+      .tier.t1,.tier.t2,.tier.t3 { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:#FFC400;color:#1a1a1a;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:240px;font-weight:700;opacity:0.10;font-family:'Poppins', sans-serif;line-height:1;pointer-events:none;user-select:none;">P</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.7;margin-bottom:16px;">Service Design · Phygital · Banco Pichincha</p>
+    <h1 style="font-size:clamp(34px,6vw,60px);font-weight:700;line-height:1.1;margin-bottom:12px;">Agencias 2.0</h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.9;margin-bottom:8px;"><span class="es">Rediseño de la experiencia phygital en agencias</span><span class="en">Phygital branch experience redesign</span></p>
+    <p style="font-size:17px;opacity:0.85;max-width:660px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Una experiencia transversal para que Banco Pichincha esté a la vanguardia de la nueva experiencia phygital dentro de sus agencias, integrando lo digital y lo presencial.</span>
+      <span class="en">A cross-cutting experience to put Banco Pichincha at the forefront of the new phygital experience inside its branches, integrating digital and in-person.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p>
+        <p style="font-weight:700;font-size:15px;">Senior Service Designer · Senior UX</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p>
+        <p style="font-weight:700;font-size:15px;">Banco Pichincha</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Duración</span><span class="en">Duration</span></p>
+        <p style="font-weight:700;font-size:15px;"><span class="es">7 meses · 2023</span><span class="en">7 months · 2023</span></p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Herramientas</span><span class="en">Tools</span></p>
+        <p style="font-weight:700;font-size:15px;">Figma · Mural · Excel</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<div class="main-layout" style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+  <div class="sidebar" style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Mi rol</span><span class="en">My role</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;">Senior Service Designer · Senior UX</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Industria</span><span class="en">Industry</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;">🏦 <span class="es">Banca · Retail</span><span class="en">Banking · Retail</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Duración</span><span class="en">Duration</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">7 meses (2023)</span><span class="en">7 months (2023)</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Artefactos</span><span class="en">Artifacts</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">Desk research, entrevistas a profundidad, lectura de data del banco, mapas de afinidad, trend analysis, HMWs, ideación, brainstorm, journey map, service blueprint, priorizaciones, prototipado.</span><span class="en">Desk research, in-depth interviews, bank data analysis, affinity maps, trend analysis, HMWs, ideation, brainstorm, journey map, service blueprint, prioritizations, prototyping.</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Herramientas</span><span class="en">Tools</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;">
+        <span style="background:#fff3e0;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Figma</span>
+        <span style="background:#fff3e0;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Mural</span>
+        <span style="background:#fff3e0;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Excel</span>
+        <span style="background:#fff3e0;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">RRSS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="fade-in">
+    <h2 style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">¿Cómo empezó?</span><span class="en">How did it start?</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">El proyecto tuvo como objetivo conocer cuál es la experiencia actual del cliente y no cliente que visita una agencia Pichincha, y cuál sería la experiencia ideal de un nuevo modelo de agencia.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">The project aimed to understand the current experience of clients and non-clients visiting a Pichincha branch, and what the ideal experience of a new branch model would be.</p>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;"><strong>Objetivo:</strong> que Banco Pichincha esté a la vanguardia de la nueva experiencia phygital dentro de sus agencias.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;"><strong>Goal:</strong> put Banco Pichincha at the forefront of the new phygital experience inside its branches.</p>
+    <div style="background:#fff3e0;border-radius:10px;padding:20px 24px;margin-top:8px;">
+      <p style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;"><span class="es">La propuesta final</span><span class="en">The final proposal</span></p>
+      <p class="es" style="font-size:14px;color:#444;line-height:1.7;">Una experiencia transversal que engloba 4 pilares fundamentales dentro de las agencias: <strong>accesibilidad, sostenibilidad, espacio familiar y digitalización</strong>.</p>
+      <p class="en" style="font-size:14px;color:#444;line-height:1.7;">A cross-cutting experience built on 4 fundamental pillars inside the branches: <strong>accessibility, sustainability, family space, and digitalization</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">00</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Nuestro reto y contexto</span><span class="en">Our challenge and context</span></h3>
+    <div class="hmw-box">
+      <div class="hmw-label">Design Challenge</div>
+      <p class="hmw-text es">¿Cómo crear un modelo de agencia mucho más estándar y acorde con las nuevas tendencias? ¿Cómo convertir a la agencia en un canal de enganche con el banco para el no cliente, principalmente el joven?</p>
+      <p class="hmw-text en">How might we create a much more standardized branch model aligned with new trends? How might we turn the branch into a hook channel for non-clients — especially young people?</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading">Research</h3>
+    <h4 class="sub-heading"><span class="es">Hallazgos — entrevistas y encuestas</span><span class="en">Findings — interviews and surveys</span></h4>
+    <p class="section-text es">El research giró en torno a cuatro grandes temas que definen la experiencia en agencia.</p>
+    <p class="section-text en">Research revolved around four major themes that define the in-branch experience.</p>
+    <div class="insight-grid-2">
+      <div class="finding-card">
+        <div class="ico">🔒</div>
+        <h5><span class="es">Seguridad</span><span class="en">Security</span></h5>
+        <ul>
+          <li class="es">Se sienten más seguros en un espacio no concurrido.</li><li class="en">They feel safer in a less crowded space.</li>
+          <li class="es">Relacionan la seguridad con la rapidez.</li><li class="en">They link security with speed.</li>
+          <li class="es">No se sienten seguros cuando el vigilante hace otras actividades en vez de resguardar la agencia.</li><li class="en">They feel unsafe when the guard does other tasks instead of protecting the branch.</li>
+        </ul>
+      </div>
+      <div class="finding-card">
+        <div class="ico">⏱️</div>
+        <h5><span class="es">Tiempo</span><span class="en">Time</span></h5>
+        <ul>
+          <li class="es">Les gustaría que el tiempo de espera/colas sea productivo y educativo.</li><li class="en">They'd like the waiting/queue time to be productive and educational.</li>
+          <li class="es">Para muchos, esperar de pie implica riesgo: se sienten observados.</li><li class="en">For many, standing while waiting feels risky: they feel watched.</li>
+          <li class="es">Estar sentados sugiere que la espera tardará más de lo esperado.</li><li class="en">Being seated suggests the wait will take longer than expected.</li>
+        </ul>
+      </div>
+      <div class="finding-card">
+        <div class="ico">🛋️</div>
+        <h5><span class="es">Comodidad</span><span class="en">Comfort</span></h5>
+        <ul>
+          <li class="es">Al hacer una transacción priorizan la rapidez.</li><li class="en">When making a transaction they prioritize speed.</li>
+          <li class="es">Una agencia amplia e iluminada da sensación de comodidad.</li><li class="en">A spacious, well-lit branch feels comfortable.</li>
+          <li class="es">No tener todos los servicios habilitados causa incomodidad, pérdida de tiempo y estrés.</li><li class="en">Not having all services available causes discomfort, wasted time and stress.</li>
+        </ul>
+      </div>
+      <div class="finding-card">
+        <div class="ico">🤝</div>
+        <h5><span class="es">Atención</span><span class="en">Service</span></h5>
+        <ul>
+          <li class="es">Valoran un trato humanizado y personalizado.</li><li class="en">They value humanized, personalized treatment.</li>
+          <li class="es">Asocian la experiencia del asesor con su forma de vestir y verse.</li><li class="en">They associate the advisor's experience with how they dress and look.</li>
+          <li class="es">Valoran la no diferenciación entre clientes y no clientes; diferenciar se percibe como discriminatorio.</li><li class="en">They value no differentiation between clients and non-clients; differentiating feels discriminatory.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Definición</span><span class="en">Definition</span></h3>
+
+    <h4 class="sub-heading">Insights</h4>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-card-icon">🔐</div>
+        <p class="insight-card-text es"><strong>El dinero es seguridad:</strong> si pierdo mi seguridad, pierdo muchas posibilidades.</p>
+        <p class="insight-card-text en"><strong>Money is security:</strong> if I lose my security, I lose many possibilities.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🏠</div>
+        <p class="insight-card-text es"><strong>Tan seguro y cálido como mi hogar:</strong> el banco debe transmitir la seguridad y calidez de mi casa.</p>
+        <p class="insight-card-text en"><strong>As safe and warm as home:</strong> the bank should convey the security and warmth of my house.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🤲</div>
+        <p class="insight-card-text es"><strong>Confío en ti:</strong> te entrego mi dinero y espero que retribuyas esa confianza.</p>
+        <p class="insight-card-text en"><strong>I trust you:</strong> I give you my money and expect you to repay that trust.</p>
+      </div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Tipo de clientes</span><span class="en">Client types</span></h4>
+    <p class="section-text es">Tras sintetizar la investigación, definimos 2 arquetipos principales de clientes que asisten a agencia, y con ellos partimos cómo sería el diseño ideal.</p>
+    <p class="section-text en">After synthesizing the research, we defined 2 main archetypes of clients that visit the branch, and from them we shaped the ideal design.</p>
+    <div class="insight-grid-2">
+      <div class="insight-card"><div class="insight-card-icon">🙋</div><div class="insight-card-title es">Autogestionado</div><div class="insight-card-title en">Self-managed</div><p class="insight-card-text es">Prefiere resolver por su cuenta y de forma rápida, apoyándose en canales y herramientas digitales.</p><p class="insight-card-text en">Prefers to solve on their own and quickly, relying on digital channels and tools.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">🧑‍🤝‍🧑</div><div class="insight-card-title es">Dependiente</div><div class="insight-card-title en">Dependent</div><p class="insight-card-text es">Necesita acompañamiento y asesoría humana para sentirse seguro al realizar sus operaciones.</p><p class="insight-card-text en">Needs guidance and human advice to feel confident performing their operations.</p></div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Modelos de agencia</span><span class="en">Branch models</span></h4>
+    <div class="pyramid">
+      <div class="tier t1">Flagship<small><span class="es">Centros de servicios, grandes, centrados en la experiencia</span><span class="en">Service hubs, large, experience-centered</span></small></div>
+      <div class="tier t2"><span class="es">Pequeñas</span><span class="en">Small</span><small><span class="es">Foco en relación asesor / cliente, ventas y asesorías</span><span class="en">Focus on advisor / client relationship, sales and advice</span></small></div>
+      <div class="tier t3">Express<small><span class="es">Menor tamaño, orientadas a autogestión y transacción</span><span class="en">Smaller, self-service and transaction oriented</span></small></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Ideación</span><span class="en">Ideation</span></h3>
+
+    <h4 class="sub-heading"><span class="es">Taller con colaboradores</span><span class="en">Workshop with staff</span></h4>
+    <p class="section-text es">Realizamos un taller con los colaboradores de la red de agencias donde identificamos cómo se sienten y se perciben dentro del espacio físico que los rodea. Además pudimos identificar no solo su punto de vista, sino también el del cliente que asiste a las oficinas.</p>
+    <p class="section-text en">We ran a workshop with the branch network staff to identify how they feel and perceive themselves within their physical space. We also captured not only their point of view, but the customer's too.</p>
+
+    <h4 class="sub-heading"><span class="es">Priorización de características de la experiencia</span><span class="en">Prioritizing experience attributes</span></h4>
+    <p class="section-text es">Pusimos al <strong>cliente</strong> en el centro y priorizamos seis atributos de la experiencia que el nuevo modelo debía resolver.</p>
+    <p class="section-text en">We put the <strong>client</strong> at the center and prioritized six experience attributes the new model had to solve.</p>
+    <div class="hub">
+      <div class="hub-card"><h5><span class="es">Seguridad</span><span class="en">Security</span></h5><p class="es">Propuesta de layout y protocolos de atención a los clientes.</p><p class="en">Layout proposal and client service protocols.</p></div>
+      <div class="hub-card"><h5><span class="es">Confianza</span><span class="en">Trust</span></h5><p class="es">Con información clara y precisa.</p><p class="en">With clear, precise information.</p></div>
+      <div class="hub-card"><h5><span class="es">Atención</span><span class="en">Service</span></h5><p class="es">Personalizada, con soluciones adaptadas a los clientes.</p><p class="en">Personalized, with solutions adapted to clients.</p></div>
+      <div class="hub-card"><h5><span class="es">Modernidad</span><span class="en">Modernity</span></h5><p class="es">Inmersión del cliente en el mindset digital y herramientas que agilicen la atención.</p><p class="en">Immersing the client in a digital mindset and tools that speed up service.</p></div>
+      <div class="hub-card"><h5><span class="es">Omnicanalidad</span><span class="en">Omnichannel</span></h5><p class="es">Garantizar la misma experiencia en la agencia y en los diversos canales.</p><p class="en">Guaranteeing the same experience in the branch and across channels.</p></div>
+      <div class="hub-card"><h5><span class="es">Humanización</span><span class="en">Humanization</span></h5><p class="es">Humanizar el entorno y la forma de mostrarnos hacia los clientes.</p><p class="en">Humanizing the environment and how we present ourselves to clients.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">04</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Prototipado</span><span class="en">Prototyping</span></h3>
+    <p class="section-text es">Prototipamos los touchpoints clave de la nueva agencia, cada uno asociado a un pilar de la experiencia: fachadas, bienvenida, ticketera, señalización, asientos, zona digital, espacios ecoamigables y conectividad (celular / Wi-Fi).</p>
+    <p class="section-text en">We prototyped the key touchpoints of the new branch, each tied to an experience pillar: façades, welcome, ticketing, wayfinding, seating, digital zone, eco-friendly spaces, and connectivity (mobile / Wi-Fi).</p>
+    <img src="pich_prototipo.png" alt="Prototipos de la nueva agencia: fachadas, bienvenida, ticketera, señalización, asientos, zona digital, ecoamigable y celular/wifi" class="case-img">
+    <p class="img-caption es">Conceptos prototipados de la nueva agencia, cada uno vinculado a modernidad, atención o humanización.</p>
+    <p class="img-caption en">Prototyped concepts for the new branch, each tied to modernity, service or humanization.</p>
+  </div>
+</div>
+
+<!-- SECTION 05 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">05</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">MVP y resultados</span><span class="en">MVP and results</span></h3>
+    <p class="section-text es">La propuesta no se quedó en papel: Banco Pichincha lanzó el nuevo formato de agencia, empezando por la agencia de <strong>Chincha (Perú)</strong>, apostando por espacios más eficientes, digitales y amigables con sus clientes y el ambiente.</p>
+    <p class="section-text en">The proposal didn't stay on paper: Banco Pichincha launched the new branch format, starting with the <strong>Chincha (Peru)</strong> branch, betting on more efficient, digital, and friendly spaces for its clients and the environment.</p>
+    <img src="pich_news.png" alt="Noticia: Banco Pichincha anuncia atributos enfocados en la digitalización en sus agencias para potenciar la experiencia del cliente" class="case-img">
+    <p class="img-caption es">Cobertura del lanzamiento del nuevo formato de agencia enfocado en la digitalización.</p>
+    <p class="img-caption en">Coverage of the launch of the new branch format focused on digitalization.</p>
+    <p class="section-text es" style="margin-top:24px;">El nuevo concepto pone énfasis en los espacios interactivos donde la tecnología y la atención de calidad conviven en un ambiente cómodo y seguro. Posteriormente, esta propuesta sería replicada en ciudades fuera de Lima, con una infraestructura moderna que prioriza los dispositivos tecnológicos, la resolución de consultas a través de los colaboradores y la comodidad — desde la señalización hasta la ubicación del mobiliario.</p>
+    <p class="section-text en" style="margin-top:24px;">The new concept emphasizes interactive spaces where technology and quality service coexist in a comfortable, safe environment. The proposal would later be replicated in cities beyond Lima, with modern infrastructure prioritizing technology, advisor-led query resolution, and comfort — from wayfinding to furniture placement.</p>
+    <img src="pich_agency.png" alt="Agencia Banco Pichincha del nuevo formato, ya implementada" class="case-img">
+    <p class="img-caption es">El nuevo modelo de agencia, ya implementado y operativo.</p>
+    <p class="img-caption en">The new branch model, already implemented and operating.</p>
+
+    <div class="result-banner" style="margin-top:8px;">
+      <div class="result-title es">🏗️ De la propuesta a la realidad</div>
+      <div class="result-title en">🏗️ From proposal to reality</div>
+      <p class="result-text es">El rediseño de Agencias 2.0 se materializó en un nuevo formato de agencia lanzado por Banco Pichincha, con planes de replicarse en más ciudades.</p>
+      <p class="result-text en">The Agencias 2.0 redesign materialized into a new branch format launched by Banco Pichincha, with plans to replicate it across more cities.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT PROJECT -->
+<div style="max-width:900px;margin:0 auto;padding:48px 24px 40px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="bci-agencias.html" style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#E65100'" onmouseout="this.style.color='#111'">BCI — Nueva experiencia en agencias →</a>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('lang-en');
+    this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN';
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0, rootMargin: '0px 0px 300px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartDocs – Rediseño de Producto | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #5B4CFF;
+      --dark: #111;
+      --text: #333;
+      --muted: #777;
+      --border: #e5e5e5;
+      --accent: #6A5AE0;
+      --accent-light: #8278E6;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    body .en { display: none; }
+    body.lang-en .es { display: none; }
+    body.lang-en .en { display: block; }
+    span.en, a.en { display: none; }
+    body.lang-en span.es, body.lang-en a.es { display: none; }
+    body.lang-en span.en, body.lang-en a.en { display: inline; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* Process sections */
+    .process-section { border-top: 1px solid var(--border); padding: 64px 24px; }
+    .process-inner { max-width: 900px; margin: 0 auto; }
+    .section-num { font-family: 'Poppins', sans-serif; font-size: 96px; font-weight: 700; color: var(--accent); opacity: 0.08; line-height: 1; margin-bottom: -32px; }
+    .section-divider { height: 4px; background: var(--purple); border-radius: 2px; max-width: 48px; margin-bottom: 20px; }
+    .section-heading { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+    .section-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+
+    /* Content blocks */
+    .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+    .insight-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .insight-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; }
+    .insight-card-icon { font-size: 22px; margin-bottom: 10px; }
+    .insight-card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 8px; }
+    .insight-card-text { font-size: 13px; color: #555; line-height: 1.65; }
+    .quote-box { background: #f0f0f8; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 24px 28px; margin: 24px 0; }
+    .quote-text { font-size: 16px; font-style: italic; color: #333; line-height: 1.7; margin-bottom: 10px; }
+    .quote-attr { font-size: 13px; color: #777; font-weight: 600; }
+    .stats-row { display: flex; gap: 0; margin: 24px 0; background: #f8f8f8; border-radius: 12px; overflow: hidden; }
+    .stat-item { flex: 1; text-align: center; padding: 28px 16px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.4; }
+    .hmw-box { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .hmw-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 12px; }
+    .hmw-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; line-height: 1.4; }
+    .artifact-box { background: #f8f8f8; border-radius: 12px; padding: 20px 24px; margin: 12px 0; display: flex; align-items: flex-start; gap: 16px; }
+    .artifact-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .artifact-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 6px; }
+    .artifact-text { font-size: 13px; color: #555; line-height: 1.6; }
+    .findings-list { list-style: none; margin: 20px 0; padding: 0; }
+    .findings-list li { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+    .findings-list li:last-child { border-bottom: none; }
+    .finding-num { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); opacity: 0.4; flex-shrink: 0; width: 32px; }
+    .finding-text { font-size: 14px; color: #444; line-height: 1.65; }
+    .result-banner { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .result-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .result-text { font-size: 14px; opacity: 0.9; line-height: 1.8; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+    .tech-pill { background: #e8e8f5; color: var(--accent); font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 20px; border: 1.5px solid #c8c8e8; }
+
+    /* Screen galleries */
+    .screens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; margin: 24px 0; align-items: start; }
+    .shot { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 6px 22px rgba(0,0,0,0.09); background: #fff; max-height: 440px; object-fit: cover; object-position: top; }
+    .shot-cap { font-size: 12px; color: #999; margin-top: 8px; line-height: 1.5; }
+
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14px; }
+    .comparison-table th { padding: 14px 16px; text-align: left; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px; }
+    .comparison-table th:first-child { color: var(--dark); background: #f8f8f8; border-radius: 8px 0 0 0; width: 22%; }
+    .comparison-table th.before-th { background: #f0f0f0; color: #555; }
+    .comparison-table th.after-th { background: var(--accent); color: #fff; border-radius: 0 8px 0 0; }
+    .comparison-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; color: #444; }
+    .comparison-table td:first-child { font-weight: 600; color: var(--dark); background: #fafafa; font-size: 13px; }
+    .comparison-table td.before-td { background: #fafafa; }
+    .comparison-table td.after-td { background: #f0f0f8; }
+    .comparison-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+    .comparison-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+
+    /* Screen showcase cards */
+    .screen-card { border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; margin: 28px 0; }
+    .screen-card-header { background: #f8f8f8; padding: 16px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+    .screen-card-num { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); background: #e0e0f5; padding: 4px 12px; border-radius: 20px; }
+    .screen-card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px; color: var(--dark); }
+    .screen-card-body { padding: 20px 22px 24px; }
+    .screen-card-img { width: 100%; border-radius: 8px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); display: block; margin-bottom: 16px; border: 1px solid var(--border); }
+    .screen-card-text { font-size: 14px; color: #555; line-height: 1.7; }
+
+    /* Live link button */
+    .live-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; padding: 12px 24px; border-radius: 8px; margin: 8px 0; transition: background 0.2s; }
+    .live-btn:hover { background: var(--accent-light); }
+    .live-btn svg { flex-shrink: 0; }
+
+    /* Process step */
+    .process-step { display: flex; gap: 20px; padding: 20px 0; border-bottom: 1px solid #f0f0f0; }
+    .process-step:last-child { border-bottom: none; }
+    .step-icon { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+    .step-content { flex: 1; }
+    .step-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--dark); margin-bottom: 6px; }
+    .step-text { font-size: 14px; color: #555; line-height: 1.65; }
+
+    @media (max-width: 768px) {
+      .main-layout { grid-template-columns: 1fr !important; }
+      .sidebar { position: static !important; }
+    }
+    @media (max-width: 640px) {
+      .insight-grid, .insight-grid-2 { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .section-num { font-size: 60px; }
+      .comparison-table { font-size: 12px; }
+      .comparison-table th, .comparison-table td { padding: 10px 10px; }
+      .screens-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--accent);color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#5b4cd6 0%,#8278E6 60%,#6A5AE0 100%);opacity:0.95;"></div>
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:280px;font-weight:700;opacity:0.05;font-family:'Poppins', sans-serif;line-height:1;pointer-events:none;user-select:none;">SD</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.75;margin-bottom:16px;">UX/UI Designer · Baufest · <span class="es">Rediseño de Producto</span><span class="en">Product Redesign</span></p>
+    <h1 style="font-size:clamp(36px,6vw,64px);font-weight:700;line-height:1.1;margin-bottom:12px;">SmartDocs</h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.85;margin-bottom:8px;">
+      <span class="es">Rediseño de plataforma documental con IA</span>
+      <span class="en">AI Document Platform Redesign</span>
+    </p>
+    <p style="font-size:17px;opacity:0.75;max-width:640px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Cómo transformé la interfaz de una plataforma SaaS con IA — del diseño en Figma a la implementación asistida por Claude AI — haciendo visible la inteligencia que ya vivía en el producto.</span>
+      <span class="en">How I transformed the interface of an AI SaaS platform — from Figma design to Claude AI-assisted implementation — making visible the intelligence already living inside the product.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;margin-bottom:36px;">
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p>
+        <p style="font-weight:700;font-size:15px;">Baufest</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p>
+        <p style="font-weight:700;font-size:15px;">UX/UI Designer — <span class="es">Rediseño de producto</span><span class="en">Product redesign</span></p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Tipo</span><span class="en">Type</span></p>
+        <p style="font-weight:700;font-size:15px;"><span class="es">Producto SaaS · Rediseño</span><span class="en">SaaS Product · Redesign</span></p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Plataforma</span><span class="en">Platform</span></p>
+        <p style="font-weight:700;font-size:15px;">Web (Desktop)</p>
+      </div>
+    </div>
+    <a href="https://andrealoag13.github.io/smartdocs/" target="_blank" class="live-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span class="es">Ver sitio en vivo</span><span class="en">View live site</span>
+    </a>
+  </div>
+</section>
+
+<!-- OVERVIEW PANEL -->
+<div class="main-layout" style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+
+  <!-- Sidebar -->
+  <div class="sidebar" style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Empresa</span><span class="en">Company</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;">Baufest</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Rol</span><span class="en">Role</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">UX/UI Designer — Rediseño de producto</span><span class="en">UX/UI Designer — Product redesign</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Tipo</span><span class="en">Type</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">Producto SaaS · Rediseño</span><span class="en">SaaS Product · Redesign</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Plataforma</span><span class="en">Platform</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;">Web (Desktop)</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Tecnología</span><span class="en">Technology</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;">
+        <span style="background:#e8e8f5;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Azure OpenAI</span>
+        <span style="background:#e8e8f5;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Azure AI Doc Intelligence</span>
+        <span style="background:#e8e8f5;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Figma</span>
+        <span style="background:#e8e8f5;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Claude AI</span>
+      </div>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;">Sitio</div>
+      <a href="https://andrealoag13.github.io/smartdocs/" target="_blank" style="font-size:13px;color:var(--accent);font-weight:600;word-break:break-all;text-decoration:underline;">andrealoag13.github.io/smartdocs</a>
+    </div>
+  </div>
+
+  <!-- Right: Context intro -->
+  <div class="fade-in">
+    <h2 style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">Un producto que ya existía, una interfaz que necesitaba evolucionar</span><span class="en">A product that already existed, an interface that needed to evolve</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Mi participación en SmartDocs comenzó en una etapa clave: el producto ya estaba en producción y funcionaba. Tenía usuarios reales, casos documentados de impacto, y tecnología de vanguardia — Azure OpenAI y Azure AI Document Intelligence — procesando documentos en segundos. Pero su interfaz no estaba a la altura de esa potencia.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">My involvement with SmartDocs started at a pivotal moment: the product was already in production and working. It had real users, documented impact cases, and cutting-edge technology — Azure OpenAI and Azure AI Document Intelligence — processing documents in seconds. But its interface wasn't matching that power.</p>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Entré a rediseñar la interfaz completa. Diseñé el nuevo sistema en Figma y luego utilicé Claude AI para acelerar la construcción de la interfaz rediseñada — un proceso donde la IA que potencia el producto también aceleró su propio rediseño.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">I came in to redesign the entire interface. I designed the new system in Figma and then used Claude AI to accelerate the implementation of the redesigned interface — a process where the AI that powers the product also accelerated its own redesign.</p>
+    <div style="background:#f0f0f8;border-radius:10px;padding:20px 24px;margin-top:8px;">
+      <p style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;"><span class="es">Contexto del producto</span><span class="en">Product context</span></p>
+      <p class="es" style="font-size:14px;color:#444;line-height:1.7;">SmartDocs procesa documentos con IA — valida, extrae y ejecuta acciones automáticamente. El caso documentado de un retailer LATAM: 350 usuarios, 1,500 tipos de documentos, 6,000 docs = 1,800 horas = USD 18,000/mes. Con SmartDocs: 60× más rápido (18 min → 17 seg).</p>
+      <p class="en" style="font-size:14px;color:#444;line-height:1.7;">SmartDocs processes documents with AI — validates, extracts, and automatically executes actions. Documented LATAM retail case: 350 users, 1,500 document types, 6,000 docs = 1,800 hours = USD 18,000/month. With SmartDocs: 60× faster (18 min → 17 sec).</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00 — CONTEXTO -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">00</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Contexto: un producto en transformación</span><span class="en">Context: a product in transformation</span></h3>
+    <p class="section-text es">SmartDocs es la plataforma de gestión documental con IA de Baufest. La plataforma procesa documentos usando Azure OpenAI y Azure AI Document Intelligence, permitiendo que lo que un equipo de personas tardaba 18 minutos en revisar suceda en 17 segundos. El caso documentado: una empresa retail en LATAM con 350 usuarios y 1,500 tipos de documentos procesando 6,000 documentos al mes — equivalente a 1,800 horas y USD 18,000 mensuales en operación manual.</p>
+    <p class="section-text en">SmartDocs is Baufest's AI-powered document management platform. The platform processes documents using Azure OpenAI and Azure AI Document Intelligence, enabling what a team of people would take 18 minutes to review to happen in 17 seconds. The documented case: a LATAM retail company with 350 users and 1,500 document types processing 6,000 documents per month — equivalent to 1,800 hours and USD 18,000 monthly in manual operation.</p>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">60×</div>
+        <div class="stat-label"><span class="es">más rápido</span><span class="en">faster</span><br><span style="font-size:11px;opacity:0.7;">18 min → 17 seg</span></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6,000</div>
+        <div class="stat-label"><span class="es">documentos/mes</span><span class="en">documents/month</span><br><span style="font-size:11px;opacity:0.7;">=1,800 hrs manuales</span></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1,500</div>
+        <div class="stat-label"><span class="es">tipos de documentos</span><span class="en">document types</span></div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">350</div>
+        <div class="stat-label"><span class="es">usuarios en operación</span><span class="en">operational users</span></div>
+      </div>
+    </div>
+
+    <p class="es" style="font-size:15px;color:var(--muted);line-height:1.8;margin-top:8px;">El foco de este case study es el diseño — no el producto en sí. SmartDocs ya tenía la tecnología. Mi trabajo fue darle la interfaz que esa tecnología merecía: clara, escalable, y que hiciera visible la inteligencia que ya vivía en el sistema.</p>
+    <p class="en" style="font-size:15px;color:var(--muted);line-height:1.8;margin-top:8px;">The focus of this case study is the design — not the product itself. SmartDocs already had the technology. My work was to give it the interface that technology deserved: clear, scalable, and making visible the intelligence that already lived inside the system.</p>
+
+    <div class="tech-stack" style="margin-top:20px;">
+      <div class="tech-pill">Azure OpenAI</div>
+      <div class="tech-pill">Azure AI Document Intelligence</div>
+      <div class="tech-pill">Figma</div>
+      <div class="tech-pill">Claude AI</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01 — LA INTERFAZ ANTERIOR -->
+<div class="process-section" style="background:#fafafa;">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">La interfaz anterior</span><span class="en">The previous interface</span></h3>
+    <p class="section-text es">La UI original de SmartDocs era funcional — hacía lo que tenía que hacer, e incluso ya contaba con módulos como estadísticas y un chatbot de IA. Pero su diseño revelaba que fue construida pensando en la funcionalidad primero, y en la experiencia de usuario después. El resultado era una interfaz que se sentía como un sistema de back-office: densa, con navegación horizontal oscura, poco espacio en blanco, y sin jerarquía visual clara.</p>
+    <p class="section-text en">SmartDocs' original UI was functional — it did what it needed to do, and it even already had modules like statistics and an AI chatbot. But its design revealed it was built thinking about functionality first, and user experience second. The result was an interface that felt like a back-office system: dense, with a dark horizontal navigation, little whitespace, and no clear visual hierarchy.</p>
+
+    <div class="insight-grid-2" style="margin-bottom:8px;">
+      <div class="insight-card">
+        <div class="insight-card-icon">🔲</div>
+        <div class="insight-card-title es">Barra de navegación oscura horizontal</div>
+        <div class="insight-card-title en">Dark horizontal navigation bar</div>
+        <p class="insight-card-text es">Nav oscuro en la parte superior con tabs horizontales: Document Extraction, History, Template Management, Notifications, Companies, Users. Al scrollear el contenido, el contexto de navegación podía perderse.</p>
+        <p class="insight-card-text en">Dark nav at the top with horizontal tabs: Document Extraction, History, Template Management, Notifications, Companies, Users. When scrolling content, navigation context could be lost.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">📋</div>
+        <div class="insight-card-title es">Layout denso, texto pequeño</div>
+        <div class="insight-card-title en">Dense layout, small text</div>
+        <p class="insight-card-text es">Tablas con muchas columnas apretadas, poco espacio en blanco, tipografía pequeña, estados mostrados como texto coloreado sin pills ni badges diferenciadores.</p>
+        <p class="insight-card-text en">Tables with many cramped columns, little whitespace, small typography, statuses shown as colored text without differentiating pills or badges.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">📊</div>
+        <div class="insight-card-title es">Estadísticas poco legibles</div>
+        <div class="insight-card-title en">Hard-to-read statistics</div>
+        <p class="insight-card-text es">Ya existía una vista de estadísticas con gráficos, pero estaba sobrecargada y sin jerarquía: los KPIs no se distinguían y la información competía por la atención.</p>
+        <p class="insight-card-text en">A statistics view with charts already existed, but it was overloaded and without hierarchy: KPIs didn't stand out and information competed for attention.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🤖</div>
+        <div class="insight-card-title es">Chatbot de IA básico</div>
+        <div class="insight-card-title en">Basic AI chatbot</div>
+        <p class="insight-card-text es">El sistema tenía un chatbot ("AI Chatbot"), pero con una interfaz mínima, sin historial de conversaciones visible ni integración clara dentro del producto.</p>
+        <p class="insight-card-text en">The system had a chatbot ("AI Chatbot"), but with a minimal interface, no visible conversation history, and no clear integration within the product.</p>
+      </div>
+    </div>
+
+    <p style="font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin:28px 0 6px;"><span class="es">Pantallas del sistema anterior</span><span class="en">Screens from the previous system</span></p>
+    <p class="section-text es" style="margin-bottom:12px;">Todas las pantallas del sistema original, tal como estaban antes del rediseño.</p>
+    <p class="section-text en" style="margin-bottom:12px;">All the screens of the original system, as they were before the redesign.</p>
+
+    <div class="screens-grid">
+      <div><img src="smartdocs_old_page1.png" class="shot" loading="lazy" alt="SmartDocs anterior — Extracción de documentos"><p class="shot-cap"><span class="es">Extracción de documentos</span><span class="en">Document extraction</span></p></div>
+      <div><img src="smartdocs_old_page2.png" class="shot" loading="lazy" alt="SmartDocs anterior — Gestión de plantillas"><p class="shot-cap"><span class="es">Gestión de plantillas — tabla densa</span><span class="en">Template management — dense table</span></p></div>
+      <div><img src="smartdocs_old_page3.png" class="shot" loading="lazy" alt="SmartDocs anterior — Gestión de notificaciones"><p class="shot-cap"><span class="es">Gestión de notificaciones</span><span class="en">Notification management</span></p></div>
+      <div><img src="smartdocs_old_page4.png" class="shot" loading="lazy" alt="SmartDocs anterior — Gestión de empresas"><p class="shot-cap"><span class="es">Gestión de empresas</span><span class="en">Company management</span></p></div>
+      <div><img src="smartdocs_old_page5.png" class="shot" loading="lazy" alt="SmartDocs anterior — Gestión de usuarios"><p class="shot-cap"><span class="es">Gestión de usuarios</span><span class="en">User management</span></p></div>
+      <div><img src="smartdocs_old_page6.png" class="shot" loading="lazy" alt="SmartDocs anterior — Calendario de vencimientos"><p class="shot-cap"><span class="es">Calendario de vencimientos</span><span class="en">Due dates calendar</span></p></div>
+      <div><img src="smartdocs_old_page7.png" class="shot" loading="lazy" alt="SmartDocs anterior — Chatbot de IA"><p class="shot-cap"><span class="es">Chatbot de IA (versión anterior)</span><span class="en">AI Chatbot (previous version)</span></p></div>
+      <div><img src="smartdocs_old_page8.png" class="shot" loading="lazy" alt="SmartDocs anterior — Notificaciones"><p class="shot-cap"><span class="es">Notificaciones — lista densa</span><span class="en">Notifications — dense list</span></p></div>
+      <div><img src="smartdocs_old_page9.png" class="shot" loading="lazy" alt="SmartDocs anterior — Estadísticas"><p class="shot-cap"><span class="es">Estadísticas (versión anterior)</span><span class="en">Statistics (previous version)</span></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02 — EL PROCESO DE REDISEÑO -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">El proceso de rediseño</span><span class="en">The redesign process</span></h3>
+    <p class="section-text es">Mi proceso tuvo dos fases: primero diseñé la nueva interfaz en Figma, tomando decisiones de arquitectura de información, sistema de diseño y componentes. Luego usé Claude AI para acelerar la implementación del front-end — un flujo de trabajo donde el diseño en Figma se convirtió en código de manera mucho más eficiente.</p>
+    <p class="section-text en">My process had two phases: first I designed the new interface in Figma, making information architecture, design system, and component decisions. Then I used Claude AI to accelerate the front-end implementation — a workflow where the Figma design became code much more efficiently.</p>
+
+    <div style="margin:28px 0;">
+      <div class="process-step">
+        <div class="step-icon">1</div>
+        <div class="step-content">
+          <div class="step-title"><span class="es">Análisis de la UI existente y definición de problemas</span><span class="en">Analysis of existing UI and problem definition</span></div>
+          <p class="step-text es">Revisé en profundidad la interfaz anterior: flujos de usuario, densidad informacional, jerarquía visual, uso de componentes nativos del browser, estructura de navegación. Identifiqué los puntos de fricción principales y las oportunidades de mejora.</p>
+          <p class="step-text en">I thoroughly reviewed the previous interface: user flows, information density, visual hierarchy, browser-native component usage, navigation structure. I identified the main friction points and improvement opportunities.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">2</div>
+        <div class="step-content">
+          <div class="step-title"><span class="es">Diseño de la nueva interfaz en Figma</span><span class="en">New interface design in Figma</span></div>
+          <p class="step-text es">Diseñé el nuevo sistema completo en Figma: nueva arquitectura de navegación (sidebar vertical), dashboard de métricas, asistente de IA, sistema de componentes unificado con paleta blanca/morado, pills de estado, badges de versión, y todos los screens rediseñados.</p>
+          <p class="step-text en">I designed the complete new system in Figma: new navigation architecture (vertical sidebar), metrics dashboard, AI assistant, unified component system with white/purple palette, status pills, version badges, and all redesigned screens.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">3</div>
+        <div class="step-content">
+          <div class="step-title"><span class="es">Implementación asistida por Claude AI</span><span class="en">Claude AI-assisted implementation</span></div>
+          <p class="step-text es">Usé Claude AI para acelerar la construcción de la nueva interfaz. El diseño en Figma se tradujo a código de manera más rápida y con mayor fidelidad al diseño original — reduciendo la brecha entre diseño e implementación.</p>
+          <p class="step-text en">I used Claude AI to accelerate building the new interface. The Figma design translated to code faster and with greater fidelity to the original design — reducing the gap between design and implementation.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-icon">4</div>
+        <div class="step-content">
+          <div class="step-title"><span class="es">Resultado: plataforma en producción</span><span class="en">Result: platform in production</span></div>
+          <p class="step-text es">La plataforma rediseñada está publicada y accesible. El resultado es una interfaz que hace visible la inteligencia del sistema, escala hacia nuevas funcionalidades, y pone al usuario — no a la tecnología — en el centro.</p>
+          <p class="step-text en">The redesigned platform is published and accessible. The result is an interface that makes the system's intelligence visible, scales toward new features, and puts the user — not the technology — at the center.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="https://andrealoag13.github.io/smartdocs/" target="_blank" class="live-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="es">Ver la plataforma rediseñada</span><span class="en">View the redesigned platform</span>
+      </a>
+    </div>
+
+    <h4 style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:var(--dark);margin:36px 0 16px;"><span class="es">Decisiones clave de diseño</span><span class="en">Key design decisions</span></h4>
+    <div class="insight-grid-2">
+      <div class="insight-card">
+        <div class="insight-card-icon">🗂️</div>
+        <div class="insight-card-title es">Sidebar vertical en lugar de tabs horizontales</div>
+        <div class="insight-card-title en">Vertical sidebar instead of horizontal tabs</div>
+        <p class="insight-card-text es">Moví la navegación de tabs horizontales a un sidebar vertical con íconos. Siempre visible, con la sección activa resaltada en morado, y capaz de escalar a muchas más secciones sin romper el layout.</p>
+        <p class="insight-card-text en">I moved navigation from horizontal tabs to a vertical sidebar with icons. Always visible, with the active section highlighted in purple, and capable of scaling to many more sections without breaking the layout.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">📊</div>
+        <div class="insight-card-title es">Dashboard rediseñado como pantalla de inicio</div>
+        <div class="insight-card-title en">Redesigned dashboard as home screen</div>
+        <p class="insight-card-text es">Rediseñé la vista de estadísticas en un dashboard claro con KPIs (procesamientos, páginas, plantillas, tokens, tasa de aprobación, tiempo promedio), gráfico de donut, gráfico de barras y tabla. El usuario entra con contexto inmediato y legible.</p>
+        <p class="insight-card-text en">I redesigned the statistics view into a clear dashboard with KPIs (processings, pages, templates, tokens, approval rate, average time), donut chart, bar chart, and table. The user enters with immediate, readable context.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🤖</div>
+        <div class="insight-card-title es">Asistente de IA como función de primer nivel</div>
+        <div class="insight-card-title en">AI assistant as first-class feature</div>
+        <p class="insight-card-text es">Rediseñé el chatbot básico en un asistente de IA completo: con su propio ítem y badge "AI" en la navegación, historial de conversaciones y consultas en lenguaje natural sobre documentos, estados y plantillas.</p>
+        <p class="insight-card-text en">I redesigned the basic chatbot into a complete AI assistant: with its own item and "AI" badge in navigation, conversation history, and natural-language queries about documents, statuses, and templates.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">💊</div>
+        <div class="insight-card-title es">Componentes visuales diferenciados</div>
+        <div class="insight-card-title en">Differentiated visual components</div>
+        <p class="insight-card-text es">Reemplacé los estados de texto plano con pills de estado (Aceptado/Rechazado en verde/rojo), badges de versión (v1, v2), barra de búsqueda, avatar de usuario — un sistema de componentes coherente y escaneable.</p>
+        <p class="insight-card-text en">I replaced plain-text statuses with status pills (Accepted/Rejected in green/red), version badges (v1, v2), search bar, user avatar — a coherent and scannable component system.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🎨</div>
+        <div class="insight-card-title es">Paleta blanca + morado, fondo claro</div>
+        <div class="insight-card-title en">White + purple palette, light background</div>
+        <p class="insight-card-text es">Cambié el fondo oscuro de navegación por un sistema blanco/morado unificado. Más espacio en blanco, tipografía mayor, contraste claro — sin fatiga visual de dark mode en toda la pantalla.</p>
+        <p class="insight-card-text en">I changed the dark navigation background to a unified white/purple system. More whitespace, larger typography, clear contrast — no full-screen dark mode eye strain.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🏷️</div>
+        <div class="insight-card-title es">Identidad visual: logo SmartDocs</div>
+        <div class="insight-card-title en">Visual identity: SmartDocs logo</div>
+        <p class="insight-card-text es">Añadí el logo de SmartDocs en la barra superior, avatar de usuario con nombre ("Andrea López"), selector de idioma y barra de búsqueda — dando al producto una identidad visual coherente y personalizada.</p>
+        <p class="insight-card-text en">I added the SmartDocs logo in the top bar, user avatar with name ("Andrea López"), language selector, and search bar — giving the product a coherent and personalized visual identity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03 — ANTES VS DESPUÉS -->
+<div class="process-section" style="background:#fafafa;">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Antes vs. Después</span><span class="en">Before vs. After</span></h3>
+    <p class="section-text es">La comparación muestra la magnitud del cambio. Cada decisión de diseño tuvo un propósito concreto — no fue un rediseño cosmético, sino una reestructuración profunda de cómo el usuario interactúa con el sistema. Las pantallas anteriores están en la sección 01; las rediseñadas, en la sección 04.</p>
+    <p class="section-text en">The comparison shows the magnitude of the change. Each design decision had a concrete purpose — this was not a cosmetic redesign, but a deep restructuring of how the user interacts with the system. The previous screens are in section 01; the redesigned ones, in section 04.</p>
+
+    <h4 style="font-family:'Poppins', sans-serif;font-weight:700;font-size:17px;color:var(--dark);margin:36px 0 16px;"><span class="es">Comparativa en 8 dimensiones</span><span class="en">Comparison across 8 dimensions</span></h4>
+    <div style="overflow-x:auto;">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th><span class="es">Dimensión</span><span class="en">Dimension</span></th>
+            <th class="before-th"><span class="es">Antes</span><span class="en">Before</span></th>
+            <th class="after-th"><span class="es">Después</span><span class="en">After</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="es">Jerarquía visual</span><span class="en">Visual hierarchy</span></td>
+            <td class="before-td"><span class="es">Plana. Todos los elementos tienen el mismo peso visual; los CTAs no se distinguen.</span><span class="en">Flat. All elements have the same visual weight; CTAs don't stand out.</span></td>
+            <td class="after-td"><span class="es">Clara. Botones CTA en morado, sidebar vs. zona de contenido diferenciadas, tarjetas con jerarquía interna.</span><span class="en">Clear. Purple CTA buttons, sidebar vs. content zone differentiated, cards with internal hierarchy.</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Organización del contenido</span><span class="en">Content organization</span></td>
+            <td class="before-td"><span class="es">Tabs horizontales: el usuario escanea de izquierda a derecha para encontrar secciones.</span><span class="en">Horizontal tabs: user scans left-to-right to find sections.</span></td>
+            <td class="after-td"><span class="es">Sidebar vertical siempre visible, secciones agrupadas con íconos. La navegación no se mezcla con el contenido.</span><span class="en">Always-visible vertical sidebar, sections grouped with icons. Navigation doesn't mix with content.</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Legibilidad</span><span class="en">Readability</span></td>
+            <td class="before-td"><span class="es">Nav oscuro crea fatiga de contraste. Filas densas, texto pequeño, estados como texto simple.</span><span class="en">Dark nav creates contrast fatigue. Dense rows, small text, statuses as plain text.</span></td>
+            <td class="after-td"><span class="es">Fondo blanco, tipografía generosa, espacio en blanco amplio, pills de estado hacen el escaneo instantáneo.</span><span class="en">White background, generous typography, ample whitespace, status pills make scanning instant.</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Navegación</span><span class="en">Navigation</span></td>
+            <td class="before-td"><span class="es">Al scrollear el contenido, los tabs pueden quedar fuera de contexto visual según el scroll.</span><span class="en">When scrolling content, tabs may lose visual context depending on scroll position.</span></td>
+            <td class="after-td"><span class="es">Sidebar fijo siempre presente. La sección activa está resaltada en morado en todo momento.</span><span class="en">Fixed sidebar always present. Active section is highlighted in purple at all times.</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Consistencia visual</span><span class="en">Visual consistency</span></td>
+            <td class="before-td"><span class="es">Lenguaje mixto: header oscuro + contenido claro + componentes nativos del browser.</span><span class="en">Mixed design language: dark header + light content + browser-native components.</span></td>
+            <td class="after-td"><span class="es">Paleta morado/blanco unificada, elementos de formulario personalizados, cards consistentes en todas las pantallas.</span><span class="en">Unified purple/white palette, custom form elements, consistent cards across all screens.</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Uso de componentes</span><span class="en">Component usage</span></td>
+            <td class="before-td"><span class="es">Inputs nativos del browser, estados solo en texto coloreado, sin badges ni pills.</span><span class="en">Browser-native inputs, statuses only as colored text, no badges or pills.</span></td>
+            <td class="after-td"><span class="es">Pills de estado (Aceptado/Rechazado), badges de versión (v1/v2), barra de búsqueda, avatar de usuario.</span><span class="en">Status pills (Accepted/Rejected), version badges (v1/v2), search bar, user avatar.</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Escalabilidad del diseño</span><span class="en">Design scalability</span></td>
+            <td class="before-td"><span class="es">Tabs horizontales: añadir nuevas secciones comprime el espacio disponible hasta el colapso.</span><span class="en">Horizontal tabs: adding new sections compresses available space until collapse.</span></td>
+            <td class="after-td"><span class="es">Sidebar vertical puede incorporar nuevas secciones sin romper el layout ni la legibilidad.</span><span class="en">Vertical sidebar can incorporate new sections without breaking layout or readability.</span></td>
+          </tr>
+          <tr>
+            <td><span class="es">Experiencia general</span><span class="en">Overall experience</span></td>
+            <td class="before-td"><span class="es">Sistema de back-office. Orientado a la herramienta, sin contexto, sin identidad de producto.</span><span class="en">Back-office system. Tool-oriented, no context, no product identity.</span></td>
+            <td class="after-td"><span class="es">Producto SaaS con identidad. Dashboard da contexto inmediato. Asistente de IA hace la plataforma sentir inteligente.</span><span class="en">SaaS product with identity. Dashboard gives immediate context. AI assistant makes the platform feel intelligent.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04 — LA PLATAFORMA REDISEÑADA -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">04</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">La plataforma rediseñada</span><span class="en">The redesigned platform</span></h3>
+    <p class="section-text es">Seis pantallas, seis decisiones de diseño. Cada screen resuelve un problema concreto de la UI anterior y eleva la experiencia de usuario de una funcionalidad a un producto.</p>
+    <p class="section-text en">Six screens, six design decisions. Each screen solves a concrete problem from the previous UI and elevates the user experience from a tool to a product.</p>
+
+    <div style="margin-bottom:4px;">
+      <a href="https://andrealoag13.github.io/smartdocs/" target="_blank" class="live-btn" style="margin-bottom:28px;display:inline-flex;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="es">Ver la plataforma en vivo</span><span class="en">View live platform</span>
+      </a>
+    </div>
+
+    <!-- Screen 1: Dashboard -->
+    <div class="screen-card">
+      <div class="screen-card-header">
+        <span class="screen-card-num">01</span>
+        <span class="screen-card-title"><span class="es">Dashboard — Estadísticas de procesamiento</span><span class="en">Dashboard — Processing statistics</span></span>
+      </div>
+      <div class="screen-card-body">
+        <img src="smartdocs_new_page6.png" alt="SmartDocs nuevo — Dashboard" class="screen-card-img">
+        <p class="screen-card-text es">La vista de estadísticas, completamente rediseñada. El dashboard muestra de forma inmediata el estado del sistema: 161 procesamientos totales, 870 páginas procesadas, 26 plantillas, 720.9k tokens, 57.7% de tasa de aprobación, 18.70 seg de tiempo promedio. Un gráfico de donut muestra la distribución Aprobados/Rechazados (92/69). Un gráfico de barras desglosa procesamientos por plantilla. La tabla de detalle da visibilidad granular por tipo de documento. El usuario entra a la plataforma con contexto completo del sistema — no a ciegas.</p>
+        <p class="screen-card-text en">The statistics view, completely redesigned. The dashboard immediately shows system status: 161 total processings, 870 processed pages, 26 templates, 720.9k tokens, 57.7% approval rate, 18.70 sec average time. A donut chart shows Approved/Rejected distribution (92/69). A bar chart breaks down processings by template. The detail table gives granular visibility by document type. The user enters the platform with complete system context — not blindly.</p>
+      </div>
+    </div>
+
+    <!-- Screen 2: Document extraction -->
+    <div class="screen-card">
+      <div class="screen-card-header">
+        <span class="screen-card-num">02</span>
+        <span class="screen-card-title"><span class="es">Extracción de documentos</span><span class="en">Document extraction</span></span>
+      </div>
+      <div class="screen-card-body">
+        <img src="smartdocs_new_page1.png" alt="SmartDocs nuevo — Extracción de documentos" class="screen-card-img">
+        <p class="screen-card-text es">La pantalla principal, rediseñada de raíz. El sidebar izquierdo es inmediatamente visible con "Document extraction" resaltado en morado. La barra superior muestra el logo de SmartDocs, una barra de búsqueda, selector de idioma (EN), notificaciones y el avatar "Andrea López" — personalizando la experiencia. El contenido central tiene la tarjeta "Document processing" (dropdown tipo + botón Choose file + CTA "Process document" en morado), seguida de "Document preview" y "Extraction results". Mucho espacio en blanco, cada elemento respira.</p>
+        <p class="screen-card-text en">The main screen, redesigned from scratch. The left sidebar is immediately visible with "Document extraction" highlighted in purple. The top bar shows the SmartDocs logo, a search bar, language selector (EN), notifications, and the "Andrea López" avatar — personalizing the experience. The central content has the "Document processing" card (type dropdown + Choose file button + purple "Process document" CTA), followed by "Document preview" and "Extraction results". Ample whitespace, each element breathes.</p>
+      </div>
+    </div>
+
+    <!-- Screen 3: History -->
+    <div class="screen-card">
+      <div class="screen-card-header">
+        <span class="screen-card-num">03</span>
+        <span class="screen-card-title"><span class="es">Historial de procesamiento</span><span class="en">Processing history</span></span>
+      </div>
+      <div class="screen-card-body">
+        <img src="smartdocs_new_page2.png" alt="SmartDocs nuevo — Historial" class="screen-card-img">
+        <p class="screen-card-text es">La tabla de historial completamente rediseñada. Filtros prominentes en la parte superior: dropdown "Document type" (All documents) y dropdown "Status" (All status) con un botón "Apply filters" en morado. Las columnas son claras: File, Template, Processing date, Version, Status. Los estados ya no son texto: son pills con color — rojo para "Rechazado", verde para "Aceptado". Los números de versión usan badges (v1, v2). La paginación es visible y accesible. La tabla es scannable en segundos.</p>
+        <p class="screen-card-text en">The completely redesigned history table. Prominent filters at the top: "Document type" dropdown (All documents) and "Status" dropdown (All status) with a purple "Apply filters" button. Columns are clear: File, Template, Processing date, Version, Status. Statuses are no longer text: they are colored pills — red for "Rechazado", green for "Aceptado". Version numbers use badges (v1, v2). Pagination is visible and accessible. The table is scannable in seconds.</p>
+      </div>
+    </div>
+
+    <!-- Screen 4: AI Assistant -->
+    <div class="screen-card">
+      <div class="screen-card-header">
+        <span class="screen-card-num">04</span>
+        <span class="screen-card-title"><span class="es">Asistente de IA</span><span class="en">AI Assistant</span></span>
+      </div>
+      <div class="screen-card-body">
+        <img src="smartdocs_new_page3.png" alt="SmartDocs nuevo — Asistente de IA" class="screen-card-img">
+        <p class="screen-card-text es">El chatbot básico convertido en un asistente de IA completo. Ahora tiene su propio espacio en la navegación (con badge "AI" destacado). La pantalla tiene dos zonas: un panel lateral con el historial de conversaciones (¿Cuántos documentos rechazados tengo? / Resumen Carta Situación Fiscal / Prueba de las APIs) y el chat principal. El asistente saluda: "Hi Andrea! I'm your SmartDocs assistant." Una pregunta de ejemplo: "¿Cuántos documentos rechazados tengo este mes?" — el sistema responde con datos concretos: "Tienes 69 documentos rechazados (42.9% del total). La plantilla con más rechazos es Licencia de uso de suelo (9 de 10)." La IA que procesa documentos ahora también conversa sobre ellos.</p>
+        <p class="screen-card-text en">The basic chatbot turned into a complete AI assistant. It now has its own space in navigation (with highlighted "AI" badge). The screen has two zones: a side panel with conversation history (¿Cuántos documentos rechazados tengo? / Resumen Carta Situación Fiscal / Prueba de las APIs) and the main chat. The assistant greets: "Hi Andrea! I'm your SmartDocs assistant." An example question: "¿Cuántos documentos rechazados tengo este mes?" — the system responds with concrete data: "Tienes 69 documentos rechazados (42.9% del total). La plantilla con más rechazos es Licencia de uso de suelo (9 de 10)." The AI that processes documents now also converses about them.</p>
+      </div>
+    </div>
+
+    <!-- Screen 5: Template management -->
+    <div class="screen-card">
+      <div class="screen-card-header">
+        <span class="screen-card-num">05</span>
+        <span class="screen-card-title"><span class="es">Gestión de plantillas de documentos</span><span class="en">Document template management</span></span>
+      </div>
+      <div class="screen-card-body">
+        <img src="smartdocs_new_page5.png" alt="SmartDocs nuevo — Plantillas" class="screen-card-img">
+        <p class="screen-card-text es">La tabla de plantillas en el diseño rediseñado es clara y funcional. Columnas: Type, Description, Threshold (95%), Properties, Calculations, Status. Los tipos incluyen documentos reales del contexto COFEPRIS: Constancia de Alineamiento, Licencia de uso de suelo, Visto bueno de seguridad estructural, Escrituras, Manifesto de impacto ambiental. El estado usa pills: "Activo" en verde, "Rechazado" en rojo. Un menú de tres puntos da acceso a acciones por fila. El diseño permite gestionar decenas de tipos de documento de manera escaneable.</p>
+        <p class="screen-card-text en">The template table in the redesigned design is clear and functional. Columns: Type, Description, Threshold (95%), Properties, Calculations, Status. Types include real documents from the COFEPRIS context: Constancia de Alineamiento, Licencia de uso de suelo, Visto bueno de seguridad estructural, Escrituras, Manifesto de impacto ambiental. Status uses pills: "Activo" in green, "Rechazado" in red. A three-dot menu gives access to per-row actions. The design allows managing dozens of document types in a scannable way.</p>
+      </div>
+    </div>
+
+    <!-- Screen 6: User management -->
+    <div class="screen-card">
+      <div class="screen-card-header">
+        <span class="screen-card-num">06</span>
+        <span class="screen-card-title"><span class="es">Gestión de usuarios</span><span class="en">User management</span></span>
+      </div>
+      <div class="screen-card-body">
+        <img src="smartdocs_new_page4.png" alt="SmartDocs nuevo — Usuarios" class="screen-card-img">
+        <p class="screen-card-text es">La pantalla de gestión de usuarios completa el sistema administrativo. Header claro con título "User management" y botones de acción: Delete, Export, New user (el CTA principal en morado). La tabla muestra Name, Email, Company, Role, Phone, Status. Las filas son limpias y legibles, con el estado "Active" en pill verde. El sidebar está siempre presente, con "Users" resaltado. Diseño coherente con el resto del sistema.</p>
+        <p class="screen-card-text en">The user management screen completes the administrative system. Clear header with "User management" title and action buttons: Delete, Export, New user (main CTA in purple). The table shows Name, Email, Company, Role, Phone, Status. Rows are clean and readable, with "Active" status in green pill. The sidebar is always present, with "Users" highlighted. Consistent design with the rest of the system.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NEXT PROJECT -->
+<div style="max-width:900px;margin:0 auto;padding:40px 24px 32px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="rimac-endoso.html" style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#6A5AE0'" onmouseout="this.style.color='#111'">Rimac — Nueva propuesta de Endoso →</a>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  // Language toggle
+  const btn = document.getElementById('lang-toggle');
+  btn.addEventListener('click', () => {
+    document.body.classList.toggle('lang-en');
+    btn.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN';
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px 400px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  // Fallback: if anything is still hidden after load, reveal it
+  window.addEventListener('load', () => {
+    setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight + 400) el.classList.add('visible');
+    }), 300);
+  });
+</script>
+</body>
+</html>

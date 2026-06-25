@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCI – Nueva experiencia en agencias | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #5B4CFF;
+      --dark: #111;
+      --text: #333;
+      --muted: #777;
+      --border: #e5e5e5;
+      --accent: #1D4ED8;
+      --accent-light: #3b82f6;
+      --navy: #0d1e4a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    body .en { display: none; }
+    body.lang-en .es { display: none; }
+    body.lang-en .en { display: block; }
+    span.en, a.en { display: none; }
+    body.lang-en span.es, body.lang-en a.es { display: none; }
+    body.lang-en span.en, body.lang-en a.en { display: inline; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    .process-section { border-top: 1px solid var(--border); padding: 64px 24px; }
+    .process-inner { max-width: 900px; margin: 0 auto; }
+    .section-num { font-family: 'Poppins', sans-serif; font-size: 96px; font-weight: 700; color: var(--accent); opacity: 0.08; line-height: 1; margin-bottom: -32px; }
+    .section-divider { height: 4px; background: var(--purple); border-radius: 2px; max-width: 48px; margin-bottom: 20px; }
+    .section-heading { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+    .section-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+    .sub-heading { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--dark); margin: 40px 0 10px; }
+
+    .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+    .insight-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .insight-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; }
+    .insight-card-icon { font-size: 22px; margin-bottom: 10px; }
+    .insight-card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 8px; }
+    .insight-card-text { font-size: 13px; color: #555; line-height: 1.65; }
+    .stats-row { display: flex; gap: 0; margin: 24px 0; background: #f8f8f8; border-radius: 12px; overflow: hidden; }
+    .stat-item { flex: 1; text-align: center; padding: 28px 16px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.4; }
+    .hmw-box { background: var(--navy); color: #fff; border-radius: 12px; padding: 36px 40px; margin: 24px 0; }
+    .hmw-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-bottom: 12px; }
+    .hmw-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 600; line-height: 1.4; }
+
+    .case-img { width: 100%; border-radius: 12px; margin: 18px 0 6px; box-shadow: 0 6px 24px rgba(0,0,0,0.10); display: block; border: 1px solid var(--border); background:#fff; }
+    .img-caption { font-size: 12px; color: #999; text-align: center; margin-bottom: 24px; line-height: 1.5; }
+
+    .num-card { display:flex; gap:16px; align-items:flex-start; padding:18px 0; border-bottom:1px solid #f0f0f0; }
+    .num-card:last-child { border-bottom:none; }
+    .num-badge { width:40px;height:40px;border-radius:10px;background:var(--accent);color:#fff;font-weight:700;font-family:'Poppins',sans-serif;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px; }
+    .num-card h5 { font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;color:#111;margin-bottom:6px; }
+    .num-card ul { list-style:none;padding:0;margin:0; }
+    .num-card li { font-size:13px;color:#555;line-height:1.55;padding:3px 0 3px 14px;position:relative; }
+    .num-card li::before { content:"→";position:absolute;left:0;color:var(--accent);font-weight:700; }
+
+    .pillars5 { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:24px 0; }
+    .pillar5 { border-radius:12px; padding:16px 12px; color:#fff; }
+    .pillar5 h5 { font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;line-height:1.25;margin-bottom:6px; }
+    .pillar5 p { font-size:11.5px;line-height:1.45;opacity:0.95; }
+
+    .chip { display:inline-block;background:#eaf0ff;color:var(--accent);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;margin:3px 4px 3px 0; }
+
+    .result-banner { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .result-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .result-text { font-size: 14px; opacity: 0.95; line-height: 1.8; }
+
+    @media (max-width: 760px) { .main-layout { grid-template-columns: 1fr !important; } .sidebar { position: static !important; } .pillars5 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) {
+      .insight-grid, .insight-grid-2 { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .section-num { font-size: 60px; }
+      .pillars5 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--accent);color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:240px;font-weight:700;opacity:0.08;font-family:'Poppins', sans-serif;line-height:1;pointer-events:none;user-select:none;">B</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.85;margin-bottom:16px;">Service Design · Sucursales · BCI</p>
+    <h1 style="font-size:clamp(32px,5.5vw,58px);font-weight:700;line-height:1.1;margin-bottom:12px;"><span class="es">Nueva experiencia en agencias</span><span class="en">New branch experience</span></h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.9;margin-bottom:8px;"><span class="es">Rediseño del modelo de sucursales — BCI Chile</span><span class="en">Branch model redesign — BCI Chile</span></p>
+    <p style="font-size:17px;opacity:0.85;max-width:660px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Una experiencia holística y tecnológica del modelo de sucursales, a la vanguardia digital, para que BCI sea el banco TOP en experiencia de agencias en Chile.</span>
+      <span class="en">A holistic, technological branch-model experience, digitally cutting-edge, to make BCI the TOP bank for branch experience in Chile.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p>
+        <p style="font-weight:700;font-size:15px;">Senior Service Designer · Senior UX</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p>
+        <p style="font-weight:700;font-size:15px;">BCI</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Duración</span><span class="en">Duration</span></p>
+        <p style="font-weight:700;font-size:15px;"><span class="es">6 meses · 2021</span><span class="en">6 months · 2021</span></p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Herramientas</span><span class="en">Tools</span></p>
+        <p style="font-weight:700;font-size:15px;">Figma · Mural · Excel</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<div class="main-layout" style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+  <div class="sidebar" style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Mi rol</span><span class="en">My role</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;">Senior Service Designer · Senior UX</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Industria</span><span class="en">Industry</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;">🏦 <span class="es">Banca · Chile</span><span class="en">Banking · Chile</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Duración</span><span class="en">Duration</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">6 meses (2021)</span><span class="en">6 months (2021)</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Artefactos</span><span class="en">Artifacts</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">Desk research, entrevistas a profundidad, lectura de data del banco, mapas de afinidad, trend analysis, HMWs, ideación, brainstorm, journey map, service blueprint, priorizaciones, prototipado.</span><span class="en">Desk research, in-depth interviews, bank data analysis, affinity maps, trend analysis, HMWs, ideation, brainstorm, journey map, service blueprint, prioritizations, prototyping.</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Herramientas</span><span class="en">Tools</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;">
+        <span style="background:#eaf0ff;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Figma</span>
+        <span style="background:#eaf0ff;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Mural</span>
+        <span style="background:#eaf0ff;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Excel</span>
+        <span style="background:#eaf0ff;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">RRSS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="fade-in">
+    <h2 style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">¿Cómo empezó?</span><span class="en">How did it start?</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">El proyecto tuvo como finalidad conocer las oportunidades de mejora de las agencias de BCI y rediseñarlas acorde al público actual.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">The project's purpose was to uncover improvement opportunities in BCI's branches and redesign them to fit today's audience.</p>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;"><strong>Objetivo:</strong> que BCI sea el banco TOP en experiencia de agencias en Chile.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;"><strong>Goal:</strong> make BCI the TOP bank for branch experience in Chile.</p>
+    <div style="background:#eaf0ff;border-radius:10px;padding:20px 24px;margin-top:8px;">
+      <p style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;"><span class="es">La propuesta final</span><span class="en">The final proposal</span></p>
+      <p class="es" style="font-size:14px;color:#444;line-height:1.7;">Una experiencia holística y tecnológica en el modelo de agencias que esté a la vanguardia digital.</p>
+      <p class="en" style="font-size:14px;color:#444;line-height:1.7;">A holistic, technological branch-model experience that is digitally cutting-edge.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">00</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Nuestro reto y contexto</span><span class="en">Our challenge and context</span></h3>
+    <div class="hmw-box">
+      <div class="hmw-label"><span class="es">Nuestro reto</span><span class="en">Our challenge</span></div>
+      <p class="hmw-text es">¿Cómo rediseñamos las agencias BCI para que sean más acordes al público actual?</p>
+      <p class="hmw-text en">How might we redesign BCI's branches so they fit today's audience?</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading">Research</h3>
+    <h4 class="sub-heading"><span class="es">Recap: dolores transversales en las sucursales (AS-IS)</span><span class="en">Recap: cross-cutting pains in branches (AS-IS)</span></h4>
+    <p class="section-text es">Mapeamos las experiencias de los clientes y sus causas a lo largo de toda la sucursal: variación del servicio entre sucursales, comunicación ambigua, tiempos de espera altos, canales digitales desactualizados, atención product-centric y un modelo centralizado que no incentiva la relación.</p>
+    <p class="section-text en">We mapped customer experiences and their root causes across the whole branch: inconsistent service between branches, ambiguous communication, high waiting times, outdated digital channels, product-centric service, and a centralized model that doesn't encourage relationships.</p>
+    <img src="bci_asis.png" alt="Blueprint AS-IS: dolores transversales en las sucursales y sus causas" class="case-img">
+    <p class="img-caption es">Blueprint AS-IS — experiencias de los clientes y las causas detrás de cada dolor.</p>
+    <p class="img-caption en">AS-IS blueprint — customer experiences and the causes behind each pain.</p>
+
+    <h4 class="sub-heading"><span class="es">¿Por qué cambian las sucursales?</span><span class="en">Why are branches changing?</span></h4>
+    <p class="section-text es">Como parte de un nuevo modelo atencional, buscamos convertirnos en el mejor aliado de nuestros clientes, ofreciendo productos, servicios y beneficios personalizados que superen sus expectativas. Por eso optamos por rediseñar la experiencia para asegurar una interacción <strong>humana, resolutiva y digital-first</strong>.</p>
+    <p class="section-text en">As part of a new service model, we aimed to become our clients' best ally, offering personalized products, services and benefits that exceed their expectations. So we chose to redesign the experience to ensure a <strong>human, resolutive and digital-first</strong> interaction.</p>
+    <div>
+      <span class="chip"><span class="es">Personal y confiable</span><span class="en">Personal & trustworthy</span></span>
+      <span class="chip"><span class="es">Resolutivo y simple</span><span class="en">Resolutive & simple</span></span>
+      <span class="chip"><span class="es">Cercano</span><span class="en">Close</span></span>
+      <span class="chip"><span class="es">Más que servicios financieros</span><span class="en">More than financial services</span></span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Definición</span><span class="en">Definition</span></h3>
+
+    <h4 class="sub-heading"><span class="es">¿Qué propósito tendrán las sucursales en el nuevo modelo?</span><span class="en">What purpose will branches have in the new model?</span></h4>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-card-icon">📲</div>
+        <div class="insight-card-title es">Apoyar la estrategia digital-first</div>
+        <div class="insight-card-title en">Support the digital-first strategy</div>
+        <p class="insight-card-text es">Apoyar a los clientes a usar los canales digitales, enseñarles a auto-atenderse y motivarlos a preferir lo digital.</p>
+        <p class="insight-card-text en">Help clients use digital channels, teach them to self-serve, and motivate them to prefer digital.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🤝</div>
+        <div class="insight-card-title es">Experiencia humana y resolutiva</div>
+        <div class="insight-card-title en">Human and resolutive experience</div>
+        <p class="insight-card-text es">Lograr que el cliente salga con una solución, atendido de forma respetuosa y cercana, entendiendo su necesidad.</p>
+        <p class="insight-card-text en">Ensure the client leaves with a solution, served respectfully and closely, understanding their need.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">⭐</div>
+        <div class="insight-card-title es">Living the brand</div>
+        <div class="insight-card-title en">Living the brand</div>
+        <p class="insight-card-text es">Posicionarnos como un banco diferente, tangibilizar la marca y personalizar según la necesidad del cliente.</p>
+        <p class="insight-card-text en">Position ourselves as a different bank, make the brand tangible, and personalize to the client's need.</p>
+      </div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">El rediseño desde una mirada por capas</span><span class="en">Redesign through a layered lens</span></h4>
+    <p class="section-text es">La sucursal no es solo un espacio físico: es un ente que reúne la sumatoria de capas — algunas más visibles que otras — y todas son responsables de la experiencia. El reto fue <strong>rediseñar lo actual e innovar en cada capa</strong>.</p>
+    <p class="section-text en">A branch isn't just a physical space: it's an entity made of layers — some more visible than others — and all of them shape the experience. The challenge was to <strong>redesign the present and innovate in each layer</strong>.</p>
+    <div style="margin:8px 0;">
+      <div class="num-card"><div class="num-badge">1</div><div><h5><span class="es">Espacios</span><span class="en">Spaces</span></h5><ul><li class="es">Mobiliario, layout, señalética, iluminación y objetos habilitadores (físicos y digitales).</li><li class="en">Furniture, layout, wayfinding, lighting and enabling objects (physical and digital).</li></ul></div></div>
+      <div class="num-card"><div class="num-badge">2</div><div><h5><span class="es">Roles y dinámicas</span><span class="en">Roles & dynamics</span></h5><ul><li class="es">Definición de roles, capacitación, nuevos protocolos de atención y mejoras en la derivación.</li><li class="en">Role definition, training, new service protocols and improvements in handoff.</li></ul></div></div>
+      <div class="num-card"><div class="num-badge">3</div><div><h5><span class="es">Canales y sistemas</span><span class="en">Channels & systems</span></h5><ul><li class="es">Nuevos sistemas, nueva tecnología e integración de canales.</li><li class="en">New systems, new technology and channel integration.</li></ul></div></div>
+      <div class="num-card"><div class="num-badge">4</div><div><h5><span class="es">Procesos</span><span class="en">Processes</span></h5><ul><li class="es">Rediseño de procesos y cambio en las políticas actuales.</li><li class="en">Process redesign and changes to current policies.</li></ul></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Ideación</span><span class="en">Ideation</span></h3>
+    <p class="section-text es">A partir de la persona <strong>Claudia</strong> mapeamos su recorrido — por qué llega a la sucursal, qué hace dentro y cómo se va — y construimos propuestas para cada capa y momento del journey. Cada idea se priorizó y se conectó con los propósitos del nuevo modelo atencional.</p>
+    <p class="section-text en">Using the persona <strong>Claudia</strong> we mapped her journey — why she comes to the branch, what she does inside, and how she leaves — and built proposals for each layer and moment. Each idea was prioritized and connected to the new service model's purposes.</p>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label es">motivos por los que<br>Claudia visita la sucursal</div><div class="stat-label en">reasons Claudia<br>visits the branch</div></div>
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label es">capas rediseñadas</div><div class="stat-label en">redesigned layers</div></div>
+      <div class="stat-item"><div class="stat-num">5</div><div class="stat-label es">pilares de la<br>propuesta de valor</div><div class="stat-label en">value-proposition<br>pillars</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">04</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Prototipado</span><span class="en">Prototyping</span></h3>
+
+    <h4 class="sub-heading"><span class="es">Nuestra propuesta de valor — 5 pilares</span><span class="en">Our value proposition — 5 pillars</span></h4>
+    <p class="section-text es">Se plantearon 5 pilares que engloban de manera holística el proyecto, con soluciones digitales, físicas y phygitales.</p>
+    <p class="section-text en">We defined 5 pillars that holistically frame the project, with digital, physical and phygital solutions.</p>
+    <div class="pillars5">
+      <div class="pillar5" style="background:#27AE60;"><h5>Living de brand</h5><p class="es">Hacer tangible la marca en cada interacción.</p><p class="en">Make the brand tangible in every interaction.</p></div>
+      <div class="pillar5" style="background:#1D4ED8;"><h5><span class="es">Gestión y seguimiento</span><span class="en">Management & follow-up</span></h5><p class="es">Acompañamiento y gestión de clientes.</p><p class="en">Client follow-up and management.</p></div>
+      <div class="pillar5" style="background:#F39200;"><h5><span class="es">Educación digital y autogestión</span><span class="en">Digital education & self-service</span></h5><p class="es">Enseñar y habilitar la autogestión digital.</p><p class="en">Teach and enable digital self-service.</p></div>
+      <div class="pillar5" style="background:#E0245E;"><h5><span class="es">Atención al cliente</span><span class="en">Client service</span></h5><p class="es">Atención humana, resolutiva y cercana.</p><p class="en">Human, resolutive and close service.</p></div>
+      <div class="pillar5" style="background:#8E44AD;"><h5><span class="es">Zona transaccional</span><span class="en">Transactional zone</span></h5><p class="es">Transacciones rápidas y optimizadas.</p><p class="en">Fast, optimized transactions.</p></div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">¿Cómo se ve esto reflejado en el espacio?</span><span class="en">How does this show up in the space?</span></h4>
+    <p class="section-text es">Traducimos los pilares en zonas físicas dentro de la sucursal: Bienvenida, Digital, Transaccional, Asesoría y Comunidad.</p>
+    <p class="section-text en">We translated the pillars into physical zones inside the branch: Welcome, Digital, Transactional, Advisory and Community.</p>
+    <img src="bci_zonas.png" alt="Las 5 zonas de la nueva sucursal: bienvenida, digital, transaccional, asesoría y comunidad" class="case-img">
+    <p class="img-caption es">Zona de Bienvenida (nueva), Zona Digital (nueva), Zona Transaccional, Zona de Asesoría y Zona de Comunidad.</p>
+    <p class="img-caption en">Welcome zone (new), Digital zone (new), Transactional zone, Advisory zone and Community zone.</p>
+  </div>
+</div>
+
+<!-- SECTION 05 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">05</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">MVP y resultados</span><span class="en">MVP and results</span></h3>
+    <p class="section-text es">El modelo se materializó en un layout de Edificio Corporativo con las nuevas zonas implementadas, y testeamos la experiencia real con clientes — incluyendo un recorrido de accesibilidad con una persona de visión reducida.</p>
+    <p class="section-text en">The model materialized into a Corporate Building layout with the new zones implemented, and we tested the real experience with clients — including an accessibility walkthrough with a person with reduced vision.</p>
+    <img src="bci_resultado.png" alt="Layout del Edificio Corporativo BCI con las nuevas zonas implementadas y fotos del espacio" class="case-img">
+    <p class="img-caption es">Layout del Edificio Corporativo con las zonas implementadas — qué dicen los clientes de la nueva sucursal.</p>
+    <p class="img-caption en">Corporate Building layout with the implemented zones — what clients say about the new branch.</p>
+
+    <div class="insight-grid-2">
+      <div class="insight-card" style="border-color:#27AE60;">
+        <div class="insight-card-icon">✅</div>
+        <div class="insight-card-title es">Lo que gusta</div>
+        <div class="insight-card-title en">What they like</div>
+        <p class="insight-card-text es">El recorrido en la zona de bienvenida fue libre de obstáculos; en general el espacio es fácil de moverse y los pasillos son amplios.</p>
+        <p class="insight-card-text en">The welcome-zone path was obstacle-free; overall the space is easy to move through and aisles are wide.</p>
+      </div>
+      <div class="insight-card" style="border-color:var(--accent);">
+        <div class="insight-card-icon">🛠️</div>
+        <div class="insight-card-title es">Por mejorar</div>
+        <div class="insight-card-title en">To improve</div>
+        <p class="insight-card-text es">El tótem necesita guía táctil y auditiva; algunos obstáculos a la altura del bastón; la atención en caja debe comunicar mejor el estado del turno; y la distribución debe mantenerse en el tiempo (las personas con discapacidad hacen mapas mentales del espacio).</p>
+        <p class="insight-card-text en">The kiosk needs tactile and audio guidance; some obstacles at cane height; teller service must communicate the turn status better; and the layout should stay consistent over time (people with disabilities build mental maps of the space).</p>
+      </div>
+    </div>
+    <img src="bci_photos.png" alt="Fotos de la nueva sucursal BCI implementada — tótem, zonas digitales y de espera" class="case-img">
+    <p class="img-caption es">La nueva sucursal BCI ya implementada: tótem "Aquí comienza tu experiencia", zonas digitales y de espera.</p>
+    <p class="img-caption en">The new BCI branch already implemented: "Your experience starts here" kiosk, digital and waiting zones.</p>
+
+    <div class="result-banner" style="margin-top:8px;">
+      <div class="result-title es">🏢 Un modelo de sucursal hecho realidad</div>
+      <div class="result-title en">🏢 A branch model made real</div>
+      <p class="result-text es">El rediseño se llevó a un espacio real con sus cinco zonas, validado con clientes y con foco explícito en accesibilidad — sentando las bases del nuevo modelo de sucursales de BCI.</p>
+      <p class="result-text en">The redesign was taken to a real space with its five zones, validated with clients and with an explicit accessibility focus — laying the foundations for BCI's new branch model.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT PROJECT -->
+<div style="max-width:900px;margin:0 auto;padding:48px 24px 40px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="rimac-freemium.html" style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#1D4ED8'" onmouseout="this.style.color='#111'">Rimac — Vida Gratuito (Freemium) →</a>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('lang-en');
+    this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN';
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0, rootMargin: '0px 0px 300px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrea López — Sobre mí / About</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --purple:#5B4CFF; --dark:#111; --text:#333; --muted:#777; --border:#e5e5e5; --accent:#5B4CFF; --accent-light:#7b6fff; }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Poppins',sans-serif; color:var(--text); background:#fff; }
+    a { text-decoration:none; color:inherit; }
+    body .en { display:none; } body.lang-en .es { display:none; } body.lang-en .en { display:block; }
+    span.en,a.en { display:none; } body.lang-en span.es,body.lang-en a.es { display:none; } body.lang-en span.en,body.lang-en a.en { display:inline; }
+    .fade-in { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; } .fade-in.visible { opacity:1; transform:none; }
+
+    .section { padding:64px 24px; border-top:1px solid var(--border); }
+    .inner { max-width:920px; margin:0 auto; }
+    .label { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:12px; }
+    .h2 { font-family:'Poppins',sans-serif; font-size:30px; font-weight:700; color:var(--dark); margin-bottom:18px; line-height:1.15; }
+    .lead { font-size:16px; color:var(--text); line-height:1.85; margin-bottom:14px; }
+
+    /* Stats */
+    .stats { display:flex; background:#f8f8f8; border-radius:14px; overflow:hidden; margin:0 auto; max-width:920px; }
+    .stat { flex:1; text-align:center; padding:26px 12px; border-right:1px solid var(--border); }
+    .stat:last-child { border-right:none; }
+    .stat .n { font-size:34px; font-weight:700; color:var(--accent); line-height:1; }
+    .stat .t { font-size:12.5px; color:#555; margin-top:6px; line-height:1.4; }
+
+    /* Timeline */
+    .timeline { position:relative; margin-top:8px; padding-left:26px; }
+    .timeline::before { content:""; position:absolute; left:7px; top:6px; bottom:6px; width:2px; background:var(--border); }
+    .tl-item { position:relative; padding:0 0 30px 0; }
+    .tl-item::before { content:""; position:absolute; left:-26px; top:5px; width:14px; height:14px; border-radius:50%; background:var(--accent); border:3px solid #fff; box-shadow:0 0 0 2px var(--accent); }
+    .tl-top { display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:4px; }
+    .tl-company { font-family:'Poppins',sans-serif; font-weight:700; font-size:17px; color:var(--dark); }
+    .tl-role { font-size:13px; color:var(--accent); font-weight:600; }
+    .tl-period { font-size:12px; color:var(--muted); font-weight:600; margin-left:auto; }
+    .tl-context { font-size:14px; color:#555; line-height:1.65; margin:4px 0 8px; }
+    .tl-clients { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+    .chip { display:inline-block; background:#eee9ff; color:var(--accent); font-size:12px; font-weight:600; padding:3px 11px; border-radius:20px; }
+
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px; }
+    .card { border:1.5px solid var(--border); border-radius:12px; padding:18px 20px; }
+    .card h4 { font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:var(--dark); margin-bottom:4px; }
+    .card p { font-size:13px; color:var(--muted); line-height:1.5; }
+
+    .skill-cluster { margin-bottom:18px; }
+    .skill-cluster h4 { font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:10px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; }
+    .chip-g { background:#f4f4f4; color:#333; font-size:13px; font-weight:500; padding:6px 14px; border-radius:20px; border:1px solid var(--border); }
+
+    .lang-row { display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; }
+    .lang { flex:1; min-width:180px; border:1.5px solid var(--border); border-radius:12px; padding:16px 18px; }
+    .lang .l { font-weight:700; font-size:15px; color:var(--dark); }
+    .lang .v { font-size:13px; color:var(--muted); margin-top:2px; }
+
+    .cta-btn { display:inline-flex; align-items:center; gap:8px; background:#fff; color:var(--accent); border:2px solid var(--accent); font-weight:700; font-size:14px; padding:12px 24px; border-radius:10px; transition:all .2s; }
+    .cta-btn:hover { background:var(--accent); color:#fff; }
+    .cta-btn.solid { background:var(--accent); color:#fff; }
+    .cta-btn.solid:hover { background:var(--accent-light); border-color:var(--accent-light); }
+
+    @media (max-width:640px){ .grid2{ grid-template-columns:1fr; } .stats{ flex-wrap:wrap; } .stat{ flex:0 0 50%; } .stat:nth-child(2){ border-right:none; } .tl-period{ margin-left:0; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="index.html#projects" style="font-size:14px;font-weight:600;"><span class="es">Proyectos</span><span class="en">Projects</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" rel="noopener" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--accent);color:#fff;padding:120px 24px 72px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-50px;font-size:240px;font-weight:700;opacity:0.08;line-height:1;pointer-events:none;user-select:none;">A</span>
+  <div style="max-width:920px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.85;margin-bottom:16px;"><span class="es">Sobre mí</span><span class="en">About me</span></p>
+    <h1 style="font-size:clamp(36px,6vw,60px);font-weight:700;line-height:1.05;margin-bottom:12px;">Andrea López Agurto</h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.92;margin-bottom:10px;">Senior Service Designer · Senior UX Designer</p>
+    <p style="font-size:15px;opacity:0.85;margin-bottom:28px;">📍 Lima, Perú</p>
+    <p style="font-size:17px;opacity:0.9;max-width:680px;line-height:1.7;margin-bottom:34px;">
+      <span class="es">Diseñadora de servicios y UX con más de 8 años liderando research, diseño de servicios e iniciativas de transformación digital en banca, seguros, fintech, tecnología e impacto social en Latinoamérica y EE.UU.</span>
+      <span class="en">Service & UX Designer with 8+ years leading research, service design and digital transformation initiatives across banking, insurance, fintech, technology and social impact in Latin America and the US.</span>
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--accent);font-weight:700;font-size:14px;padding:13px 26px;border-radius:10px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="es">Descargar CV (PDF)</span><span class="en">Download CV (PDF)</span>
+      </a>
+      <a href="https://www.linkedin.com/in/andrealoag/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.6);font-weight:700;font-size:14px;padding:11px 24px;border-radius:10px;">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div style="padding:40px 24px;background:#fff;">
+  <div class="stats fade-in">
+    <div class="stat"><div class="n">8+</div><div class="t"><span class="es">años de experiencia</span><span class="en">years of experience</span></div></div>
+    <div class="stat"><div class="n">7</div><div class="t"><span class="es">industrias</span><span class="en">industries</span></div></div>
+    <div class="stat"><div class="n">5</div><div class="t"><span class="es">países</span><span class="en">countries</span></div></div>
+    <div class="stat"><div class="n">3</div><div class="t"><span class="es">idiomas</span><span class="en">languages</span></div></div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<section class="section" style="border-top:none;padding-top:24px;">
+  <div class="inner fade-in">
+    <p class="label"><span class="es">Resumen profesional</span><span class="en">Professional summary</span></p>
+    <h2 class="h2"><span class="es">Diseño servicios y experiencias que mueven el negocio</span><span class="en">I design services and experiences that move the business</span></h2>
+    <p class="lead es">Soy <strong>Senior Service Designer y UX Designer</strong> con más de 8 años llevando productos del research a la implementación en banca, seguros, fintech, tecnología e impacto social, en 5 países de Latinoamérica y EE.UU. Conecto estrategia, personas y tecnología para diseñar experiencias que las empresas pueden lanzar — y que generan resultados medibles.</p>
+    <p class="lead en">I'm a <strong>Senior Service Designer and UX Designer</strong> with 8+ years taking products from research to implementation across banking, insurance, fintech, technology and social impact, in 5 countries across Latin America and the US. I connect strategy, people and technology to design experiences companies can actually ship — and that drive measurable results.</p>
+    <p class="lead es">Mi trabajo ha salido al mundo real: el rediseño de agencias de Banco Pichincha, plataformas en producción en EE.UU. y la primera campaña digital de Rimac que no solo generó leads, sino que convirtió. Lidero discovery, facilito workshops con stakeholders e integro <strong>IA en research y diseño</strong> para ir más rápido y más profundo.</p>
+    <p class="lead en">My work has reached the real world: the Banco Pichincha branch redesign, live platforms in the US, and Rimac's first digital campaign that didn't just generate leads — it converted. I lead discovery, facilitate stakeholder workshops, and integrate <strong>AI into research and design</strong> to go faster and deeper.</p>
+    <p class="lead es">Mi formación en <strong>Derecho</strong> me da una mirada sistémica única para navegar la complejidad, los stakeholders y la transformación organizacional. Estoy <strong>abierta a nuevas oportunidades</strong> de impacto.</p>
+    <p class="lead en">My background in <strong>Law</strong> gives me a unique systemic lens to navigate complexity, stakeholders and organizational transformation. I'm <strong>open to new opportunities</strong> with impact.</p>
+  </div>
+</section>
+
+<!-- WHAT I BRING -->
+<section class="section">
+  <div class="inner fade-in">
+    <p class="label"><span class="es">Qué aporto</span><span class="en">What I bring</span></p>
+    <h2 class="h2"><span class="es">Por qué trabajar conmigo</span><span class="en">Why work with me</span></h2>
+    <div class="grid2">
+      <div class="card"><h4>🧩 <span class="es">Diseño end-to-end</span><span class="en">End-to-end design</span></h4><p><span class="es">Del research y el discovery a la definición de MVP, prototipado e implementación — no me quedo en la teoría, llego al producto.</span><span class="en">From research and discovery to MVP definition, prototyping and implementation — I don't stop at theory, I get to the product.</span></p></div>
+      <div class="card"><h4>📈 <span class="es">Impacto de negocio</span><span class="en">Business impact</span></h4><p><span class="es">Diseño alineado a OKRs y resultados: campañas que convierten, lanzamientos reales y procesos que ahorran tiempo y costos.</span><span class="en">Design aligned to OKRs and outcomes: campaigns that convert, real launches, and processes that save time and cost.</span></p></div>
+      <div class="card"><h4>🤖 <span class="es">IA aplicada</span><span class="en">Applied AI</span></h4><p><span class="es">Integro IA en research, síntesis y diseño (prompt design, generación de insights) para acelerar el trabajo sin perder rigor.</span><span class="en">I integrate AI into research, synthesis and design (prompt design, insight generation) to speed up work without losing rigor.</span></p></div>
+      <div class="card"><h4>🤝 <span class="es">Facilitación y stakeholders</span><span class="en">Facilitation & stakeholders</span></h4><p><span class="es">Facilito workshops y alineo a equipos multidisciplinarios de negocio, desarrollo y diseño en torno a una visión clara.</span><span class="en">I facilitate workshops and align cross-functional business, dev and design teams around a clear vision.</span></p></div>
+      <div class="card"><h4>⚖️ <span class="es">Pensamiento sistémico</span><span class="en">Systemic thinking</span></h4><p><span class="es">Mi base en Derecho me permite entender sistemas complejos, normativas y la transformación organizacional.</span><span class="en">My Law background lets me understand complex systems, regulations and organizational transformation.</span></p></div>
+      <div class="card"><h4>🌎 <span class="es">Multipaís · multisector</span><span class="en">Multi-country · multi-sector</span></h4><p><span class="es">Experiencia en banca, seguros, fintech, retail y tecnología en Perú, Chile, Ecuador, Argentina y EE.UU.</span><span class="en">Experience across banking, insurance, fintech, retail and tech in Peru, Chile, Ecuador, Argentina and the US.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" style="background:#fafafa;">
+  <div class="inner fade-in">
+    <p class="label"><span class="es">Experiencia</span><span class="en">Experience</span></p>
+    <h2 class="h2"><span class="es">Trayectoria profesional</span><span class="en">Career path</span></h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">Baufest</span><span class="tl-role">UX/UI Designer</span><span class="tl-period">2024 – 2026</span></div>
+        <p class="tl-context es">Diseño de producto y UX/UI para clientes en EE.UU. y Latinoamérica: plataforma de entregas en tiempo real para TITAN America (DXD Specialist, MVP), gestión de menús y bebestibles para Aramark Argentina, y rediseño visual de Cosmos.</p>
+        <p class="tl-context en">Product and UX/UI design for clients in the US and Latin America: real-time delivery platform for TITAN America (DXD Specialist, MVP), beverage and menu management for Aramark Argentina, and visual redesign of Cosmos.</p>
+        <div class="tl-clients"><span class="chip">TITAN America</span><span class="chip">Aramark</span><span class="chip">Cosmos</span></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">BBVA</span><span class="tl-role">Senior Service Designer</span><span class="tl-period">2024 · 3 <span class="es">meses</span><span class="en">months</span></span></div>
+        <p class="tl-context es">Apoyo a una iniciativa estratégica de captación de clientes: research, diseño de servicios y descubrimiento de oportunidades para atraer nuevos segmentos. Customer journey mapping, workshops con stakeholders y recomendaciones estratégicas.</p>
+        <p class="tl-context en">Support for a strategic customer-acquisition initiative: research, service design and opportunity discovery to attract new segments. Customer journey mapping, stakeholder workshops and strategic recommendations.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">Globant</span><span class="tl-role">Senior Service Designer</span><span class="tl-period">2022 – 2024</span></div>
+        <p class="tl-context es">Research y estrategia para múltiples proyectos: StarMeUp (USA), una iniciativa de movilidad para Banco Pichincha (Ecuador), la transformación digital de agencias de BCI (Chile), un producto BNPL y la app de Hiraoka para IH Fintech (Perú), y el onboarding interno de Globers con el programa DOJO.</p>
+        <p class="tl-context en">Research and strategy for multiple projects: StarMeUp (USA), a mobility initiative for Banco Pichincha (Ecuador), the digital transformation of BCI branches (Chile), a BNPL product and Hiraoka's app for IH Fintech (Peru), and internal Glober onboarding through the DOJO program.</p>
+        <div class="tl-clients"><span class="chip">StarMeUp · USA</span><span class="chip">Banco Pichincha · EC</span><span class="chip">BCI · CL</span><span class="chip">IH Fintech / Hiraoka · PE</span><span class="chip">Globant DOJO</span></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">RIMAC Seguros</span><span class="tl-role">Senior UX / Service Designer</span><span class="tl-period">2022 – 2023</span></div>
+        <p class="tl-context es">Lideré iniciativas de discovery para productos de la Tribu de Seguros de Vida: user research, definición y conceptualización de MVP, facilitación de workshops y definición de OKRs.</p>
+        <p class="tl-context en">Led discovery initiatives for products within the Life Insurance Tribe: user research, MVP definition and conceptualization, workshop facilitation and OKR definition.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">Multiplica Talent</span><span class="tl-role">UX Designer SSR / Service Designer</span><span class="tl-period">2021 – 2022</span></div>
+        <p class="tl-context es">Cliente Rimac Seguros: actividades de research y discovery, estrategia de posicionamiento de un producto freemium y facilitación de sesiones de co-creación.</p>
+        <p class="tl-context en">Client Rimac Seguros: research and discovery activities, positioning strategy for a freemium product, and facilitation of co-creation sessions.</p>
+        <div class="tl-clients"><span class="chip">Rimac Seguros</span></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">Banco Pichincha</span><span class="tl-role">Service Designer SSR</span><span class="tl-period">2020 – 2021</span></div>
+        <p class="tl-context es">Research interno y externo, evangelización de UX, adopción de metodologías ágiles y diseño de servicios a lo largo de múltiples canales bancarios.</p>
+        <p class="tl-context en">Internal and external research, UX evangelization, agile methodologies adoption and service design across multiple banking channels.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">Lucky S.A.C.</span><span class="tl-role">UX Designer</span><span class="tl-period">2019</span></div>
+        <p class="tl-context es">Proyectos de innovación para canales de retail tradicional y moderno; research y mejora de la experiencia del cliente.</p>
+        <p class="tl-context en">Innovation projects for traditional and modern retail channels; research and customer experience improvement.</p>
+        <div class="tl-clients"><span class="chip">Alicorp</span><span class="chip">Colgate-Palmolive</span><span class="chip">Kimberly-Clark</span></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">Laboratoria</span><span class="tl-role">UX Designer</span><span class="tl-period">2019</span></div>
+        <p class="tl-context es">User research, prototipado y usability testing, mapeo de procesos y diseño de soluciones.</p>
+        <p class="tl-context en">User research, prototyping and usability testing, process mapping and solution design.</p>
+        <div class="tl-clients"><span class="chip">BanBif</span><span class="chip">Crack the Code</span><span class="chip">Cocina Lab</span></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-top"><span class="tl-company">CECONAR – SUSALUD</span><span class="tl-role"><span class="es">Asistente Legal</span><span class="en">Legal Assistant</span></span><span class="tl-period">2016 – 2018</span></div>
+        <p class="tl-context es">Redacción de documentación legal, apoyo en arbitraje y conciliación, e iniciativas de atención y orientación al ciudadano.</p>
+        <p class="tl-context en">Legal documentation drafting, arbitration and conciliation support, and citizen service and outreach initiatives.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section">
+  <div class="inner fade-in">
+    <p class="label"><span class="es">Educación</span><span class="en">Education</span></p>
+    <h2 class="h2"><span class="es">Formación</span><span class="en">Education</span></h2>
+    <div class="grid2">
+      <div class="card"><h4><span class="es">Diplomado en UI Design</span><span class="en">UI Design Diploma</span></h4><p>Repensar Educativo · 2026</p></div>
+      <div class="card"><h4><span class="es">Máster en UX Research</span><span class="en">Master's in UX Research</span></h4><p>Universidad de Belgrano, Argentina · 2022</p></div>
+      <div class="card"><h4><span class="es">Título Profesional en UX Designer</span><span class="en">Professional Degree in UX Design</span></h4><p>ISIL · 2021–2024</p></div>
+      <div class="card"><h4><span class="es">Diplomado en UX Research</span><span class="en">UX Research Diploma</span></h4><p>ISIL · 2023</p></div>
+      <div class="card"><h4>UX Design Bootcamp</h4><p>Laboratoria · 2019</p></div>
+      <div class="card"><h4><span class="es">Bachiller en Derecho</span><span class="en">Bachelor's Degree in Law</span></h4><p>Universidad Nacional Mayor de San Marcos · 2013–2018</p></div>
+    </div>
+    <p class="label" style="margin-top:36px;"><span class="es">Certificaciones y formación especializada</span><span class="en">Certifications & specialized training</span></p>
+    <div class="chips" style="margin-top:6px;">
+      <span class="chip-g">Scrum Foundation — CertiProf</span>
+      <span class="chip-g">Adobe Illustrator CS6</span>
+      <span class="chip-g">AI for Experience Design — Digital House</span>
+      <span class="chip-g">AI for Programming — Digital House</span>
+      <span class="chip-g">Service Design — Repensar Educativo</span>
+      <span class="chip-g">UX Research Avanzado — Multiplica</span>
+      <span class="chip-g">UX/UI Avanzado — Coderhouse</span>
+      <span class="chip-g">Design Research — Globant University</span>
+      <span class="chip-g">Leadership Skills — Globant University</span>
+      <span class="chip-g">Gamification — Udemy</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS & TOOLS -->
+<section class="section" style="background:#fafafa;">
+  <div class="inner fade-in">
+    <p class="label"><span class="es">Especialidades y herramientas</span><span class="en">Skills & tools</span></p>
+    <h2 class="h2"><span class="es">Cómo trabajo</span><span class="en">How I work</span></h2>
+
+    <div class="skill-cluster">
+      <h4><span class="es">Core skills</span><span class="en">Core skills</span></h4>
+      <div class="chips">
+        <span class="chip-g">Service Design</span><span class="chip-g">UX Strategy</span><span class="chip-g">User Research</span><span class="chip-g">Customer Experience (CX)</span><span class="chip-g">Design Thinking</span><span class="chip-g">Lean UX</span><span class="chip-g">Product Discovery</span><span class="chip-g">Workshop Facilitation</span><span class="chip-g">Stakeholder Management</span><span class="chip-g">Service Blueprinting</span><span class="chip-g">Journey Mapping</span><span class="chip-g">Innovation Strategy</span><span class="chip-g">Strategic Opportunity Discovery</span><span class="chip-g">Design Facilitation</span>
+      </div>
+    </div>
+
+    <div class="skill-cluster">
+      <h4>AI for Design & Research</h4>
+      <div class="chips">
+        <span class="chip-g">AI for Design & Research</span><span class="chip-g">Human-Centered AI</span><span class="chip-g">AI-assisted Service Innovation</span><span class="chip-g">Prompt Design for UX</span><span class="chip-g">ChatGPT</span><span class="chip-g">Claude</span><span class="chip-g">Gemini</span>
+      </div>
+    </div>
+
+    <div class="skill-cluster">
+      <h4><span class="es">Herramientas de diseño e investigación</span><span class="en">Design & research tools</span></h4>
+      <div class="chips">
+        <span class="chip-g">Figma</span><span class="chip-g">InVision</span><span class="chip-g">Useberry</span><span class="chip-g">Miro</span><span class="chip-g">Hotjar</span><span class="chip-g">Google Analytics</span><span class="chip-g">User Interviews</span><span class="chip-g">Usability Testing</span><span class="chip-g">Jira</span><span class="chip-g">Notion</span><span class="chip-g">Slack</span><span class="chip-g">Journey Maps</span><span class="chip-g">Service Blueprints</span><span class="chip-g">MVP Canvas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section class="section">
+  <div class="inner fade-in">
+    <p class="label"><span class="es">Idiomas</span><span class="en">Languages</span></p>
+    <h2 class="h2"><span class="es">Idiomas</span><span class="en">Languages</span></h2>
+    <div class="lang-row">
+      <div class="lang"><div class="l"><span class="es">Español</span><span class="en">Spanish</span></div><div class="v"><span class="es">Nativo</span><span class="en">Native</span></div></div>
+      <div class="lang"><div class="l"><span class="es">Inglés</span><span class="en">English</span></div><div class="v"><span class="es">Intermedio alto</span><span class="en">Upper intermediate</span></div></div>
+      <div class="lang"><div class="l"><span class="es">Chino mandarín</span><span class="en">Mandarin Chinese</span></div><div class="v"><span class="es">Básico (Nivel 2)</span><span class="en">Basic (Level 2)</span></div></div>
+    </div>
+    <div style="margin-top:36px;display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" rel="noopener" class="cta-btn solid">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="es">Descargar CV completo</span><span class="en">Download full CV</span>
+      </a>
+      <a href="mailto:andrea.lopez.agurto@gmail.com" class="cta-btn"><span class="es">Escríbeme</span><span class="en">Get in touch</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function(){ document.body.classList.toggle('lang-en'); this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN'; });
+  const observer = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target);} }),{ threshold:0, rootMargin:'0px 0px 200px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

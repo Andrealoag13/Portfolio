@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IN Fintech – Buy Now, Pay Later | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --purple:#5B4CFF; --dark:#111; --text:#333; --muted:#777; --border:#e5e5e5; --accent:#283593; --accent-light:#3949ab; }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Poppins',sans-serif; color:var(--text); background:#fff; }
+    a { text-decoration:none; color:inherit; }
+    body .en { display:none; } body.lang-en .es { display:none; } body.lang-en .en { display:block; }
+    span.en,a.en { display:none; } body.lang-en span.es,body.lang-en a.es { display:none; } body.lang-en span.en,body.lang-en a.en { display:inline; }
+    .fade-in { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; } .fade-in.visible { opacity:1; transform:none; }
+    .process-section { border-top:1px solid var(--border); padding:64px 24px; } .process-inner { max-width:900px; margin:0 auto; }
+    .section-num { font-size:96px; font-weight:700; color:var(--accent); opacity:.08; line-height:1; margin-bottom:-32px; }
+    .section-divider { height:4px; background:var(--purple); border-radius:2px; max-width:48px; margin-bottom:20px; }
+    .section-heading { font-size:28px; font-weight:700; color:var(--dark); margin-bottom:16px; }
+    .section-text { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:28px; }
+    .sub-heading { font-size:20px; font-weight:700; color:var(--dark); margin:40px 0 10px; }
+    .insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:24px 0; }
+    .insight-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+    .insight-card { background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:20px; }
+    .insight-card-icon { font-size:22px; margin-bottom:10px; }
+    .insight-card-title { font-weight:700; font-size:15px; color:#111; margin-bottom:8px; }
+    .insight-card-text { font-size:13px; color:#555; line-height:1.65; }
+    .stats-row { display:flex; margin:24px 0; background:#f8f8f8; border-radius:12px; overflow:hidden; }
+    .stat-item { flex:1; text-align:center; padding:28px 16px; border-right:1px solid var(--border); }
+    .stat-item:last-child { border-right:none; }
+    .stat-num { font-size:32px; font-weight:700; color:var(--accent); }
+    .stat-label { font-size:13px; color:#555; margin-top:6px; line-height:1.4; }
+    .find-list { list-style:none; padding:0; margin:20px 0; }
+    .find-list li { display:flex; gap:16px; padding:16px 0; border-bottom:1px solid #f0f0f0; }
+    .find-list li:last-child { border-bottom:none; }
+    .find-n { width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px; }
+    .find-b h5 { font-weight:700;font-size:15px;color:#111;margin-bottom:4px; }
+    .find-b p { font-size:13px;color:#555;line-height:1.6; }
+    .result-banner { background:var(--accent); color:#fff; border-radius:12px; padding:28px 32px; margin:24px 0; }
+    .result-title { font-size:18px; font-weight:700; margin-bottom:12px; } .result-text { font-size:14px; opacity:.95; line-height:1.8; }
+    @media (max-width:760px){ .main-layout{ grid-template-columns:1fr !important; } .sidebar{ position:static !important; } }
+    @media (max-width:640px){ .insight-grid,.insight-grid-2{ grid-template-columns:1fr; } .stats-row{ flex-direction:column; } .section-num{ font-size:60px; } }
+  </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<section style="background:var(--accent);color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:240px;font-weight:700;opacity:0.08;line-height:1;pointer-events:none;user-select:none;">$</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.85;margin-bottom:16px;">UX Research · Fintech · Hiraoka</p>
+    <h1 style="font-size:clamp(34px,6vw,60px);font-weight:700;line-height:1.1;margin-bottom:12px;">Buy Now, Pay Later</h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.9;margin-bottom:8px;"><span class="es">Research "As is" del proceso de compra y pago</span><span class="en">"As is" research of the purchase and payment process</span></p>
+    <p style="font-size:17px;opacity:0.85;max-width:660px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Investigación sobre percepciones, hábitos y comportamientos en torno al modelo BNPL (Buy Now, Pay Later) en el proceso de compra y medios de pago en el Perú.</span>
+      <span class="en">Research on perceptions, habits and behaviors around the BNPL (Buy Now, Pay Later) model in the purchase and payment process in Peru.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p><p style="font-weight:700;font-size:15px;">Senior Service Designer · Senior UX</p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p><p style="font-weight:700;font-size:15px;">Hiraoka</p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Fecha</span><span class="en">Date</span></p><p style="font-weight:700;font-size:15px;"><span class="es">Enero 2023</span><span class="en">January 2023</span></p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Producto</span><span class="en">Product</span></p><p style="font-weight:700;font-size:15px;">BNPL</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="main-layout" style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+  <div class="sidebar" style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Mi rol</span><span class="en">My role</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;">Senior Service Designer · Senior UX</p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Industria</span><span class="en">Industry</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;">💳 <span class="es">Fintech · Pagos</span><span class="en">Fintech · Payments</span></p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Muestra</span><span class="en">Sample</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">13 usuarios · 6 stakeholders · 80 h desk research</span><span class="en">13 users · 6 stakeholders · 80h desk research</span></p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Métodos</span><span class="en">Methods</span></div><div style="display:flex;flex-wrap:wrap;gap:4px;"><span style="background:#e8eaf6;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;"><span class="es">Entrevistas</span><span class="en">Interviews</span></span><span style="background:#e8eaf6;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;"><span class="es">Observación</span><span class="en">Observation</span></span><span style="background:#e8eaf6;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Desk research</span></div></div>
+  </div>
+  <div class="fade-in">
+    <h2 style="font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">¿Cómo empezó?</span><span class="en">How did it start?</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">El reporte "As is" buscó entender el proceso de compra de las personas en Perú e identificar los puntos de dolor en todo el recorrido, profundizando especialmente en el <strong>momento del pago</strong>, para evaluar la oportunidad de un producto BNPL.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">The "As is" report sought to understand people's purchase process in Peru and identify pain points across the journey, going especially deep into the <strong>payment moment</strong>, to evaluate the opportunity for a BNPL product.</p>
+    <div style="background:#e8eaf6;border-radius:10px;padding:20px 24px;margin-top:8px;">
+      <p style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;"><span class="es">Foco</span><span class="en">Focus</span></p>
+      <p class="es" style="font-size:14px;color:#444;line-height:1.7;">Hábitos de compra, motivaciones y sentimientos relacionados a los diferentes medios de pago, para encontrar áreas de oportunidad que evolucionen la experiencia.</p>
+      <p class="en" style="font-size:14px;color:#444;line-height:1.7;">Purchase habits, motivations and feelings around different payment methods, to find opportunity areas that evolve the experience.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 01 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Objetivos y metodología</span><span class="en">Objectives and methodology</span></h3>
+    <div class="insight-grid">
+      <div class="insight-card"><div class="insight-card-icon">1️⃣</div><p class="insight-card-text es">Entender el proceso de compra e identificar los puntos de dolor en todo el recorrido, profundizando en el pago.</p><p class="insight-card-text en">Understand the purchase process and identify pain points across the journey, going deep into payment.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">2️⃣</div><p class="insight-card-text es">Obtener insights sobre hábitos, motivaciones y factores que afectan la forma de compra y los medios de pago.</p><p class="insight-card-text en">Get insights on habits, motivations and factors affecting how people buy and pay.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">3️⃣</div><p class="insight-card-text es">Identificar puntos de dolor y áreas de oportunidad para el target que mejoren la experiencia de compra y pago.</p><p class="insight-card-text en">Identify pain points and opportunity areas for the target that improve the purchase and payment experience.</p></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num">13</div><div class="stat-label es">usuarios<br>entrevistados</div><div class="stat-label en">users<br>interviewed</div></div>
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label es">entrevistas a<br>stakeholders</div><div class="stat-label en">stakeholder<br>interviews</div></div>
+      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label es">tiendas<br>observadas</div><div class="stat-label en">stores<br>observed</div></div>
+      <div class="stat-item"><div class="stat-num">80h</div><div class="stat-label es">desk<br>research</div><div class="stat-label en">desk<br>research</div></div>
+    </div>
+    <div class="insight-grid-2">
+      <div class="insight-card"><div class="insight-card-icon">🎙️</div><div class="insight-card-title es">Entrevistas a profundidad</div><div class="insight-card-title en">In-depth interviews</div><p class="insight-card-text es">Información estructurada y profunda sobre historias, comportamientos y hábitos, guiando la conversación hacia experiencias específicas con marcas y productos.</p><p class="insight-card-text en">Structured, deep information about stories, behaviors and habits, steering the conversation toward specific experiences with brands and products.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">👀</div><div class="insight-card-title es">Observación del contexto</div><div class="insight-card-title en">Contextual observation</div><p class="insight-card-text es">Inmersiva y contextual: entender lo que el usuario no dice y cómo se comporta para descubrir necesidades latentes.</p><p class="insight-card-text en">Immersive and contextual: understand what the user doesn't say and how they behave to uncover latent needs.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Insights de usuarios</span><span class="en">User insights</span></h3>
+    <ul class="find-list">
+      <li><div class="find-n">1</div><div class="find-b"><h5 class="es">Temor a endeudarse</h5><h5 class="en">Fear of debt</h5><p class="es">La mayoría prefiere débito o efectivo: usar un financiamiento les genera un estrés extra que prefieren evitar.</p><p class="en">Most prefer debit or cash: using financing creates extra stress they prefer to avoid.</p></div></li>
+      <li><div class="find-n">2</div><div class="find-b"><h5 class="es">Búsqueda en línea antes de comprar</h5><h5 class="en">Online search before buying</h5><p class="es">El primer paso es buscar el producto online; para muebles, línea blanca y ropa quieren tocarlo y probarlo, completando la compra en tienda.</p><p class="en">The first step is searching online; for furniture, appliances and clothing they want to touch and try it, completing the purchase in-store.</p></div></li>
+      <li><div class="find-n">3</div><div class="find-b"><h5 class="es">Ofertas y fidelización deciden el medio de pago</h5><h5 class="en">Offers and loyalty drive the payment method</h5><p class="es">Eligen el medio de pago según promociones, descuentos, regalos y puntos que puedan usar durante y después de la compra.</p><p class="en">They choose the payment method based on promotions, discounts, gifts and points usable during and after the purchase.</p></div></li>
+      <li><div class="find-n">4</div><div class="find-b"><h5 class="es">Miedo a olvidar la fecha de pago</h5><h5 class="en">Fear of forgetting the due date</h5><p class="es">Quienes tienen más de 2 productos financieros sienten estrés al recordar una nueva fecha — una barrera para colocar el producto.</p><p class="en">Those with more than 2 financial products feel stress remembering a new date — a barrier to adopting the product.</p></div></li>
+      <li><div class="find-n">5</div><div class="find-b"><h5 class="es">Inclinación a pagar lo antes posible</h5><h5 class="en">Tendency to pay as soon as possible</h5><p class="es">Prefieren adelantar cuotas por miedo a penalidades por pago tardío y a la incertidumbre sobre su futuro financiero.</p><p class="en">They prefer to prepay installments for fear of late-payment penalties and uncertainty about their financial future.</p></div></li>
+      <li><div class="find-n">6</div><div class="find-b"><h5 class="es">Contacto humano</h5><h5 class="en">Human contact</h5><p class="es">Buscan productos financieros con soporte humano-humano para poder comunicarse con su entidad.</p><p class="en">They look for financial products with human-to-human support to communicate with their provider.</p></div></li>
+    </ul>
+
+    <h4 class="sub-heading"><span class="es">Journey del arquetipo</span><span class="en">Archetype journey</span></h4>
+    <p class="section-text es">Mapeamos el recorrido emocional del usuario a lo largo del proceso de compra y pago, identificando los momentos de mayor fricción.</p>
+    <p class="section-text en">We mapped the user's emotional journey across the purchase and payment process, identifying the highest-friction moments.</p>
+    <img src="fintech_journey.png" alt="Journey emocional del arquetipo a lo largo del proceso de compra y pago" style="width:100%;border-radius:12px;border:1px solid var(--border);box-shadow:0 6px 24px rgba(0,0,0,0.10);display:block;margin:18px 0 6px;">
+    <p style="font-size:12px;color:#999;text-align:center;margin-bottom:8px;line-height:1.5;"><span class="es">Curva emocional del arquetipo desde la consideración hasta el pago del crédito.</span><span class="en">Archetype's emotional curve from consideration to credit payment.</span></p>
+  </div>
+</div>
+
+<!-- 03 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Áreas de oportunidad</span><span class="en">Opportunity areas</span></h3>
+    <p class="section-text es">Los hallazgos definen el reto de diseño para un BNPL relevante en el contexto peruano: reducir la ansiedad financiera, dar control y construir confianza.</p>
+    <p class="section-text en">The findings define the design challenge for a BNPL relevant to the Peruvian context: reduce financial anxiety, give control, and build trust.</p>
+    <div class="insight-grid">
+      <div class="insight-card"><div class="insight-card-icon">🔔</div><div class="insight-card-title es">Control de fechas</div><div class="insight-card-title en">Date control</div><p class="insight-card-text es">Recordatorios y la opción de adelantar cuotas para quitar el miedo a la penalización y al olvido.</p><p class="insight-card-text en">Reminders and the option to prepay installments to remove fear of penalties and forgetting.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">🛡️</div><div class="insight-card-title es">Confianza y transparencia</div><div class="insight-card-title en">Trust and transparency</div><p class="insight-card-text es">Claridad total sobre tasas, fechas y condiciones para vencer el temor a endeudarse.</p><p class="insight-card-text en">Full clarity on rates, dates and conditions to overcome the fear of debt.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">🤝</div><div class="insight-card-title es">Soporte humano</div><div class="insight-card-title en">Human support</div><p class="insight-card-text es">Un canal humano accesible que acompañe al usuario y refuerce la relación con la marca.</p><p class="insight-card-text en">An accessible human channel that supports the user and reinforces the brand relationship.</p></div>
+    </div>
+    <div class="result-banner">
+      <div class="result-title es">💡 Conclusión</div>
+      <div class="result-title en">💡 Conclusion</div>
+      <p class="result-text es">El BNPL tiene espacio en Perú, pero el diseño debe trabajar contra la aversión a la deuda: control, transparencia y soporte humano son las palancas para convertir un financiamiento en una experiencia que el usuario sienta segura.</p>
+      <p class="result-text en">BNPL has room in Peru, but the design must work against debt aversion: control, transparency and human support are the levers to turn financing into an experience the user feels is safe.</p>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:900px;margin:0 auto;padding:48px 24px 40px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Volver al inicio</span><span class="en">Back to start</span></p>
+  <a href="index.html" style="font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#283593'" onmouseout="this.style.color='#111'"><span class="es">Ver todos los proyectos →</span><span class="en">See all projects →</span></a>
+</div>
+
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function(){ document.body.classList.toggle('lang-en'); this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN'; });
+  const observer = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target);} }),{ threshold:0, rootMargin:'0px 0px 300px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

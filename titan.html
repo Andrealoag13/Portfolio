@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TITAN America – Cypress Customer Portal | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #5B4CFF;
+      --dark: #111;
+      --text: #333;
+      --muted: #777;
+      --border: #e5e5e5;
+      --accent: #0f4780;
+      --accent-light: #1565c0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    body .en { display: none; }
+    body.lang-en .es { display: none; }
+    body.lang-en .en { display: block; }
+    span.en, a.en { display: none; }
+    body.lang-en span.es, body.lang-en a.es { display: none; }
+    body.lang-en span.en, body.lang-en a.en { display: inline; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* Process sections */
+    .process-section { border-top: 1px solid var(--border); padding: 64px 24px; }
+    .process-inner { max-width: 900px; margin: 0 auto; }
+    .section-num { font-family: 'Poppins', sans-serif; font-size: 96px; font-weight: 700; color: var(--accent); opacity: 0.08; line-height: 1; margin-bottom: -32px; }
+    .section-divider { height: 4px; background: var(--purple); border-radius: 2px; max-width: 48px; margin-bottom: 20px; }
+    .section-heading { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+    .section-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+
+    /* Content blocks */
+    .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+    .insight-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .insight-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; }
+    .insight-card-icon { font-size: 22px; margin-bottom: 10px; }
+    .insight-card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 8px; }
+    .insight-card-text { font-size: 13px; color: #555; line-height: 1.65; }
+    .stats-row { display: flex; gap: 0; margin: 24px 0; background: #f8f8f8; border-radius: 12px; overflow: hidden; }
+    .stat-item { flex: 1; text-align: center; padding: 28px 16px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.4; }
+    .hmw-box { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .hmw-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 12px; }
+    .hmw-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; line-height: 1.4; }
+    .artifact-box { background: #f8f8f8; border-radius: 12px; padding: 20px 24px; margin: 12px 0; display: flex; align-items: flex-start; gap: 16px; }
+    .artifact-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .artifact-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 6px; }
+    .artifact-text { font-size: 13px; color: #555; line-height: 1.6; }
+    .findings-list { list-style: none; margin: 20px 0; padding: 0; }
+    .findings-list li { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+    .findings-list li:last-child { border-bottom: none; }
+    .finding-num { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); opacity: 0.4; flex-shrink: 0; width: 32px; }
+    .finding-text { font-size: 14px; color: #444; line-height: 1.65; }
+    .result-banner { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .result-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .result-text { font-size: 14px; opacity: 0.9; line-height: 1.8; }
+    .release-card { border: 2px solid var(--accent); border-radius: 12px; padding: 24px; margin: 16px 0; }
+    .release-tag { display: inline-block; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px; }
+    .release-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+    .release-features { list-style: none; padding: 0; }
+    .release-features li { font-size: 14px; color: #555; padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; }
+    .release-features li::before { content: "→"; color: var(--purple); font-weight: 700; flex-shrink: 0; }
+
+    /* Mobile screenshots */
+    .mobile-screens { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 28px 0; }
+    .mobile-screen { max-width: 280px; width: 100%; border-radius: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); display: block; }
+    .mobile-screen-caption { text-align: center; font-size: 12px; color: #888; margin-top: 8px; line-height: 1.4; }
+    .mobile-screen-group { display: flex; flex-direction: column; align-items: center; }
+
+    @media (max-width: 640px) {
+      .insight-grid, .insight-grid-2 { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .section-num { font-size: 60px; }
+      .mobile-screen { max-width: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:#0f4780;color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:280px;font-weight:700;opacity:0.06;font-family:'Poppins', sans-serif;line-height:1;pointer-events:none;user-select:none;">T</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.75;margin-bottom:16px;">DXD Specialist · UX/UI Design · Baufest</p>
+    <h1 style="font-size:clamp(36px,6vw,64px);font-weight:700;line-height:1.1;margin-bottom:12px;">Cypress Customer Portal</h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.85;margin-bottom:8px;">Titan America</p>
+    <p style="font-size:17px;opacity:0.75;max-width:640px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Plataforma para pedidos de concreto y seguimiento en tiempo real de entregas para las operaciones de distribución en Florida, Virginia, Carolina del Norte y del Sur.</span>
+      <span class="en">Platform for concrete ordering and real-time delivery tracking for distribution operations across Florida, Virginia, North Carolina, and South Carolina.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p>
+        <p style="font-weight:700;font-size:15px;">DXD Specialist — UX/UI Designer</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p>
+        <p style="font-weight:700;font-size:15px;">Baufest para Titan America</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Período</span><span class="en">Period</span></p>
+        <p style="font-weight:700;font-size:15px;">2024 – 2026</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Herramientas</span><span class="en">Tools</span></p>
+        <p style="font-weight:700;font-size:15px;">Figma · Material UI</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW PANEL -->
+<div style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+  <!-- Sidebar -->
+  <div style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">¿Qué es el proyecto?</span><span class="en">What is this project?</span></div>
+      <p class="es" style="font-size:13px;color:var(--muted);line-height:1.7;">Portal web para que los clientes de Titan America en EE.UU. puedan hacer pedidos de concreto Ready-Mix, ver el estado en tiempo real y rastrear los camiones en ruta a su obra.</p>
+      <p class="en" style="font-size:13px;color:var(--muted);line-height:1.7;">Web portal for Titan America customers in the US to place Ready-Mix concrete orders, see real-time status, and track trucks en route to their job site.</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Mi rol</span><span class="en">My role</span></div>
+      <p class="es" style="font-size:13px;color:var(--muted);line-height:1.7;">DXD Specialist — diseño UX/UI completo del portal en Figma con Material UI. Investigación de requisitos con usuarios finales, wireframing, prototipado y handoff al equipo de desarrollo.</p>
+      <p class="en" style="font-size:13px;color:var(--muted);line-height:1.7;">DXD Specialist — complete UX/UI design of the portal in Figma with Material UI. Requirements research with end users, wireframing, prototyping, and developer handoff.</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Impacto</span><span class="en">Impact</span></div>
+      <p class="es" style="font-size:13px;color:var(--muted);line-height:1.7;">R3 y R4 en producción. Extensión del contrato a soporte y mantenimiento continuo.</p>
+      <p class="en" style="font-size:13px;color:var(--muted);line-height:1.7;">R3 and R4 in production. Contract extended to ongoing support and maintenance.</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Industria</span><span class="en">Industry</span></div>
+      <p style="font-size:13px;color:var(--muted);">🏗️ <span class="es">Construcción · Logística</span><span class="en">Construction · Logistics</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Herramientas</span><span class="en">Tools</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;">
+        <span style="background:#e8f0fe;color:#0f4780;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Figma</span>
+        <span style="background:#e8f0fe;color:#0f4780;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Material UI</span>
+        <span style="background:#e8f0fe;color:#0f4780;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Jira</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Context -->
+  <div class="fade-in">
+    <h2 style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">Contexto del proyecto</span><span class="en">Project context</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Titan America es uno de los gigantes de la industria de materiales de construcción en Estados Unidos y Europa. Su operación de Ready-Mix — la producción y entrega de concreto premezclado — involucra cientos de camiones mixer distribuidos en múltiples estados, coordinando pedidos de clientes como constructoras, contratistas y proyectos de obra civil.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Titan America is one of the giants of the construction materials industry in the United States and Europe. Their Ready-Mix operation — production and delivery of premixed concrete — involves hundreds of mixer trucks distributed across multiple states, coordinating orders from customers like construction companies, contractors, and civil engineering projects.</p>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Antes del portal, el proceso de pedido y seguimiento se hacía de forma manual: era fragmentado y dependiente de llamadas telefónicas. Baufest fue contratada para construir el <strong>Cypress Customer Portal</strong>, una plataforma digital que centralizara la operación. Fui responsable del diseño UX/UI completo como DXD Specialist desde el MVP hasta el Release 4.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Before the portal, the ordering and tracking process was done manually: it was fragmented and phone call-dependent. Baufest was contracted to build the <strong>Cypress Customer Portal</strong>, a digital platform to centralize operations. I was responsible for the complete UX/UI design as DXD Specialist from MVP through Release 4.</p>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);">Trabajé de la mano con desarrolladores .NET y React, QA, DevOps y el equipo de negocio de Titan, en un entorno ágil, aplicando metodologías ágiles para el levantamiento de requerimientos con usuarios finales.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);">I worked alongside .NET and React developers, QA, DevOps, and the Titan business team, in an agile environment, applying agile methodologies for end-user requirements research.</p>
+  </div>
+</div>
+
+<!-- SECTION 00 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">00</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Nuestro reto y contexto</span><span class="en">Our challenge and context</span></h3>
+    <p class="section-text es">Transformar un proceso de pedido de concreto 100% telefónico y manual en una plataforma digital self-service que los clientes de Titan pudieran usar desde obra, con información en tiempo real.</p>
+    <p class="section-text en">Transform a 100% phone-based and manual concrete ordering process into a digital self-service platform that Titan's customers could use from the job site, with real-time information.</p>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num">4</div><div class="stat-label es">estados cubiertos<br>Florida · Virginia · Carolina del Norte · Carolina del Sur</div><div class="stat-label en">states covered<br>Florida · Virginia · North Carolina · South Carolina</div></div>
+      <div class="stat-item"><div class="stat-num">R3 → R4</div><div class="stat-label es">2 releases en producción</div><div class="stat-label en">2 releases in production</div></div>
+      <div class="stat-item"><div class="stat-num">2024–26</div><div class="stat-label es">duración del proyecto</div><div class="stat-label en">project duration</div></div>
+    </div>
+    <div class="insight-grid-2">
+      <div class="insight-card">
+        <div class="insight-card-icon">📞</div>
+        <div class="insight-card-title es">El problema original</div>
+        <div class="insight-card-title en">The original problem</div>
+        <p class="insight-card-text es">Antes todo se hacía de forma manual: los clientes hacían pedidos por teléfono, no tenían visibilidad del estado del pedido ni de la ubicación del camión, y dependían de llamar al dispatcher para cualquier cambio o cancelación.</p>
+        <p class="insight-card-text en">Before, everything was done manually: customers placed orders by phone, had no visibility into order status or truck location, and had to call the dispatcher for any change or cancellation.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🎯</div>
+        <div class="insight-card-title es">El objetivo</div>
+        <div class="insight-card-title en">The goal</div>
+        <p class="insight-card-text es">Crear un portal que permitiera a los clientes hacer pedidos, ver el estado en tiempo real, rastrear camiones en ruta y gestionar proyectos desde cualquier dispositivo — especialmente desde móvil en obra.</p>
+        <p class="insight-card-text en">Create a portal allowing customers to place orders, see real-time status, track trucks en route, and manage projects from any device — especially from mobile on the job site.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Investigación de requisitos</span><span class="en">Requirements Research</span></h3>
+    <p class="section-text es">Trabajamos con metodologías ágiles para el levantamiento de requisitos con los usuarios finales del portal: clientes de Titan (constructoras, contratistas), empleados de Titan (dispatchers, supervisores) y administradores del sistema.</p>
+    <p class="section-text en">We used agile methodologies for requirements research with the portal's end users: Titan customers (construction companies, contractors), Titan employees (dispatchers, supervisors), and system administrators.</p>
+    <div class="artifact-box">
+      <div class="artifact-icon">🏗️</div>
+      <div>
+        <div class="artifact-title"><span class="es">Workshops con usuarios finales</span><span class="en">Workshops with end users</span></div>
+        <p class="artifact-text es">Realizamos workshops presenciales y remotos con clientes de Titan en Florida para entender sus flujos de trabajo actuales, los momentos críticos del proceso de pedido y las necesidades desde dispositivos móviles en campo.</p>
+        <p class="artifact-text en">We conducted in-person and remote workshops with Titan customers in Florida to understand their current workflows, the critical moments in the ordering process, and mobile device needs in the field.</p>
+      </div>
+    </div>
+    <ul class="findings-list">
+      <li><span class="finding-num">01</span><span class="finding-text es">Los clientes necesitaban visibilidad del ETA del camión — el concreto tiene una ventana de uso limitada, los retrasos no avisados generan desperdicios costosos.</span><span class="finding-text en">Customers needed truck ETA visibility — concrete has a limited usage window, unannounced delays cause costly waste.</span></li>
+      <li><span class="finding-num">02</span><span class="finding-text es">El 70% de los accesos se hacía desde dispositivos móviles — las tablas de datos tradicionales eran inutilizables en pantallas pequeñas.</span><span class="finding-text en">70% of accesses were from mobile devices — traditional data tables were unusable on small screens.</span></li>
+      <li><span class="finding-num">03</span><span class="finding-text es">Los empleados de Titan necesitaban acceso rápido sin fricción — SSO era crítico para no interrumpir el workflow operacional.</span><span class="finding-text en">Titan employees needed fast, friction-free access — SSO was critical to not interrupt the operational workflow.</span></li>
+      <li><span class="finding-num">04</span><span class="finding-text es">La capacidad de liberar o cancelar un pedido era el feature más demandado — los clientes debían llamar al dispatcher para cada cambio.</span><span class="finding-text en">The ability to release or cancel an order was the most demanded feature — customers had to call the dispatcher for every change.</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 02 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Definición del producto</span><span class="en">Product Definition</span></h3>
+    <p class="section-text es">Definimos los flujos principales, el sistema de diseño basado en Material UI y la arquitectura de información del portal para alinear a los equipos de diseño, desarrollo y negocio.</p>
+    <p class="section-text en">We defined the main flows, the Material UI-based design system, and the portal's information architecture to align design, development, and business teams.</p>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-card-icon">👤</div>
+        <div class="insight-card-title es">Cliente de Titan</div>
+        <div class="insight-card-title en">Titan Customer</div>
+        <p class="insight-card-text es">Constructora o contratista que hace pedidos frecuentes de concreto. Necesita hacer pedidos y ver ETA desde el celular en obra.</p>
+        <p class="insight-card-text en">Construction company or contractor making frequent concrete orders. Needs to place orders and see ETA from phone on site.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🏢</div>
+        <div class="insight-card-title es">Empleado de Titan</div>
+        <div class="insight-card-title en">Titan Employee</div>
+        <p class="insight-card-text es">Dispatcher o supervisor que gestiona operaciones. Necesita acceso rápido vía SSO y visibilidad de todas las órdenes activas.</p>
+        <p class="insight-card-text en">Dispatcher or supervisor managing operations. Needs quick SSO access and visibility of all active orders.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">⚙️</div>
+        <div class="insight-card-title es">Administrador</div>
+        <div class="insight-card-title en">Administrator</div>
+        <p class="insight-card-text es">Gestiona configuración del sistema. Necesita agregar nuevas regiones y plantas sin cambios de código.</p>
+        <p class="insight-card-text en">Manages system configuration. Needs to add new regions and plants without code changes.</p>
+      </div>
+    </div>
+    <div class="hmw-box">
+      <div class="hmw-label">How Might We</div>
+      <p class="hmw-text es">¿Cómo podríamos diseñar una plataforma que funcione igual de bien para un contratista en obra mirando su teléfono bajo el sol, y para un dispatcher gestionando 50 pedidos activos desde su escritorio?</p>
+      <p class="hmw-text en">How might we design a platform that works just as well for a contractor on site looking at their phone under the sun, and for a dispatcher managing 50 active orders from their desk?</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Diseño por releases</span><span class="en">Design by releases</span></h3>
+    <p class="section-text es">El portal se construyó en releases iterativos. Diseñé cada release en Figma usando componentes de Material UI, con handoff detallado al equipo de React.</p>
+    <p class="section-text en">The portal was built in iterative releases. I designed each release in Figma using Material UI components, with detailed handoff to the React team.</p>
+    <div class="release-card">
+      <span class="release-tag">Release 3 · Go-live</span>
+      <div class="release-title es">Lanzamiento del portal — Florida</div>
+      <div class="release-title en">Portal Launch — Florida</div>
+      <ul class="release-features">
+        <li><span class="es">Hacer pedidos de concreto Ready-Mix desde el portal</span><span class="en">Place Ready-Mix concrete orders from the portal</span></li>
+        <li><span class="es">Seguimiento del estado del pedido en tiempo real</span><span class="en">Real-time order status tracking</span></li>
+        <li><span class="es">Rastreo de ubicación del camión en ruta con ETA al job site</span><span class="en">Truck location tracking en route with ETA to job site</span></li>
+        <li><span class="es">Acciones de transacción: liberar o cancelar un pedido</span><span class="en">Transaction actions: release or cancel an order</span></li>
+        <li><span class="es">Acceso rápido para empleados de Titan via SSO</span><span class="en">Fast access for Titan employees via SSO</span></li>
+      </ul>
+    </div>
+    <div class="release-card" style="margin-top:16px;">
+      <span class="release-tag" style="background:var(--purple);">Release 4 · Expansión</span>
+      <div class="release-title es">Expansión multi-región y rediseño mobile</div>
+      <div class="release-title en">Multi-region expansion and mobile redesign</div>
+      <ul class="release-features">
+        <li><span class="es">Soporte multi-región: Florida, Virginia, Carolina del Norte y del Sur — configuración sin cambios de código</span><span class="en">Multi-region support: Florida, Virginia, North Carolina, South Carolina — configuration without code changes</span></li>
+        <li><span class="es">Integración con nuevo sistema de dispatch BCMI</span><span class="en">Integration with new BCMI dispatch system</span></li>
+        <li><span class="es">Rediseño completo de UI para mobile: cards en lugar de tablas</span><span class="en">Complete mobile UI redesign: cards instead of tables</span></li>
+        <li><span class="es">Nueva funcionalidad de Re-order (repetir pedido anterior)</span><span class="en">New Re-order functionality (repeat previous order)</span></li>
+        <li><span class="es">Pantalla "Mi perfil" para usuarios</span><span class="en">New "My Profile" screen for users</span></li>
+      </ul>
+    </div>
+    <p class="section-text es" style="margin-top:28px;">Las pantallas a continuación muestran el flujo real de la app: el formulario de nuevo pedido y el menú de navegación principal de Titan TAP.</p>
+    <p class="section-text en" style="margin-top:28px;">The screens below show the actual app flow: the new order form and the main navigation menu of Titan TAP.</p>
+    <div class="mobile-screens">
+      <div class="mobile-screen-group">
+        <img src="titan_page1.png" class="mobile-screen" loading="lazy" alt="New order request – Step 1 of 6. Sales order type, Customer (ODC Constructions), Division (Ready-Mix Concrete).">
+        <p class="mobile-screen-caption es">Nuevo pedido — Paso 1 de 6<br>Tipo de orden, cliente y división</p>
+        <p class="mobile-screen-caption en">New order — Step 1 of 6<br>Order type, customer and division</p>
+      </div>
+      <div class="mobile-screen-group">
+        <img src="titan_page2.png" class="mobile-screen" loading="lazy" alt="Navigation menu: Dashboard, My Orders, Live Truck Tracker, My Projects, Billtrust Invoicing, Quotes, General Request, Settings.">
+        <p class="mobile-screen-caption es">Menú de navegación principal<br>Titan TAP — usuario: Andrea Lopez</p>
+        <p class="mobile-screen-caption en">Main navigation menu<br>Titan TAP — user: Andrea Lopez</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">04</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Proceso y herramientas de diseño</span><span class="en">Design process and tools</span></h3>
+    <p class="section-text es">Trabajé como única diseñadora UX/UI del equipo, colaborando directamente con el product owner, desarrolladores y QA. Diseñé en Figma con componentes de Material UI.</p>
+    <p class="section-text en">I worked as the sole UX/UI designer on the team, collaborating directly with the product owner, developers, and QA. I designed in Figma with Material UI components.</p>
+    <div class="insight-grid-2">
+      <div class="artifact-box" style="margin:0;">
+        <div class="artifact-icon">🎨</div>
+        <div>
+          <div class="artifact-title"><span class="es">Sistema de diseño en Material UI</span><span class="en">Material UI design system</span></div>
+          <p class="artifact-text es">Construí el sistema de diseño del portal en Figma usando la librería de Material UI, adaptada a la identidad visual de Titan America. Esto permitió handoff rápido al equipo de React y coherencia visual entre releases.</p>
+          <p class="artifact-text en">I built the portal design system in Figma using the Material UI library, adapted to Titan America's visual identity. This enabled fast handoff to the React team and visual coherence across releases.</p>
+        </div>
+      </div>
+      <div class="artifact-box" style="margin:0;">
+        <div class="artifact-icon">📱</div>
+        <div>
+          <div class="artifact-title"><span class="es">Rediseño mobile-first en R4</span><span class="en">Mobile-first redesign in R4</span></div>
+          <p class="artifact-text es">En Release 4, rediseñé los data tables a cards optimizadas para pantallas pequeñas, reduciendo la fricción para usuarios en campo que acceden desde el celular.</p>
+          <p class="artifact-text en">In Release 4, I redesigned data tables into cards optimized for small screens, reducing friction for field users accessing from their phones.</p>
+        </div>
+      </div>
+    </div>
+    <p class="section-text es" style="margin-top:28px;">La pantalla de <em>My Orders</em> en la app real ilustra el resultado del rediseño: cards escaneables con estado, mezcla, obra y fecha de entrega, más pestañas de filtrado y búsqueda integrada.</p>
+    <p class="section-text en" style="margin-top:28px;">The <em>My Orders</em> screen in the live app illustrates the redesign result: scannable cards with status, mix, project, and delivery date, plus filter tabs and integrated search.</p>
+    <div class="mobile-screens">
+      <div class="mobile-screen-group">
+        <img src="titan_page7.png" class="mobile-screen" loading="lazy" alt="My Orders list: Order #645678, Purchase order BAGF5R10, Ship date 11/11/2024, Project LEE COUNTY, Mix 2500 #57, Status Active, Delivery In progress.">
+        <p class="mobile-screen-caption es">My Orders — card de pedido activo<br>Order #645678, LEE COUNTY</p>
+        <p class="mobile-screen-caption en">My Orders — active order card<br>Order #645678, LEE COUNTY</p>
+      </div>
+      <div class="mobile-screen-group">
+        <img src="titan_page8.png" class="mobile-screen" loading="lazy" alt="My Orders with search bar and Active Orders / Upcoming Orders / Past Orders tabs plus filter button.">
+        <p class="mobile-screen-caption es">My Orders — búsqueda y filtros<br>Active / Upcoming / Past Orders</p>
+        <p class="mobile-screen-caption en">My Orders — search and filters<br>Active / Upcoming / Past Orders</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04B: LIVE TRUCK TRACKER -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num" style="opacity:0.05;">04B</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Live Truck Tracker</span><span class="en">Live Truck Tracker</span></h3>
+    <p class="section-text es">Una de las funcionalidades más críticas del portal: el mapa en tiempo real que muestra la ubicación de los camiones en ruta, el ETA y el estado de entrega, directamente desde el celular en obra.</p>
+    <p class="section-text en">One of the portal's most critical features: the real-time map showing truck locations en route, ETA, and delivery status, directly from the phone on the job site.</p>
+    <div class="mobile-screens">
+      <div class="mobile-screen-group">
+        <img src="titan_page3.png" class="mobile-screen" loading="lazy" alt="Dashboard screen with Live Truck Tracker map (Google Maps with truck location pins) and Active Orders list below it.">
+        <p class="mobile-screen-caption es">Dashboard — mapa de camiones + pedidos activos</p>
+        <p class="mobile-screen-caption en">Dashboard — truck map + active orders</p>
+      </div>
+      <div class="mobile-screen-group">
+        <img src="titan_page5.png" class="mobile-screen" loading="lazy" alt="Live Truck Tracker full screen map. Order Details: Project D.C Building Empire, Order #8736343, Quantity 15/30 CY, 2 of 5 delivered tickets, Planned completion 14:30 PM.">
+        <p class="mobile-screen-caption es">Live Truck Tracker — pantalla completa<br>Order #8736343 · D.C Building Empire<br>15/30 CY · 2 de 5 tickets entregados</p>
+        <p class="mobile-screen-caption en">Live Truck Tracker — full screen<br>Order #8736343 · D.C Building Empire<br>15/30 CY · 2 of 5 tickets delivered</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04C: ORDER DETAILS & DELIVERY TICKETS -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num" style="opacity:0.05;">04C</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Detalle de pedido y tickets de entrega</span><span class="en">Order detail and delivery tickets</span></h3>
+    <p class="section-text es">Cada pedido expone la información técnica completa de la mezcla, la logística de entrega y un timeline de eventos por ticket — diseñado para que el operador en obra pueda verificar el estado con un vistazo.</p>
+    <p class="section-text en">Each order exposes the complete technical mix information, delivery logistics, and a per-ticket event timeline — designed for the on-site operator to verify status at a glance.</p>
+    <div class="mobile-screens">
+      <div class="mobile-screen-group">
+        <img src="titan_page4.png" class="mobile-screen" loading="lazy" alt="Order #645678 detail – Product details tab. Mix 2500 #57 (BAFZ5RZY), Slump 5.00, Quantity 30 CY, Placement BOOM PUMP, Load size 10.00. Ship 10/21/2025 8:30AM.">
+        <p class="mobile-screen-caption es">Detalle de pedido #645678<br>Mix 2500 #57 · 30 CY · BOOM PUMP<br>Slab on grade · Overnight Pour</p>
+        <p class="mobile-screen-caption en">Order #645678 detail<br>Mix 2500 #57 · 30 CY · BOOM PUMP<br>Slab on grade · Overnight Pour</p>
+      </div>
+      <div class="mobile-screen-group">
+        <img src="titan_page6.png" class="mobile-screen" loading="lazy" alt="Delivery tickets for Order #645678. Ticket with Truck 23009, Mix 2500 #57, 30 CY. Timeline: To job 11:00 AM, On job, Pouring, Completed ETA 11:30 AM.">
+        <p class="mobile-screen-caption es">Tickets de entrega — Order #645678<br>Truck 23009 · Mix 2500 #57 · 30 CY<br>Timeline: To job → On job → Pouring → ETA 11:30 AM</p>
+        <p class="mobile-screen-caption en">Delivery tickets — Order #645678<br>Truck 23009 · Mix 2500 #57 · 30 CY<br>Timeline: To job → On job → Pouring → ETA 11:30 AM</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 05 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">05</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Resultados e impacto</span><span class="en">Results and impact</span></h3>
+    <p class="section-text es">Ambos releases alcanzaron go-live en los plazos comprometidos. El éxito del proyecto aseguró la extensión del contrato a R4 y posteriormente a soporte y mantenimiento continuo.</p>
+    <p class="section-text en">Both releases reached go-live within committed timelines. The project's success secured the contract extension to R4 and subsequently to ongoing support and maintenance.</p>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num">R3 ✓</div><div class="stat-label es">Go-live en producción, Florida</div><div class="stat-label en">Production go-live, Florida</div></div>
+      <div class="stat-item"><div class="stat-num">R4 ✓</div><div class="stat-label es">Expansión multi-región + mobile</div><div class="stat-label en">Multi-region expansion + mobile</div></div>
+      <div class="stat-item"><div class="stat-num">S&M</div><div class="stat-label es">Contrato de soporte continuo asegurado</div><div class="stat-label en">Ongoing support contract secured</div></div>
+    </div>
+    <div class="result-banner">
+      <div class="result-title es">🏗️ Reconocimiento oficial — #BaufestHit</div>
+      <div class="result-title en">🏗️ Official recognition — #BaufestHit</div>
+      <p class="result-text es">El go-live del Cypress Customer Portal fue reconocido oficialmente como <strong>#BaufestHit</strong> — el máximo reconocimiento interno de Baufest. El portal opera en Florida, Virginia, Carolina del Norte y del Sur.</p>
+      <p class="result-text en">The Cypress Customer Portal go-live was officially recognized as a <strong>#BaufestHit</strong> — Baufest's highest internal recognition. The portal now operates in Florida, Virginia, North Carolina, and South Carolina.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT PROJECT -->
+<div style="max-width:900px;margin:0 auto;padding:64px 24px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="aramark.html" style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#0f4780'" onmouseout="this.style.color='#111'">Aramark — Quoting Tool →</a>
+</div>
+
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('lang-en');
+    this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN';
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarMeUp – 1:1 Research | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --purple:#5B4CFF; --dark:#111; --text:#333; --muted:#777; --border:#e5e5e5; --accent:#7C3AED; --accent-light:#a78bfa; }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Poppins',sans-serif; color:var(--text); background:#fff; }
+    a { text-decoration:none; color:inherit; }
+    body .en { display:none; } body.lang-en .es { display:none; } body.lang-en .en { display:block; }
+    span.en,a.en { display:none; } body.lang-en span.es,body.lang-en a.es { display:none; } body.lang-en span.en,body.lang-en a.en { display:inline; }
+    .fade-in { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; } .fade-in.visible { opacity:1; transform:none; }
+    .process-section { border-top:1px solid var(--border); padding:64px 24px; } .process-inner { max-width:900px; margin:0 auto; }
+    .section-num { font-size:96px; font-weight:700; color:var(--accent); opacity:.08; line-height:1; margin-bottom:-32px; }
+    .section-divider { height:4px; background:var(--purple); border-radius:2px; max-width:48px; margin-bottom:20px; }
+    .section-heading { font-size:28px; font-weight:700; color:var(--dark); margin-bottom:16px; }
+    .section-text { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:28px; }
+    .sub-heading { font-size:20px; font-weight:700; color:var(--dark); margin:40px 0 10px; }
+    .insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:24px 0; }
+    .insight-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+    .insight-card { background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:20px; }
+    .insight-card-icon { font-size:22px; margin-bottom:10px; }
+    .insight-card-title { font-weight:700; font-size:15px; color:#111; margin-bottom:8px; }
+    .insight-card-text { font-size:13px; color:#555; line-height:1.65; }
+    .stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:24px 0; }
+    .stat-box { background:#f5f1fe; border-radius:12px; padding:22px; text-align:center; }
+    .stat-box .n { font-size:34px; font-weight:700; color:var(--accent); line-height:1; }
+    .stat-box .t { font-size:12.5px; color:#555; margin-top:8px; line-height:1.5; }
+    .obj-list { list-style:none; padding:0; margin:16px 0; }
+    .obj-list li { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid #f0f0f0; }
+    .obj-list li:last-child { border-bottom:none; }
+    .obj-arrow { color:var(--accent); font-weight:700; flex-shrink:0; }
+    .obj-text { font-size:14px; color:#444; line-height:1.6; }
+    .result-banner { background:var(--accent); color:#fff; border-radius:12px; padding:28px 32px; margin:24px 0; }
+    .result-title { font-size:18px; font-weight:700; margin-bottom:12px; } .result-text { font-size:14px; opacity:.95; line-height:1.8; }
+    @media (max-width:760px){ .main-layout{ grid-template-columns:1fr !important; } .sidebar{ position:static !important; } }
+    @media (max-width:640px){ .insight-grid,.insight-grid-2,.stat-grid{ grid-template-columns:1fr; } .section-num{ font-size:60px; } }
+  </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<section style="background:var(--accent);color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:240px;font-weight:700;opacity:0.08;line-height:1;pointer-events:none;user-select:none;">★</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.85;margin-bottom:16px;">UX Research · StarMeUp · Globant</p>
+    <h1 style="font-size:clamp(34px,6vw,60px);font-weight:700;line-height:1.1;margin-bottom:12px;"><span class="es">Reuniones 1:1 — Research</span><span class="en">1:1 Meetings — Research</span></h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.9;margin-bottom:8px;"><span class="es">UX Research para una funcionalidad de reuniones 1:1</span><span class="en">UX Research for a 1:1 meetings feature</span></p>
+    <p style="font-size:17px;opacity:0.85;max-width:660px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Investigación con líderes y no líderes más desk research para entender las reuniones 1:1 y cómo diseñarlas dentro de StarMeUp, la plataforma de reconocimiento y cultura organizacional para EE.UU.</span>
+      <span class="en">Research with leaders and non-leaders plus desk research to understand 1:1 meetings and how to design them inside StarMeUp, the US recognition and organizational-culture platform.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p><p style="font-weight:700;font-size:15px;">Senior Service Designer · Senior UX</p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Producto</span><span class="en">Product</span></p><p style="font-weight:700;font-size:15px;">StarMeUp (Globant)</p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Mercado</span><span class="en">Market</span></p><p style="font-weight:700;font-size:15px;">EE.UU. · 2021</p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Método</span><span class="en">Method</span></p><p style="font-weight:700;font-size:15px;"><span class="es">Entrevistas + Desk research</span><span class="en">Interviews + Desk research</span></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="main-layout" style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+  <div class="sidebar" style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Mi rol</span><span class="en">My role</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;">Senior Service Designer · Senior UX</p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Producto</span><span class="en">Product</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">StarMeUp — reconocimiento y cultura</span><span class="en">StarMeUp — recognition & culture</span></p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Muestra</span><span class="en">Sample</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">11 entrevistas · 6 desk research · +10 reportes</span><span class="en">11 interviews · 6 desk research · 10+ reports</span></p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Métodos</span><span class="en">Methods</span></div><div style="display:flex;flex-wrap:wrap;gap:4px;"><span style="background:#f0e9fe;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;"><span class="es">Entrevistas</span><span class="en">Interviews</span></span><span style="background:#f0e9fe;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Desk research</span><span style="background:#f0e9fe;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">User personas</span></div></div>
+  </div>
+  <div class="fade-in">
+    <h2 style="font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">¿Cómo empezó?</span><span class="en">How did it start?</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">StarMeUp quería incorporar una funcionalidad de <strong>reuniones 1:1</strong>. Antes de diseñarla, necesitábamos entender el conocimiento previo de líderes y no líderes sobre las 1:1, cómo las realizan hoy y cuál es la mejor forma de comunicar la nueva funcionalidad dentro de la plataforma.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">StarMeUp wanted to add a <strong>1:1 meetings</strong> feature. Before designing it, we needed to understand leaders' and non-leaders' prior knowledge of 1:1s, how they run them today, and the best way to communicate the new feature inside the platform.</p>
+    <div style="background:#f0e9fe;border-radius:10px;padding:20px 24px;margin-top:8px;">
+      <p style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;"><span class="es">Objetivo principal</span><span class="en">Main objective</span></p>
+      <p class="es" style="font-size:14px;color:#444;line-height:1.7;">Entender el conocimiento previo sobre las reuniones 1:1 y si líderes y no líderes las realizan, además de recopilar información actualizada y buenas prácticas.</p>
+      <p class="en" style="font-size:14px;color:#444;line-height:1.7;">Understand prior knowledge about 1:1 meetings and whether leaders and non-leaders perform them, plus gather up-to-date information and best practices.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 01 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Objetivos y metodología</span><span class="en">Objectives and methodology</span></h3>
+    <div class="insight-grid-2">
+      <div class="insight-card"><div class="insight-card-icon">🎙️</div><div class="insight-card-title es">Entrevistas</div><div class="insight-card-title en">Interviews</div><p class="insight-card-text es">11 entrevistas semiestructuradas con líderes y no líderes (con grabación y transcripción en Mural). Entender qué actividades realizan en sus 1:1 y cómo usan StarMeUp en su día a día.</p><p class="insight-card-text en">11 semi-structured interviews with leaders and non-leaders (recorded and transcribed in Mural). Understand what they do in their 1:1s and how they use StarMeUp daily.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">📚</div><div class="insight-card-title es">Desk research</div><div class="insight-card-title en">Desk research</div><p class="insight-card-text es">6 fuentes y +10 reportes de la industria (Harvard Business Review, Gallup, McKinsey, Forbes, Asana, entre otros) para definir propósito, mejores prácticas y barreras de las 1:1.</p><p class="insight-card-text en">6 sources and 10+ industry reports (Harvard Business Review, Gallup, McKinsey, Forbes, Asana, among others) to define purpose, best practices and barriers of 1:1s.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Hallazgos del desk research</span><span class="en">Desk research findings</span></h3>
+    <p class="section-text es">Los datos confirman el impacto de las 1:1 en la efectividad y retención de los equipos:</p>
+    <p class="section-text en">The data confirms the impact of 1:1s on team effectiveness and retention:</p>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="n">80%</div><div class="t es">considera las 1:1 "muy importantes" para su éxito y satisfacción laboral</div><div class="t en">consider 1:1s "very important" to their success and job satisfaction</div></div>
+      <div class="stat-box"><div class="n">50%</div><div class="t es">renuncia por una mala relación con su manager</div><div class="t en">quit because of a poor relationship with their manager</div></div>
+      <div class="stat-box"><div class="n">27%</div><div class="t es">de los empleados reporta tener este tipo de reuniones</div><div class="t en">of employees report having such meetings</div></div>
+      <div class="stat-box"><div class="n">+11%</div><div class="t es">más probable que los managers que las hacen sean vistos como líderes efectivos</div><div class="t en">more likely managers who run them are seen as effective leaders</div></div>
+      <div class="stat-box"><div class="n">30 min</div><div class="t es">cadencia semanal preferida por los empleados</div><div class="t en">weekly cadence preferred by employees</div></div>
+      <div class="stat-box"><div class="n">10%</div><div class="t es">del tiempo de los mejores managers se va en 1:1 con su equipo</div><div class="t en">of top managers' time goes to 1:1s with their team</div></div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Mejores prácticas</span><span class="en">Best practices</span></h4>
+    <ul class="obj-list">
+      <li><span class="obj-arrow">→</span><span class="obj-text es"><strong>Agenda clara:</strong> mejor predictor de la efectividad de la reunión; mantiene el foco en lo importante.</span><span class="obj-text en"><strong>Clear agenda:</strong> the strongest predictor of meeting effectiveness; keeps focus on what matters.</span></li>
+      <li><span class="obj-arrow">→</span><span class="obj-text es"><strong>Enfoque en la persona:</strong> es un espacio sagrado para el desarrollo profesional, no un catch-up ni un daily.</span><span class="obj-text en"><strong>Focus on the person:</strong> a sacred space for professional development, not a catch-up or a daily.</span></li>
+      <li><span class="obj-arrow">→</span><span class="obj-text es"><strong>Escucha sin filtros:</strong> estar presente con la experiencia real del otro, sin sesgos.</span><span class="obj-text en"><strong>Listen without filters:</strong> be present with the other's real experience, without bias.</span></li>
+      <li><span class="obj-arrow">→</span><span class="obj-text es"><strong>Consistencia y cadencia:</strong> regularidad y predictibilidad (idealmente semanal, ~30 min) para preparar y generar confianza.</span><span class="obj-text en"><strong>Consistency and cadence:</strong> regularity and predictability (ideally weekly, ~30 min) to prepare and build trust.</span></li>
+      <li><span class="obj-arrow">→</span><span class="obj-text es"><strong>Acción posterior:</strong> definir acciones claras y concretas para dar seguimiento a lo conversado.</span><span class="obj-text en"><strong>Take action after:</strong> define clear, concrete actions to follow up on what was discussed.</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 03 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">De la investigación al producto</span><span class="en">From research to product</span></h3>
+    <p class="section-text es">La investigación alimentó las <strong>user personas</strong> de líder y no líder, y la definición de los entregables de diseño: un módulo de <strong>1:1</strong> y un <strong>Team Dashboard</strong> dentro de StarMeUp, además de la mejor forma de comunicar la nueva funcionalidad a los usuarios.</p>
+    <p class="en" style="font-size:15px;color:var(--muted);line-height:1.8;">The research fed the <strong>leader and non-leader user personas</strong>, and the definition of the design deliverables: a <strong>1:1</strong> module and a <strong>Team Dashboard</strong> inside StarMeUp, plus the best way to communicate the new feature to users.</p>
+    <div class="insight-grid">
+      <div class="insight-card"><div class="insight-card-icon">👤</div><div class="insight-card-title es">User personas</div><div class="insight-card-title en">User personas</div><p class="insight-card-text es">Líder y no líder, con sus expectativas, hábitos y barreras frente a las reuniones 1:1.</p><p class="insight-card-text en">Leader and non-leader, with their expectations, habits and barriers around 1:1 meetings.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">🗂️</div><div class="insight-card-title es">Módulo 1:1</div><div class="insight-card-title en">1:1 module</div><p class="insight-card-text es">Funcionalidad para agendar, preparar (con agenda) y dar seguimiento a las reuniones 1:1.</p><p class="insight-card-text en">Feature to schedule, prepare (with an agenda) and follow up on 1:1 meetings.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">📊</div><div class="insight-card-title es">Team Dashboard</div><div class="insight-card-title en">Team Dashboard</div><p class="insight-card-text es">Visibilidad para el líder sobre su equipo y sus reuniones, conectado a la cultura de StarMeUp.</p><p class="insight-card-text en">Visibility for the leader over their team and meetings, connected to StarMeUp's culture.</p></div>
+    </div>
+    <div class="result-banner">
+      <div class="result-title es">🔍 Conclusión</div>
+      <div class="result-title en">🔍 Conclusion</div>
+      <p class="result-text es">Las 1:1 son valoradas pero poco practicadas de forma consistente. La oportunidad para StarMeUp es bajar la barrera con agenda, cadencia y seguimiento integrados — convirtiendo una buena práctica en un hábito sostenido dentro de la cultura del equipo.</p>
+      <p class="result-text en">1:1s are valued but seldom practiced consistently. The opportunity for StarMeUp is to lower the barrier with built-in agenda, cadence and follow-up — turning a best practice into a sustained habit within team culture.</p>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:900px;margin:0 auto;padding:48px 24px 40px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="fintech.html" style="font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#7C3AED'" onmouseout="this.style.color='#111'">IN Fintech — Buy Now, Pay Later →</a>
+</div>
+
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function(){ document.body.classList.toggle('lang-en'); this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN'; });
+  const observer = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target);} }),{ threshold:0, rootMargin:'0px 0px 300px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

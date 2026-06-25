@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmauna – Planes de suscripción | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --purple:#5B4CFF; --dark:#111; --text:#333; --muted:#777; --border:#e5e5e5; --accent:#0E9F6E; --accent-light:#34D399; }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Poppins',sans-serif; color:var(--text); background:#fff; }
+    a { text-decoration:none; color:inherit; }
+    body .en { display:none; } body.lang-en .es { display:none; } body.lang-en .en { display:block; }
+    span.en,a.en { display:none; } body.lang-en span.es,body.lang-en a.es { display:none; } body.lang-en span.en,body.lang-en a.en { display:inline; }
+    .fade-in { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; } .fade-in.visible { opacity:1; transform:none; }
+    .process-section { border-top:1px solid var(--border); padding:64px 24px; } .process-inner { max-width:900px; margin:0 auto; }
+    .section-num { font-size:96px; font-weight:700; color:var(--accent); opacity:.08; line-height:1; margin-bottom:-32px; }
+    .section-divider { height:4px; background:var(--purple); border-radius:2px; max-width:48px; margin-bottom:20px; }
+    .section-heading { font-size:28px; font-weight:700; color:var(--dark); margin-bottom:16px; }
+    .section-text { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:28px; }
+    .sub-heading { font-size:20px; font-weight:700; color:var(--dark); margin:40px 0 10px; }
+    .insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:24px 0; }
+    .insight-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:24px 0; }
+    .insight-card { background:#fff; border:1.5px solid var(--border); border-radius:12px; padding:20px; }
+    .insight-card-icon { font-size:22px; margin-bottom:10px; }
+    .insight-card-title { font-weight:700; font-size:15px; color:#111; margin-bottom:8px; }
+    .insight-card-text { font-size:13px; color:#555; line-height:1.65; }
+    .stats-row { display:flex; margin:24px 0; background:#f8f8f8; border-radius:12px; overflow:hidden; }
+    .stat-item { flex:1; text-align:center; padding:28px 16px; border-right:1px solid var(--border); }
+    .stat-item:last-child { border-right:none; }
+    .stat-num { font-size:32px; font-weight:700; color:var(--accent); }
+    .stat-label { font-size:13px; color:#555; margin-top:6px; line-height:1.4; }
+    .obj-list { list-style:none; padding:0; margin:20px 0; }
+    .obj-list li { display:flex; gap:14px; padding:14px 0; border-bottom:1px solid #f0f0f0; }
+    .obj-list li:last-child { border-bottom:none; }
+    .obj-arrow { color:var(--accent); font-weight:700; flex-shrink:0; }
+    .obj-text { font-size:14px; color:#444; line-height:1.6; }
+    .vp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:24px 0; }
+    .vp { border-radius:12px; padding:20px; color:#fff; }
+    .vp h5 { font-size:14px; font-weight:700; margin-bottom:10px; }
+    .vp ul { list-style:none; padding:0; margin:0; }
+    .vp li { font-size:12.5px; line-height:1.5; padding:4px 0 4px 14px; position:relative; opacity:.96; }
+    .vp li::before { content:"•"; position:absolute; left:0; }
+    .result-banner { background:var(--accent); color:#fff; border-radius:12px; padding:28px 32px; margin:24px 0; }
+    .result-title { font-size:18px; font-weight:700; margin-bottom:12px; } .result-text { font-size:14px; opacity:.95; line-height:1.8; }
+    @media (max-width:760px){ .main-layout{ grid-template-columns:1fr !important; } .sidebar{ position:static !important; } }
+    @media (max-width:640px){ .insight-grid,.insight-grid-2,.vp-grid{ grid-template-columns:1fr; } .stats-row{ flex-direction:column; } .section-num{ font-size:60px; } }
+  </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<section style="background:var(--accent);color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:240px;font-weight:700;opacity:0.08;line-height:1;pointer-events:none;user-select:none;">F</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.85;margin-bottom:16px;">UX Research · Salud digital · Farmauna</p>
+    <h1 style="font-size:clamp(34px,6vw,60px);font-weight:700;line-height:1.1;margin-bottom:12px;"><span class="es">Planes de suscripción</span><span class="en">Subscription plans</span></h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.9;margin-bottom:8px;"><span class="es">Research para nuevos modelos de suscripción en salud</span><span class="en">Research for new health subscription models</span></p>
+    <p style="font-size:17px;opacity:0.85;max-width:660px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Investigación cuali y cuanti para diseñar nuevos planes de suscripción de productos de salud y cuidado personal para el mercado peruano de Farmauna.</span>
+      <span class="en">Qualitative and quantitative research to design new subscription plans for health and personal-care products in Farmauna's Peruvian market.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p><p style="font-weight:700;font-size:15px;">Senior Service Designer · Senior UX</p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p><p style="font-weight:700;font-size:15px;">Farmauna</p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Fecha</span><span class="en">Date</span></p><p style="font-weight:700;font-size:15px;"><span class="es">Febrero 2022</span><span class="en">February 2022</span></p></div>
+      <div><p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.75;margin-bottom:4px;"><span class="es">Método</span><span class="en">Method</span></p><p style="font-weight:700;font-size:15px;"><span class="es">Cuali + Cuanti</span><span class="en">Qual + Quant</span></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="main-layout" style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+  <div class="sidebar" style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Mi rol</span><span class="en">My role</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;">Senior Service Designer · Senior UX</p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Industria</span><span class="en">Industry</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;">💊 <span class="es">Salud · E-commerce</span><span class="en">Health · E-commerce</span></p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Muestra</span><span class="en">Sample</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">18 entrevistas a profundidad · 3 perfiles</span><span class="en">18 in-depth interviews · 3 profiles</span></p></div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;"><div style="font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Métodos</span><span class="en">Methods</span></div><div style="display:flex;flex-wrap:wrap;gap:4px;"><span style="background:#e6f6ef;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;"><span class="es">Entrevistas</span><span class="en">Interviews</span></span><span style="background:#e6f6ef;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;"><span class="es">Encuestas</span><span class="en">Surveys</span></span><span style="background:#e6f6ef;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;"><span class="es">Mapas de empatía</span><span class="en">Empathy maps</span></span></div></div>
+  </div>
+  <div class="fade-in">
+    <h2 style="font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">¿Cómo empezó?</span><span class="en">How did it start?</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Farmauna quería evaluar la oportunidad de lanzar <strong>planes de suscripción</strong> de productos de salud y cuidado personal. El research buscó entender el journey de compra frecuente de tres perfiles de usuario y validar qué tan atractivo y viable era el concepto.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Farmauna wanted to evaluate the opportunity to launch <strong>subscription plans</strong> for health and personal-care products. The research sought to understand the frequent-purchase journey of three user profiles and validate how attractive and feasible the concept was.</p>
+    <div style="background:#e6f6ef;border-radius:10px;padding:20px 24px;margin-top:8px;">
+      <p style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;"><span class="es">Objetivo principal</span><span class="en">Main objective</span></p>
+      <p class="es" style="font-size:14px;color:#444;line-height:1.7;">Conocer y entender el journey de un usuario que compra de manera frecuente productos para su cuidado y el de su familia.</p>
+      <p class="en" style="font-size:14px;color:#444;line-height:1.7;">Know and understand the journey of a user who frequently buys products for their own and their family's care.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 01 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Objetivos y usuarios</span><span class="en">Objectives and users</span></h3>
+    <p class="section-text es">Entrevistamos a 18 usuarios en tres perfiles (con y sin relación previa con Farmauna):</p>
+    <p class="section-text en">We interviewed 18 users across three profiles (with and without prior Farmauna relationship):</p>
+    <div class="insight-grid">
+      <div class="insight-card"><div class="insight-card-icon">👶</div><div class="insight-card-title">Madres</div><p class="insight-card-text es">Con hijos de 0 a 5 años, 28–45 años. Compran pañales, pañitos y productos de cuidado infantil, física y virtualmente.</p><p class="insight-card-text en">With children aged 0–5, 28–45 years old. They buy diapers, wipes and childcare products, in-store and online.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">💄</div><div class="insight-card-title">Mujeres</div><p class="insight-card-text es">28–45 años. Compran anticonceptivos, toallas, skincare, maquillaje y vitaminas de forma frecuente.</p><p class="insight-card-text en">28–45 years old. Frequently buy contraceptives, pads, skincare, makeup and vitamins.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">🏋️</div><div class="insight-card-title">Fitness</div><p class="insight-card-text es">30–40 años, deportistas que cuidan su salud y apariencia. Compran proteínas, colágeno, vitaminas y suplementos.</p><p class="insight-card-text en">30–40 years old, athletes who care about health and appearance. Buy proteins, collagen, vitamins and supplements.</p></div>
+    </div>
+    <h4 class="sub-heading"><span class="es">Objetivos secundarios</span><span class="en">Secondary objectives</span></h4>
+    <ul class="obj-list">
+      <li><span class="obj-arrow">→</span><span class="obj-text es">Entender las necesidades y cómo realizan hoy estas compras frecuentes.</span><span class="obj-text en">Understand the needs and how they make these frequent purchases today.</span></li>
+      <li><span class="obj-arrow">→</span><span class="obj-text es">Detectar los pain points de este tipo de compras y los pain relievers de un plan online frecuente.</span><span class="obj-text en">Detect the pain points of these purchases and the pain relievers of a frequent online plan.</span></li>
+      <li><span class="obj-arrow">→</span><span class="obj-text es">Conocer los must-gains deseados y la disposición a pagar un fee por el servicio.</span><span class="obj-text en">Learn the desired must-gains and willingness to pay a fee for the service.</span></li>
+      <li><span class="obj-arrow">→</span><span class="obj-text es">Evaluar qué tan atractivo es el concepto presentado: qué valorarían y qué mejorarían.</span><span class="obj-text en">Evaluate how attractive the presented concept is: what they'd value and what they'd improve.</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">¿Qué descubrimos?</span><span class="en">What did we discover?</span></h3>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num">18</div><div class="stat-label es">entrevistas a<br>profundidad</div><div class="stat-label en">in-depth<br>interviews</div></div>
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label es">perfiles de<br>usuario</div><div class="stat-label en">user<br>profiles</div></div>
+      <div class="stat-item"><div class="stat-num">75%</div><div class="stat-label es">se suscribiría<br>(perfil madres)</div><div class="stat-label en">would subscribe<br>(mothers profile)</div></div>
+    </div>
+    <h4 class="sub-heading"><span class="es">Datos cuantitativos</span><span class="en">Quantitative data</span></h4>
+    <p class="section-text es">Cruzamos los datos cuantitativos por perfil — frecuencia y responsable de compra, disposición a suscribirse, ponderaciones y medios de pago.</p>
+    <p class="section-text en">We cross-analyzed the quantitative data by profile — purchase frequency and decision-maker, willingness to subscribe, priorities, and payment methods.</p>
+    <img src="farmauna_data.png" alt="Datos cuantitativos del research Farmauna por perfil, con gráficos" style="width:100%;border-radius:12px;border:1px solid var(--border);box-shadow:0 6px 24px rgba(0,0,0,0.10);display:block;margin:18px 0 28px;">
+
+    <h4 class="sub-heading"><span class="es">Hallazgos por perfil</span><span class="en">Findings by profile</span></h4>
+    <div class="insight-grid">
+      <div class="insight-card"><div class="insight-card-icon">🏋️</div><div class="insight-card-title">Fitness</div><p class="insight-card-text es">Nicho especializado que no encuentra sus productos en farmacias grandes. Investigan mucho, comparan precios, valoran packs, ofertas y la composición detallada. Prefieren web antes que app y valoran un delivery rápido.</p><p class="insight-card-text en">A specialized niche that doesn't find its products in big pharmacies. They research a lot, compare prices, value packs, offers and detailed composition. They prefer web over app and value fast delivery.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">💄</div><div class="insight-card-title">Mujeres</div><p class="insight-card-text es">Estilo de vida rutinario; compran para cuidarse. Comparan productos y precios, valoran el orden y las categorías, y la orientación del farmacéutico (que no siempre tienen). Si el producto es de calidad, lo compran sin importar el precio.</p><p class="insight-card-text en">Routine lifestyle; they buy to take care of themselves. They compare products and prices, value order and categories, and the pharmacist's guidance (not always available). If the product is high quality, they buy it regardless of price.</p></div>
+      <div class="insight-card"><div class="insight-card-icon">👶</div><div class="insight-card-title">Madres</div><p class="insight-card-text es">Compras frecuentes y planificadas para sus hijos. Son las más dispuestas a suscribirse: la recurrencia y la conveniencia del delivery les ahorra tiempo y olvidos.</p><p class="insight-card-text en">Frequent, planned purchases for their kids. They are the most willing to subscribe: recurrence and delivery convenience save them time and forgetfulness.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- 03 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Propuesta de valor</span><span class="en">Value proposition</span></h3>
+    <p class="section-text es">Tradujimos los hallazgos en tres frentes para el diseño de los planes de suscripción.</p>
+    <p class="section-text en">We translated the findings into three fronts for designing the subscription plans.</p>
+    <div class="vp-grid">
+      <div class="vp" style="background:#0E9F6E;"><h5><span class="es">Pain relievers</span><span class="en">Pain relievers</span></h5><ul><li class="es">Contra-entrega: clave por desconfianza a un servicio nuevo.</li><li class="en">Cash-on-delivery: key due to distrust of a new service.</li><li class="es">Poder pausar la suscripción cuando quiera.</li><li class="en">Ability to pause the subscription anytime.</li><li class="es">Permitir cambios antes del envío: sensación de control.</li><li class="en">Allow changes before shipping: sense of control.</li></ul></div>
+      <div class="vp" style="background:#0B7A55;"><h5><span class="es">Must-gains</span><span class="en">Must-gains</span></h5><ul><li class="es">Ofertas y promociones diferenciadas; precios justos, no inflados.</li><li class="en">Differentiated offers; fair, non-inflated prices.</li><li class="es">Productos de calidad, nacionales e internacionales.</li><li class="en">Quality products, national and international.</li><li class="es">Educación e información nutricional de especialistas.</li><li class="en">Education and nutritional info from specialists.</li></ul></div>
+      <div class="vp" style="background:#155E48;"><h5><span class="es">Puntos valorados</span><span class="en">Valued points</span></h5><ul><li class="es">Probar antes de comprar la suscripción.</li><li class="en">Try before buying the subscription.</li><li class="es">Suscripciones distintas: especializados vs. higiene.</li><li class="en">Different subscriptions: specialized vs. hygiene.</li><li class="es">Interfaz fácil e intuitiva, delivery rápido.</li><li class="en">Easy, intuitive interface, fast delivery.</li></ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">04</div><div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Conclusiones</span><span class="en">Conclusions</span></h3>
+    <p class="section-text es">El concepto de suscripción es atractivo, especialmente para el perfil de madres por la recurrencia y conveniencia. La confianza es la barrera principal: la contra-entrega, la transparencia de precios y la posibilidad de pausar o modificar son condiciones para la adopción. La oportunidad está en combinar conveniencia, precios justos, calidad y educación.</p>
+    <p class="section-text en">The subscription concept is attractive, especially for the mothers profile due to recurrence and convenience. Trust is the main barrier: cash-on-delivery, price transparency, and the ability to pause or modify are conditions for adoption. The opportunity lies in combining convenience, fair prices, quality and education.</p>
+    <div class="result-banner">
+      <div class="result-title es">📋 Recomendación de diseño</div>
+      <div class="result-title en">📋 Design recommendation</div>
+      <p class="result-text es">Diseñar planes de suscripción flexibles, con contra-entrega, transparencia total de precios, control sobre la compra y una capa educativa sobre salud — empezando por el perfil con mayor disposición: las madres.</p>
+      <p class="result-text en">Design flexible subscription plans, with cash-on-delivery, full price transparency, purchase control, and an educational health layer — starting with the most willing profile: mothers.</p>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:900px;margin:0 auto;padding:48px 24px 40px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="starmeup.html" style="font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#0E9F6E'" onmouseout="this.style.color='#111'">StarMeUp — Investigaciones UX →</a>
+</div>
+
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function(){ document.body.classList.toggle('lang-en'); this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN'; });
+  const observer = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target);} }),{ threshold:0, rootMargin:'0px 0px 300px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

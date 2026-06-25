@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrea López — Senior Service Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #5B4CFF;
+      --dark: #111;
+      --text: #333;
+      --muted: #777;
+      --border: #e5e5e5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background: #fff;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* Lang show/hide */
+    body:not(.lang-en) .en { display: none !important; }
+    body.lang-en .es { display: none !important; }
+
+    /* Fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .nav-link:hover { color: var(--dark); background: #f4f4f4; }
+
+    .nav-lang {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: none;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-lang:hover { color: var(--dark); border-color: #bbb; }
+
+    .nav-cv {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--purple);
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .nav-cv:hover { background: #3D2FD9; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--purple);
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.7;
+      max-width: 680px;
+      margin: 0 auto 14px;
+    }
+
+    .hero-sub {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--purple);
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #3D2FD9; transform: translateY(-1px); }
+
+    .btn-outline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      background: transparent;
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: #bbb; transform: translateY(-1px); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: #f8f8f8;
+      padding: 40px 24px;
+    }
+
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 0 24px;
+      position: relative;
+    }
+
+    .stat-item + .stat-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .stat-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-section {
+      padding: 80px 24px;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+
+    .section-h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+      line-height: 1.15;
+    }
+
+    .section-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    }
+    .project-card.coming-soon {
+      opacity: 0.85;
+      cursor: default;
+    }
+    .project-card.coming-soon:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .card-image {
+      height: 180px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card-image-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 100px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.15);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .card-image-company {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .card-soon-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255,255,255,0.95);
+      color: #333;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .card-body { padding: 24px; }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .card-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--purple);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .card-link:hover { gap: 10px; }
+
+    .card-link-disabled {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: default;
+    }
+
+    .work-group-label {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 32px 0 8px;
+    }
+
+    .work-group-label-text {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .work-group-label-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SKILLS ── */
+    .skills-section {
+      background: #f8f8f8;
+      padding: 80px 24px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .skill-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .skill-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+    }
+
+    .skill-icon {
+      width: 44px;
+      height: 44px;
+      background: #e8f8ef;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    .skill-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .skill-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--dark);
+      color: #fff;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .contact-section .section-label {
+      color: var(--purple);
+    }
+
+    .contact-section .section-h2 {
+      color: #fff;
+    }
+
+    .contact-desc {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      color: #aaa;
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 40px;
+      transition: opacity 0.2s;
+    }
+    .contact-email:hover { opacity: 0.8; }
+
+    .contact-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-outline-white {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: transparent;
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: 2px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+    .btn-outline-white:hover { border-color: rgba(255,255,255,0.7); }
+
+    .btn-green-sm {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--purple);
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .btn-green-sm:hover { background: #3D2FD9; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0a0a;
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid #1e1e1e;
+    }
+
+    .footer-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .footer-role {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #444;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 48px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .stats-inner { flex-wrap: wrap; }
+      .stat-item { flex: 0 0 50%; padding: 12px; }
+      .stat-item + .stat-item::before { display: none; }
+      nav { padding: 0 16px; }
+      .nav-right { gap: 4px; }
+      .nav-link { padding: 8px 10px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Andrea López</a>
+    <div class="nav-right">
+      <button class="nav-link" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+        <span class="es">Proyectos</span>
+        <span class="en">Projects</span>
+      </button>
+      <a href="about.html" class="nav-link">
+        <span class="es">Sobre mí</span>
+        <span class="en">About me</span>
+      </a>
+      <button class="nav-lang" id="lang-toggle" onclick="toggleLang()">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" class="nav-cv">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1 class="fade-in">Andrea López</h1>
+  <p class="hero-subtitle fade-in">Senior Service Designer</p>
+  <p class="hero-desc fade-in">
+    <span class="es">Diseñadora de servicios con más de 8 años de experiencia liderando investigación, diseño de servicios e iniciativas de transformación digital en banca, seguros, fintech y tecnología en Latinoamérica y EE.UU.</span>
+    <span class="en">Service designer with 8+ years of experience leading research, service design and digital transformation initiatives in banking, insurance, fintech and technology across Latin America and the US.</span>
+  </p>
+  <p class="hero-sub fade-in">
+    <span class="es">Conectando estrategia, personas y tecnología para crear experiencias que importan.</span>
+    <span class="en">Connecting strategy, people and technology to create experiences that matter.</span>
+  </p>
+  <div class="hero-buttons fade-in">
+    <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+      <span class="es">Ver trabajos ↓</span>
+      <span class="en">View work ↓</span>
+    </button>
+    <a href="about.html" class="btn-outline">
+      <span class="es">Sobre mí</span>
+      <span class="en">About me</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<section class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-number">8+</div>
+      <div class="stat-label">
+        <span class="es">Años de experiencia</span>
+        <span class="en">Years of experience</span>
+      </div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-number">11+</div>
+      <div class="stat-label">
+        <span class="es">Proyectos destacables</span>
+        <span class="en">Notable projects</span>
+      </div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-number">7</div>
+      <div class="stat-label">
+        <span class="es">Industrias</span>
+        <span class="en">Industries</span>
+      </div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-number">5</div>
+      <div class="stat-label">
+        <span class="es">Países</span>
+        <span class="en">Countries</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section class="projects-section" id="projects">
+  <div class="section-inner">
+    <p class="section-label fade-in">CASOS DE ESTUDIO</p>
+    <h2 class="section-h2 fade-in">
+      <span class="es">Trabajo seleccionado</span>
+      <span class="en">Selected work</span>
+    </h2>
+    <p class="section-subtitle fade-in">
+      <span class="es">De la investigación al diseño final — problemas reales, resultados concretos.</span>
+      <span class="en">From research to final design — real problems, concrete results.</span>
+    </p>
+
+    <div class="projects-grid">
+
+      <!-- GROUP: BAUFEST -->
+      <div class="work-group-label fade-in">
+        <span class="work-group-label-text">TRABAJO ACTUAL · BAUFEST</span>
+        <span class="work-group-label-line"></span>
+      </div>
+
+      <!-- Card 1 — TITAN AMERICA -->
+      <a href="titan.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #0a2d52 0%, #0f4780 60%, #1565c0 100%);">
+          <span class="card-image-number">T</span>
+          <span class="card-image-company">TITAN AMERICA</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#e8f0fe; color:#0f4780;">DXD</span>
+            <span class="card-tag" style="background:#f0f4ff; color:#3a5ab0;">UX/UI Design</span>
+            <span class="card-tag" style="background:#f0f4ff; color:#3a5ab0;">Product Design</span>
+          </div>
+          <p class="card-meta">2024–2026 · Baufest</p>
+          <h3 class="card-title">Cypress Customer Portal — Ready-Mix</h3>
+          <p class="card-desc">
+            <span class="es">Plataforma de pedidos de concreto y seguimiento en tiempo real de entregas en Titan America (FL, VA, NC, SC).</span>
+            <span class="en">Concrete ordering platform and real-time delivery tracking for Titan America (FL, VA, NC, SC).</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 2 — ARAMARK -->
+      <a href="aramark.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #7a0000 0%, #b71c1c 60%, #d32f2f 100%);">
+          <span class="card-image-number">A</span>
+          <span class="card-image-company">ARAMARK</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#fce8e8; color:#b71c1c;">UX/UI</span>
+            <span class="card-tag" style="background:#fce8e8; color:#b71c1c;">Service Design</span>
+            <span class="card-tag" style="background:#fce8e8; color:#b71c1c;">Agile</span>
+          </div>
+          <p class="card-meta">2026 · Baufest</p>
+          <h3 class="card-title">
+            <span class="es">Quoting Tool — expansión regional</span>
+            <span class="en">Quoting Tool — regional expansion</span>
+          </h3>
+          <p class="card-desc">
+            <span class="es">Evolución de la herramienta de cotización de Aramark de Chile a Argentina, con reglas y precios locales.</span>
+            <span class="en">Evolution of Aramark's quoting tool from Chile to Argentina, with local rules and pricing.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 3 — COSMOS -->
+      <a href="cosmos.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #0d1e4a 0%, #1549cc 60%, #2563eb 100%);">
+          <span class="card-image-number">C</span>
+          <span class="card-image-company">COSMOS</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#e8f0fe; color:#1549cc;">UX Design</span>
+            <span class="card-tag" style="background:#e8f0fe; color:#1549cc;">Backoffice</span>
+            <span class="card-tag" style="background:#e8f0fe; color:#1549cc;">Wizard</span>
+          </div>
+          <p class="card-meta">2026 · Baufest</p>
+          <h3 class="card-title">
+            <span class="es">Portal externo &amp; wizard de pagos</span>
+            <span class="en">External portal &amp; payment wizard</span>
+          </h3>
+          <p class="card-desc">
+            <span class="es">Propuestas de diseño para el portal de registro externo y el wizard de selección de cargos de Cosmos.</span>
+            <span class="en">Design proposals for Cosmos's external registration portal and charge selection wizard.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 4 — SMARTDOCS -->
+      <a href="smartdocs.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #0d0d3b 0%, #1a1a6e 60%, #2d2db8 100%);">
+          <span class="card-image-number">S</span>
+          <span class="card-image-company">SMARTDOCS</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#ededfa; color:#1a1a6e;">UX/UI</span>
+            <span class="card-tag" style="background:#ededfa; color:#1a1a6e;">AI Product</span>
+            <span class="card-tag" style="background:#ededfa; color:#1a1a6e;">SaaS</span>
+          </div>
+          <p class="card-meta">2026 · Baufest</p>
+          <h3 class="card-title">
+            <span class="es">SmartDocs — Gestión documental con IA</span>
+            <span class="en">SmartDocs — AI Document Management</span>
+          </h3>
+          <p class="card-desc">
+            <span class="es">Plataforma de IA que valida y analiza documentos en segundos, automatizando procesos manuales críticos.</span>
+            <span class="en">AI platform that validates and analyzes documents in seconds, automating critical manual processes.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- GROUP: ANTERIORES -->
+      <div class="work-group-label fade-in">
+        <span class="work-group-label-text">CASOS DE ESTUDIO ANTERIORES</span>
+        <span class="work-group-label-line"></span>
+      </div>
+
+      <!-- Card 01 — RIMAC SEGUROS -->
+      <a href="rimac-endoso.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #8B0000 0%, #C8102E 60%, #e53935 100%);">
+          <span class="card-image-number">01</span>
+          <span class="card-image-company">RIMAC SEGUROS</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#fce8e8; color:#c8102e;">Service Design</span>
+            <span class="card-tag" style="background:#fce8e8; color:#c8102e;">UX</span>
+            <span class="card-tag" style="background:#fce8e8; color:#c8102e;">Figma</span>
+          </div>
+          <p class="card-meta">2021 · Rimac</p>
+          <h3 class="card-title"><span class="es">Nueva propuesta de Endoso</span><span class="en">New Endorsement Proposal</span></h3>
+          <p class="card-desc">
+            <span class="es">Propuesta holística para digitalizar el endoso de seguros de vida, reduciendo fricción para clientes y asesores.</span>
+            <span class="en">Holistic proposal to digitalize life insurance endorsements, reducing friction for clients and advisors.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 02 — BANCO PICHINCHA -->
+      <a href="banco-pichincha.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #e65100 0%, #f57c00 60%, #ff9800 100%);">
+          <span class="card-image-number">02</span>
+          <span class="card-image-company">BANCO PICHINCHA</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#fff3e0; color:#e65100;">Service Design</span>
+            <span class="card-tag" style="background:#fff3e0; color:#e65100;">Phygital</span>
+            <span class="card-tag" style="background:#fff3e0; color:#e65100;">Research</span>
+          </div>
+          <p class="card-meta">2023 · Banco Pichincha</p>
+          <h3 class="card-title"><span class="es">Agencias 2.0</span><span class="en">Agencies 2.0</span></h3>
+          <p class="card-desc">
+            <span class="es">Rediseño de la experiencia phygital en agencias bancarias de Ecuador, integrando canales digitales y presenciales.</span>
+            <span class="en">Redesign of the phygital experience in Ecuadorian bank branches, integrating digital and in-person channels.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 03 — BCI CHILE -->
+      <a href="bci-agencias.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #bf360c 0%, #e64a19 60%, #ff5722 100%);">
+          <span class="card-image-number">03</span>
+          <span class="card-image-company">BCI CHILE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#fbe9e7; color:#bf360c;">Service Design</span>
+            <span class="card-tag" style="background:#fbe9e7; color:#bf360c;">Figma</span>
+          </div>
+          <p class="card-meta">2021 · BCI</p>
+          <h3 class="card-title"><span class="es">Nueva experiencia en agencias</span><span class="en">New branch experience</span></h3>
+          <p class="card-desc">
+            <span class="es">Rediseño holístico del modelo de agencias para BCI Chile, del research a la propuesta de MVP.</span>
+            <span class="en">Holistic redesign of the branch model for BCI Chile, from research to MVP proposal.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 04 — RIMAC FREEMIUM -->
+      <a href="rimac-freemium.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #e65100 0%, #bf360c 60%, #8d1a00 100%);">
+          <span class="card-image-number">04</span>
+          <span class="card-image-company">RIMAC SEGUROS</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#fbe9e7; color:#bf360c;">UX Design</span>
+            <span class="card-tag" style="background:#fbe9e7; color:#bf360c;">Service Design</span>
+          </div>
+          <p class="card-meta">2022 · Rimac</p>
+          <h3 class="card-title"><span class="es">Rimac Vida Gratuito — Freemium</span><span class="en">Rimac Free Life — Freemium</span></h3>
+          <p class="card-desc">
+            <span class="es">Captación de nuevos clientes jóvenes a través de un modelo freemium de seguro de vida.</span>
+            <span class="en">Acquiring new young customers through a life insurance freemium model.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 05 — RIMAC ENDOSO LANDING -->
+      <a href="rimac-endoso-landing.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #7b003e 0%, #c0175c 60%, #e91e8c 100%);">
+          <span class="card-image-number">05</span>
+          <span class="card-image-company">RIMAC SEGUROS</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#fce4ec; color:#c0175c;">UX/UI</span>
+            <span class="card-tag" style="background:#fce4ec; color:#c0175c;">Landing</span>
+            <span class="card-tag" style="background:#fce4ec; color:#c0175c;">Campaña digital</span>
+          </div>
+          <p class="card-meta">2022 · Rimac</p>
+          <h3 class="card-title"><span class="es">Endoso — Creación de la landing</span><span class="en">Endorsement — Landing creation</span></h3>
+          <p class="card-desc">
+            <span class="es">Diseño, testeo e iteración de la landing del endoso, corazón de la primera campaña digital de Rimac que no solo generó leads, sino que convirtió.</span>
+            <span class="en">Design, testing and iteration of the endorsement landing — heart of Rimac's first digital campaign to both generate leads and convert.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 05 — FARMAUNA -->
+      <a href="farmauna.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #2A1DB5 0%, #3D2FD9 60%, #5B4CFF 100%);">
+          <span class="card-image-number">06</span>
+          <span class="card-image-company">FARMAUNA</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#e8f5e9; color:#3D2FD9;">UX Research</span>
+            <span class="card-tag" style="background:#e8f5e9; color:#3D2FD9;">Product Design</span>
+            <span class="card-tag" style="background:#e8f5e9; color:#3D2FD9;">Salud Digital</span>
+          </div>
+          <p class="card-meta">2022 · Farmauna</p>
+          <h3 class="card-title">
+            <span class="es">Nuevos planes de suscripción</span>
+            <span class="en">New subscription plans</span>
+          </h3>
+          <p class="card-desc">
+            <span class="es">Investigación UX para diseñar nuevos modelos de suscripción en salud: digital para el mercado peruano.</span>
+            <span class="en">UX research to design new health subscription models for the Peruvian digital market.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 06 — STARMEUP -->
+      <a href="starmeup.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #004d40 0%, #00695c 60%, #26a69a 100%);">
+          <span class="card-image-number">07</span>
+          <span class="card-image-company">STARMEUP · USA</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#e0f2f1; color:#00695c;">UX Research</span>
+            <span class="card-tag" style="background:#e0f2f1; color:#00695c;">Figma</span>
+            <span class="card-tag" style="background:#e0f2f1; color:#00695c;">More</span>
+          </div>
+          <p class="card-meta">2021 · Globant</p>
+          <h3 class="card-title"><span class="es">Investigaciones variadas</span><span class="en">Various research studies</span></h3>
+          <p class="card-desc">
+            <span class="es">UX Research continua en una plataforma de reconocimiento y cultura organizacional para EE.UU.</span>
+            <span class="en">Ongoing UX Research for a recognition and organizational culture platform in the US.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 07 — IN FINTECH -->
+      <a href="fintech.html" class="project-card fade-in">
+        <div class="card-image" style="background: linear-gradient(135deg, #1a237e 0%, #283593 60%, #3949ab 100%);">
+          <span class="card-image-number">08</span>
+          <span class="card-image-company">IN FINTECH</span>
+        </div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="card-tag" style="background:#e8eaf6; color:#283593;">UX Research</span>
+            <span class="card-tag" style="background:#e8eaf6; color:#283593;">Fintech</span>
+            <span class="card-tag" style="background:#e8eaf6; color:#283593;">Hiraoka</span>
+          </div>
+          <p class="card-meta">2022 · Hiraoka</p>
+          <h3 class="card-title">Buy Now, Pay Later — Research</h3>
+          <p class="card-desc">
+            <span class="es">Investigación sobre percepciones y comportamientos del modelo BNPL en latinoamérica.</span>
+            <span class="en">Research on perceptions and behaviors around the BNPL model in Latin America.</span>
+          </p>
+          <span class="card-link">
+            <span class="es">Ver case study →</span>
+            <span class="en">View case study →</span>
+          </span>
+        </div>
+      </a>
+
+
+    </div><!-- /projects-grid -->
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section class="skills-section">
+  <div class="section-inner">
+    <p class="section-label fade-in">SKILLS</p>
+    <h2 class="section-h2 fade-in">
+      <span class="es">Especialidades</span>
+      <span class="en">Specialties</span>
+    </h2>
+
+    <div class="skills-grid">
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🗺️</div>
+        <h3 class="skill-title">Service Design</h3>
+        <p class="skill-desc">
+          <span class="es">Diseño end-to-end: blueprints, journeys, puntos de contacto y ecosistemas complejos.</span>
+          <span class="en">End-to-end design: blueprints, journeys, touchpoints and complex ecosystems.</span>
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🔍</div>
+        <h3 class="skill-title">UX Research</h3>
+        <p class="skill-desc">
+          <span class="es">Investigación cuali y cuanti: entrevistas, Usability testing, síntesis con IA.</span>
+          <span class="en">Qualitative and quantitative research: interviews, usability testing, AI-assisted synthesis.</span>
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🎯</div>
+        <h3 class="skill-title">Strategic Design</h3>
+        <p class="skill-desc">
+          <span class="es">Visión estratégica alineada a negocio: discovery, oportunidades, propuesta de valor.</span>
+          <span class="en">Business-aligned strategic vision: discovery, opportunities, value proposition.</span>
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🤖</div>
+        <h3 class="skill-title">AI for Design</h3>
+        <p class="skill-desc">
+          <span class="es">Integración de IA en research, síntesis y diseño. Prompt design para UX.</span>
+          <span class="en">AI integration in research, synthesis and design. Prompt design for UX.</span>
+        </p>
+      </div>
+
+      <div class="skill-card fade-in">
+        <div class="skill-icon">✦</div>
+        <h3 class="skill-title">UX &amp; Product Design</h3>
+        <p class="skill-desc">
+          <span class="es">Interfaces intuitivas, design systems y flujos centrados en el usuario.</span>
+          <span class="en">Intuitive interfaces, design systems and user-centered flows.</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section">
+  <div style="max-width:680px; margin:0 auto; text-align:center;">
+    <p class="section-label fade-in">CONTACTO</p>
+    <h2 class="section-h2 fade-in" style="margin-bottom:16px;">
+      <span class="es">¡Trabajemos juntos!</span>
+      <span class="en">Let's work together!</span>
+    </h2>
+    <p class="contact-desc fade-in">
+      <span class="es">Si tienes un proyecto en mente o quieres conocer más sobre mi trabajo, escríbeme.</span>
+      <span class="en">If you have a project in mind or want to learn more about my work, reach out.</span>
+    </p>
+    <div class="fade-in">
+      <a href="mailto:andrea.lopez.agurto@gmail.com" class="contact-email">andrea.lopez.agurto@gmail.com</a>
+    </div>
+    <div class="contact-buttons fade-in">
+      <a href="https://www.linkedin.com/in/andrealoag/" target="_blank" class="btn-outline-white">LinkedIn</a>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" class="btn-green-sm">
+        <span class="es">Ver CV completo</span>
+        <span class="en">View full CV</span>
+      </a>
+      <a href="ANDREA-LOPEZ-CV.pdf" download class="btn-outline-white">
+        <span class="es">Descargar CV</span>
+        <span class="en">Download CV</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p class="footer-name">Andrea López</p>
+  <p class="footer-role">Senior Service Designer · DXD Specialist</p>
+  <p class="footer-copy">© 2026 Andrea López. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleLang() {
+    var body = document.body;
+    var btn = document.getElementById('lang-toggle');
+    if (body.classList.contains('lang-en')) {
+      body.classList.remove('lang-en');
+      btn.textContent = 'EN';
+    } else {
+      body.classList.add('lang-en');
+      btn.textContent = 'ES';
+    }
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    observer.observe(el);
+  });
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aramark Quoting Tool – Fase 2 Argentina | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #5B4CFF;
+      --dark: #111;
+      --text: #333;
+      --muted: #777;
+      --border: #e5e5e5;
+      --accent: #c0392b;
+      --accent-light: #e74c3c;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    body .en { display: none; }
+    body.lang-en .es { display: none; }
+    body.lang-en .en { display: block; }
+    span.en, a.en { display: none; }
+    body.lang-en span.es, body.lang-en a.es { display: none; }
+    body.lang-en span.en, body.lang-en a.en { display: inline; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* Process sections */
+    .process-section { border-top: 1px solid var(--border); padding: 64px 24px; }
+    .process-inner { max-width: 900px; margin: 0 auto; }
+    .section-num { font-family: 'Poppins', sans-serif; font-size: 96px; font-weight: 700; color: var(--accent); opacity: 0.08; line-height: 1; margin-bottom: -32px; }
+    .section-divider { height: 4px; background: var(--purple); border-radius: 2px; max-width: 48px; margin-bottom: 20px; }
+    .section-heading { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+    .section-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+
+    /* Content blocks */
+    .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+    .insight-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .insight-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; }
+    .insight-card-icon { font-size: 22px; margin-bottom: 10px; }
+    .insight-card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 8px; }
+    .insight-card-text { font-size: 13px; color: #555; line-height: 1.65; }
+    .quote-box { background: #fdf0ef; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 24px 28px; margin: 24px 0; }
+    .quote-text { font-size: 16px; font-style: italic; color: #333; line-height: 1.7; margin-bottom: 10px; }
+    .quote-attr { font-size: 13px; color: #777; font-weight: 600; }
+    .stats-row { display: flex; gap: 0; margin: 24px 0; background: #f8f8f8; border-radius: 12px; overflow: hidden; }
+    .stat-item { flex: 1; text-align: center; padding: 28px 16px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.4; }
+    .result-banner { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .result-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .result-text { font-size: 14px; opacity: 0.9; line-height: 1.8; }
+    .findings-list { list-style: none; margin: 20px 0; padding: 0; }
+    .findings-list li { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+    .findings-list li:last-child { border-bottom: none; }
+    .finding-num { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); opacity: 0.4; flex-shrink: 0; width: 32px; }
+    .finding-text { font-size: 14px; color: #444; line-height: 1.65; }
+    .obj-list { list-style: none; padding: 0; margin: 24px 0; }
+    .obj-list li { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
+    .obj-list li:last-child { border-bottom: none; }
+    .obj-arrow { color: var(--purple); font-weight: 700; font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .obj-text { font-size: 14px; color: #444; line-height: 1.65; }
+    .screen-img { max-width: 100%; border-radius: 12px; margin: 24px 0; box-shadow: 0 4px 24px rgba(0,0,0,0.10); display: block; }
+    .img-caption { font-size: 12px; color: var(--muted); margin-top: -16px; margin-bottom: 24px; font-style: italic; }
+
+    @media (max-width: 900px) {
+      .layout-grid { grid-template-columns: 1fr !important; }
+      .sidebar-sticky { position: static !important; }
+    }
+    @media (max-width: 640px) {
+      .insight-grid, .insight-grid-2 { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .section-num { font-size: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--accent);color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:280px;font-weight:700;opacity:0.06;font-family:'Poppins', sans-serif;line-height:1;pointer-events:none;user-select:none;">A</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.75;margin-bottom:16px;">
+      <span class="es">UX/UI Designer · Baufest</span>
+      <span class="en">UX/UI Designer · Baufest</span>
+    </p>
+    <h1 style="font-size:clamp(32px,5.5vw,60px);font-weight:700;line-height:1.1;margin-bottom:12px;">
+      <span class="es">Aramark Quoting Tool</span>
+      <span class="en">Aramark Quoting Tool</span>
+    </h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.85;margin-bottom:8px;">
+      <span class="es">Fase 2: Expansión a Argentina</span>
+      <span class="en">Phase 2: Expansion to Argentina</span>
+    </p>
+    <p style="font-size:17px;opacity:0.75;max-width:640px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Cómo se expandió una herramienta de cotización que funcionaba en Chile a un nuevo mercado con reglas propias, sin interrumpir lo que ya estaba en producción.</span>
+      <span class="en">How a quoting tool already live in Chile was expanded to a new market with its own rules — without disrupting what was already in production.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p>
+        <p style="font-weight:700;font-size:15px;">UX/UI Designer</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p>
+        <p style="font-weight:700;font-size:15px;">Baufest / Aramark</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Duración</span><span class="en">Duration</span></p>
+        <p style="font-weight:700;font-size:15px;">
+          <span class="es">9 semanas · mar – may 2026</span>
+          <span class="en">9 weeks · Mar – May 2026</span>
+        </p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Etapa</span><span class="en">Phase</span></p>
+        <p style="font-weight:700;font-size:15px;">
+          <span class="es">Fase 2 — Argentina</span>
+          <span class="en">Phase 2 — Argentina</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN LAYOUT -->
+<div class="layout-grid" style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar-sticky" style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:22px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;"><span class="es">Empresa</span><span class="en">Company</span></div>
+      <p style="font-size:14px;color:var(--dark);font-weight:600;">Baufest / Aramark</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:22px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;"><span class="es">Rol</span><span class="en">Role</span></div>
+      <p style="font-size:14px;color:var(--dark);font-weight:600;">UX/UI Designer</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:22px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;"><span class="es">Duración</span><span class="en">Duration</span></div>
+      <p style="font-size:14px;color:var(--dark);font-weight:600;">
+        <span class="es">9 semanas (mar – may 2026)</span>
+        <span class="en">9 weeks (Mar – May 2026)</span>
+      </p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:22px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;"><span class="es">Metodología</span><span class="en">Methodology</span></div>
+      <p style="font-size:14px;color:var(--dark);font-weight:600;">Agile / Sprints</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:22px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;"><span class="es">Herramienta</span><span class="en">Tool</span></div>
+      <p style="font-size:14px;color:var(--dark);font-weight:600;">Azure DevOps</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;"><span class="es">Etapa</span><span class="en">Phase</span></div>
+      <p style="font-size:14px;color:var(--dark);font-weight:600;">
+        <span class="es">Fase 2 — Argentina</span>
+        <span class="en">Phase 2 — Argentina</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div>
+
+    <!-- SECTION 00 — El contexto -->
+    <div class="process-section fade-in" style="border-top:none;padding-top:0;padding-left:0;padding-right:0;">
+      <div class="process-inner" style="max-width:100%;">
+        <div class="section-num">00</div>
+        <div class="section-divider"></div>
+        <h3 class="section-heading">
+          <span class="es">El contexto: Aramark y la Quoting Tool</span>
+          <span class="en">The context: Aramark and the Quoting Tool</span>
+        </h3>
+        <p class="section-text es">Aramark es una compañía multinacional de servicios de alimentación y facility management. Sus equipos de ventas son responsables de construir propuestas comerciales para clientes corporativos — propuestas que antes dependían de procesos manuales, hojas de cálculo y criterios dispares según el vendedor.</p>
+        <p class="section-text en">Aramark is a multinational food services and facility management company. Its sales teams are responsible for building commercial proposals for corporate clients — proposals that previously relied on manual processes, spreadsheets, and criteria that varied from rep to rep.</p>
+
+        <p class="section-text es">La <strong>Quoting Tool</strong> nació para resolver ese problema: una aplicación web interna que permite a los vendedores generar propuestas de servicio de alimentación de manera estructurada, transparente y consistente. Seleccionan tiers de servicio, configuran secciones de menú con precios unitarios y cantidades, y obtienen una cotización lista para presentar al cliente.</p>
+        <p class="section-text en">The <strong>Quoting Tool</strong> was built to solve that problem: an internal web application that allows sales reps to generate food service proposals in a structured, transparent, and consistent way. They select service tiers, configure menu sections with unit prices and quantities, and get a quote ready to present to the client.</p>
+
+        <p class="section-text es">La Fase 1 de la herramienta fue diseñada, desarrollada y lanzada exitosamente en Chile. Con la plataforma en producción y validada en el mercado chileno, surgió la siguiente pregunta natural: ¿cómo llevarla a Argentina?</p>
+        <p class="section-text en">Phase 1 of the tool was designed, developed, and successfully launched in Chile. With the platform live and validated in the Chilean market, the natural next question emerged: how to bring it to Argentina?</p>
+
+        <div class="insight-grid-2">
+          <div class="insight-card">
+            <div class="insight-card-icon">🇨🇱</div>
+            <div class="insight-card-title es">Fase 1 — Chile</div>
+            <div class="insight-card-title en">Phase 1 — Chile</div>
+            <p class="insight-card-text es">La Quoting Tool fue diseñada, construida y lanzada en el mercado chileno. Funcionando en producción, sentó las bases tecnológicas y de diseño para la expansión regional.</p>
+            <p class="insight-card-text en">The Quoting Tool was designed, built, and launched in the Chilean market. Running in production, it laid the technological and design foundations for regional expansion.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-card-icon">🇦🇷</div>
+            <div class="insight-card-title es">Fase 2 — Argentina</div>
+            <div class="insight-card-title en">Phase 2 — Argentina</div>
+            <p class="insight-card-text es">Segunda etapa centrada en adaptar la plataforma a las reglas de negocio, precios y normativas locales del mercado argentino, sin interrumpir las operaciones ya consolidadas en Chile.</p>
+            <p class="insight-card-text en">Second phase focused on adapting the platform to Argentine market business rules, pricing structures, and local regulations — without disrupting operations already consolidated in Chile.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 01 — El desafío -->
+    <div class="process-section fade-in">
+      <div class="process-inner" style="max-width:100%;">
+        <div class="section-num">01</div>
+        <div class="section-divider"></div>
+        <h3 class="section-heading">
+          <span class="es">El desafío: crecer a un nuevo mercado</span>
+          <span class="en">The challenge: growing into a new market</span>
+        </h3>
+        <p class="section-text es">Expandir una herramienta digital a otro país parece una operación de copy-paste, pero rara vez lo es. Argentina tiene sus propias normativas, estructuras de precios y lógicas de negocio que no coinciden con las de Chile. Adaptar la plataforma sin romper lo que ya funcionaba requería entender dónde estaban esas diferencias y cómo traducirlas en cambios concretos de interfaz y flujo.</p>
+        <p class="section-text en">Expanding a digital tool to another country looks like a copy-paste operation, but it rarely is. Argentina has its own regulations, pricing structures, and business logic that don't map directly to Chile's. Adapting the platform without breaking what already worked required understanding where those differences lived and how to translate them into concrete interface and flow changes.</p>
+
+        <p class="section-text es">Al mismo tiempo, la Quoting Tool tenía usuarios reales en producción en Chile. Cualquier cambio en la arquitectura compartida de la plataforma debía garantizar que esas operaciones no se vieran afectadas. El reto no era solo de diseño: era de coordinación, precisión y criterio.</p>
+        <p class="section-text en">At the same time, the Quoting Tool had real users live in production in Chile. Any change to the platform's shared architecture had to guarantee those operations were not affected. The challenge was not only about design — it was about coordination, precision, and judgment.</p>
+
+        <ul class="obj-list">
+          <li>
+            <span class="obj-arrow">→</span>
+            <span class="obj-text">
+              <strong class="es">Diferente mercado, diferentes reglas.</strong>
+              <strong class="en">Different market, different rules.</strong>
+              <span class="es"> Argentina opera con estructuras de precios, normativas y lógicas comerciales propias que debían reflejarse en la herramienta.</span>
+              <span class="en"> Argentina operates with its own pricing structures, regulations, and commercial logic that needed to be reflected in the tool.</span>
+            </span>
+          </li>
+          <li>
+            <span class="obj-arrow">→</span>
+            <span class="obj-text">
+              <strong class="es">No interrumpir Chile.</strong>
+              <strong class="en">Don't disrupt Chile.</strong>
+              <span class="es"> La Fase 1 estaba en producción con usuarios reales. La expansión debía coexistir sin afectar el funcionamiento consolidado.</span>
+              <span class="en"> Phase 1 was live with real users. The expansion had to coexist without affecting the already-consolidated operations.</span>
+            </span>
+          </li>
+          <li>
+            <span class="obj-arrow">→</span>
+            <span class="obj-text">
+              <strong class="es">Velocidad y transparencia para los vendedores.</strong>
+              <strong class="en">Speed and transparency for sales reps.</strong>
+              <span class="es"> El objetivo de negocio central seguía siendo el mismo: hacer la creación de propuestas más rápida, precisa y clara para los equipos comerciales.</span>
+              <span class="en"> The core business goal remained the same: make proposal creation faster, more accurate, and clearer for commercial teams.</span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECTION 02 — La solución -->
+    <div class="process-section fade-in">
+      <div class="process-inner" style="max-width:100%;">
+        <div class="section-num">02</div>
+        <div class="section-divider"></div>
+        <h3 class="section-heading">
+          <span class="es">La solución: la herramienta en acción</span>
+          <span class="en">The solution: the tool in action</span>
+        </h3>
+        <p class="section-text es">La Quoting Tool guía al vendedor a través de un flujo estructurado para construir una propuesta de servicio de alimentación. El corazón de la experiencia es la pantalla de Propuesta: el vendedor elige entre tres tiers de servicio —<strong>Esencial, Estándar y Premium</strong>— y configura cada sección del menú (Entradas, Plato de fondo, Postres, Bebestibles) seleccionando ítems con su foto, precio unitario y cantidad.</p>
+        <p class="section-text en">The Quoting Tool guides the sales rep through a structured flow to build a food service proposal. The heart of the experience is the Proposal screen: the rep chooses between three service tiers —<strong>Esencial, Estándar, and Premium</strong>— and configures each menu section (Starters, Main Course, Desserts, Beverages) by selecting items with their photo, unit price, and quantity.</p>
+
+        <p class="section-text es">El resultado es una cotización completa, consistente y lista para el cliente.</p>
+        <p class="section-text en">The result is a complete, consistent quote ready for the client.</p>
+
+        <div class="insight-grid">
+          <div class="insight-card">
+            <div class="insight-card-icon">🍽️</div>
+            <div class="insight-card-title es">Tiers de servicio</div>
+            <div class="insight-card-title en">Service tiers</div>
+            <p class="insight-card-text es">Esencial, Estándar y Premium permiten al vendedor ofrecer opciones diferenciadas según el tipo y complejidad de la cuenta. La propuesta se organiza alrededor de este eje.</p>
+            <p class="insight-card-text en">Esencial, Estándar, and Premium allow the sales rep to offer differentiated options based on the type and complexity of the account. The proposal is organized around this axis.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-card-icon">📋</div>
+            <div class="insight-card-title es">Ítems con detalle</div>
+            <div class="insight-card-title en">Detailed items</div>
+            <p class="insight-card-text es">Cada ítem incluye fotografía del producto, nombre, precio unitario y campo de cantidad. El diseño en tarjetas facilita la lectura, la comparación y la selección rápida.</p>
+            <p class="insight-card-text en">Each item includes product photography, name, unit price, and quantity field. The card layout makes reading, comparing, and selecting fast and clear.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-card-icon">🥤</div>
+            <div class="insight-card-title es">Secciones por categoría</div>
+            <div class="insight-card-title en">Category sections</div>
+            <p class="insight-card-text es">Entradas, Plato de fondo, Postres, Bebestibles — cada sección tiene su propio flujo de selección. La estructura mantiene el orden y la claridad a lo largo de toda la cotización.</p>
+            <p class="insight-card-text en">Starters, Main Course, Desserts, Beverages — each section has its own selection flow. The structure keeps the quote ordered and clear from start to finish.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 03 — Mi participación -->
+    <div class="process-section fade-in">
+      <div class="process-inner" style="max-width:100%;">
+        <div class="section-num">03</div>
+        <div class="section-divider"></div>
+        <h3 class="section-heading">
+          <span class="es">Mi participación</span>
+          <span class="en">My role</span>
+        </h3>
+        <p class="section-text es">Participé como UX/UI Designer dentro del equipo core POD Digital de Baufest, integrada en la dinámica del proyecto desde el inicio de los sprints hasta la entrega final. El trabajo en proyectos de mantenimiento evolutivo tiene una particularidad: el diseño no parte de cero, sino que opera sobre una plataforma en producción con usuarios reales.</p>
+        <p class="section-text en">I participated as UX/UI Designer within Baufest's core POD Digital team, integrated into the project's dynamics from the first sprint through final delivery. Design work in evolutionary maintenance projects has a distinctive quality: it doesn't start from scratch — it operates on a production platform with real users already on it.</p>
+
+        <p class="section-text es">Eso define el foco: mantener la coherencia de la experiencia mientras se incorporan cambios funcionales, se adaptan flujos a las reglas del nuevo mercado y se toman decisiones de interfaz que deben ser técnicamente viables y consistentes con lo ya construido. El trabajo fue transversal y colaborativo — en constante diálogo con la BA/PO para entender los requerimientos de negocio, y con el desarrollador y el arquitecto para garantizar que las soluciones propuestas fueran implementables dentro del scope del proyecto.</p>
+        <p class="section-text en">That defines the focus: maintaining experience coherence while incorporating functional changes, adapting flows to the new market's rules, and making interface decisions that must be technically feasible and consistent with what was already built. The work was cross-functional and collaborative — in constant dialogue with the BA/PO to understand business requirements, and with the developer and architect to ensure proposed solutions were implementable within the project's scope.</p>
+
+        <div class="insight-grid-2">
+          <div class="insight-card">
+            <div class="insight-card-icon">⚡</div>
+            <div class="insight-card-title es">Trabajo en sprints</div>
+            <div class="insight-card-title en">Sprint-based work</div>
+            <p class="insight-card-text es">Las decisiones de diseño se tomaban dentro del ritmo ágil del equipo: requerimientos, propuesta de solución, revisión y ajuste. Azure DevOps como eje de trazabilidad y seguimiento de tareas.</p>
+            <p class="insight-card-text en">Design decisions were made within the team's agile rhythm: requirements, solution proposal, review, and adjustment. Azure DevOps as the axis for traceability and task tracking.</p>
+          </div>
+          <div class="insight-card">
+            <div class="insight-card-icon">🤝</div>
+            <div class="insight-card-title es">Colaboración transversal</div>
+            <div class="insight-card-title en">Cross-functional collaboration</div>
+            <p class="insight-card-text es">Integración constante con BA/PO, desarrollo y arquitectura. Cada decisión de interfaz se validaba contra los requerimientos de negocio, la factibilidad técnica y la coherencia con la plataforma existente.</p>
+            <p class="insight-card-text en">Constant integration with BA/PO, development, and architecture. Each interface decision was validated against business requirements, technical feasibility, and consistency with the existing platform.</p>
+          </div>
+        </div>
+
+        <p class="section-text es" style="margin-top:16px;">Algunas de las pantallas que diseñé para la herramienta. En la pantalla de Propuesta trabajé la estructura de tiers de servicio y las secciones de menú, e incorporé las acciones de <strong>Limpiar</strong> y <strong>Publicar</strong>: Limpiar permite descartar la configuración actual y empezar de nuevo, y Publicar deja la propuesta lista una vez que el vendedor la termina.</p>
+        <p class="section-text en" style="margin-top:16px;">Some of the screens I designed for the tool. On the Proposal screen I worked on the service-tier structure and the menu sections, and added the <strong>Clear</strong> and <strong>Publish</strong> actions: Clear discards the current configuration to start over, and Publish leaves the proposal ready once the rep is done.</p>
+
+        <img src="aramark_page1.png" alt="Quoting Tool — Pantalla de Propuesta con tiers de servicio Esencial, Estándar y Premium y botones de Limpiar y Publicar. Bajo Entradas: Ensalada Mixta, Ensalada Rusa, Ensalada de Palmito, Ensalada de Frutas con fotografías de alimentos, precio unitario y campos de cantidad." class="screen-img">
+        <p class="img-caption es">Pantalla de Propuesta — Tiers de servicio, acciones de Limpiar y Publicar, y sección de Entradas. Cada ítem muestra fotografía del producto, nombre, precio unitario y campo de cantidad.</p>
+        <p class="img-caption en">Proposal screen — Service tiers, Clear and Publish actions, and Starters section. Each item displays product photography, name, unit price, and quantity field.</p>
+
+        <p class="section-text es" style="margin-top:16px;">En la sección de <strong>Bebestibles</strong> diseñé el patrón de selección por opciones: el vendedor marca con checkbox las bebidas que quiere incluir (Café, Gaseosas, Jugos naturales, Vino, Agua) y esa selección se replica de forma consistente en los demás menús de la propuesta, manteniendo coherencia y evitando volver a configurar lo mismo en cada sección.</p>
+        <p class="section-text en" style="margin-top:16px;">In the <strong>Beverages</strong> section I designed the option-selection pattern: the rep checks the drinks they want to include (Coffee, Soft drinks, Natural juices, Wine, Water) and that selection replicates consistently across the proposal's other menus, keeping coherence and avoiding having to configure the same thing in each section.</p>
+
+        <img src="aramark_page2.png" alt="Quoting Tool — Sección Bebestibles con checkboxes de selección (Café y Vino marcados), precios unitarios y opciones que se replican en otros menús. Continuación de la página Propuesta." class="screen-img">
+        <p class="img-caption es">Sección Bebestibles — Selección por checkboxes (Café y Vino marcados). Las bebidas elegidas se replican en los demás menús de la cotización.</p>
+        <p class="img-caption en">Beverages section — Checkbox selection (Coffee and Wine checked). The chosen drinks replicate across the quote's other menus.</p>
+      </div>
+    </div>
+
+    <!-- SECTION 04 — El cierre -->
+    <div class="process-section fade-in">
+      <div class="process-inner" style="max-width:100%;">
+        <div class="section-num">04</div>
+        <div class="section-divider"></div>
+        <h3 class="section-heading">
+          <span class="es">El cierre</span>
+          <span class="en">The outcome</span>
+        </h3>
+        <p class="section-text es">En mayo de 2026, la segunda etapa fue entregada exitosamente. La Quoting Tool pasó a operar en dos mercados latinoamericanos: Chile, donde ya estaba consolidada, y Argentina, adaptada a sus propias reglas, precios y normativas locales. El equipo de Baufest lo comunicó oficialmente así:</p>
+        <p class="section-text en">In May 2026, the second phase was successfully delivered. The Quoting Tool now operates in two Latin American markets: Chile, where it was already consolidated, and Argentina, adapted to its own rules, pricing, and local regulations. The Baufest team made the official announcement:</p>
+
+        <div class="quote-box">
+          <p class="quote-text">"Con orgullo queremos compartir la entrega exitosa de la segunda etapa de la Quoting Tool junto a nuestro cliente Aramark. Este hito representa la expansión exitosa de la solución a un nuevo mercado, Argentina, adaptando la plataforma a las normativas y necesidades locales. Felicitamos a todo el equipo por su dedicación y excelente trabajo. ¡Sigamos construyendo juntos!"</p>
+          <p class="quote-attr">— Baufest · Comunicación oficial de entrega de proyecto · Mayo 2026</p>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-num">2</div>
+            <div class="stat-label es">mercados latinoamericanos<br>Chile → Argentina</div>
+            <div class="stat-label en">Latin American markets<br>Chile → Argentina</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">9</div>
+            <div class="stat-label es">semanas de proyecto<br>mar – may 2026</div>
+            <div class="stat-label en">project weeks<br>Mar – May 2026</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">2</div>
+            <div class="stat-label es">fases entregadas<br>Chile + Argentina</div>
+            <div class="stat-label en">phases delivered<br>Chile + Argentina</div>
+          </div>
+        </div>
+
+        <div class="result-banner" style="margin-top:32px;">
+          <div class="result-title es">Segunda etapa completada — Aramark Argentina</div>
+          <div class="result-title en">Second phase completed — Aramark Argentina</div>
+          <p class="result-text es">La plataforma fue adaptada y entregada para el mercado argentino en 9 semanas, trabajando bajo metodología ágil. La Quoting Tool de Aramark opera ahora en dos mercados latinoamericanos: Chile y Argentina.</p>
+          <p class="result-text en">The platform was adapted and delivered for the Argentine market in 9 weeks, working under agile methodology. Aramark's Quoting Tool now operates in two Latin American markets: Chile and Argentina.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end main content -->
+</div><!-- end layout grid -->
+
+<!-- NEXT PROJECT -->
+<div style="max-width:900px;margin:0 auto;padding:32px 24px 64px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="cosmos.html" style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#c0392b'" onmouseout="this.style.color='#111'">Cosmos — Portal &amp; wizard de pagos →</a>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  // Lang toggle
+  const toggle = document.getElementById('lang-toggle');
+  toggle.addEventListener('click', () => {
+    const isEn = document.body.classList.toggle('lang-en');
+    toggle.textContent = isEn ? 'ES' : 'EN';
+    document.documentElement.lang = isEn ? 'en' : 'es';
+  });
+
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

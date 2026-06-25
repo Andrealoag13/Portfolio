@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmos – Plataforma Empresarial | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #5B4CFF;
+      --dark: #111;
+      --text: #333;
+      --muted: #777;
+      --border: #e5e5e5;
+      --accent: #0056dc;
+      --accent-light: #2f74ff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    body .en { display: none; }
+    body.lang-en .es { display: none; }
+    body.lang-en .en { display: block; }
+    span.en, a.en { display: none; }
+    body.lang-en span.es, body.lang-en a.es { display: none; }
+    body.lang-en span.en, body.lang-en a.en { display: inline; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* Process sections */
+    .process-section { border-top: 1px solid var(--border); padding: 64px 24px; }
+    .process-inner { max-width: 900px; margin: 0 auto; }
+    .section-num { font-family: 'Poppins', sans-serif; font-size: 96px; font-weight: 700; color: var(--accent); opacity: 0.08; line-height: 1; margin-bottom: -32px; }
+    .section-divider { height: 4px; background: var(--purple); border-radius: 2px; max-width: 48px; margin-bottom: 20px; }
+    .section-heading { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+    .section-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+    .sub-heading { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--dark); margin: 40px 0 6px; }
+    .sub-text { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+
+    /* Content blocks */
+    .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+    .insight-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .insight-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; }
+    .insight-card-icon { font-size: 22px; margin-bottom: 10px; }
+    .insight-card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 8px; }
+    .insight-card-text { font-size: 13px; color: #555; line-height: 1.65; }
+    .quote-box { background: #eef2fb; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 24px 28px; margin: 24px 0; }
+    .quote-text { font-size: 16px; font-style: italic; color: #333; line-height: 1.7; margin-bottom: 10px; }
+    .quote-attr { font-size: 13px; color: #777; font-weight: 600; }
+    .stats-row { display: flex; gap: 0; margin: 24px 0; background: #f8f8f8; border-radius: 12px; overflow: hidden; }
+    .stat-item { flex: 1; text-align: center; padding: 28px 16px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.4; }
+    .hmw-box { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .hmw-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 12px; }
+    .hmw-text { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; line-height: 1.4; }
+    .artifact-box { background: #f8f8f8; border-radius: 12px; padding: 20px 24px; margin: 12px 0; display: flex; align-items: flex-start; gap: 16px; }
+    .artifact-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .artifact-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 6px; }
+    .artifact-text { font-size: 13px; color: #555; line-height: 1.6; }
+    .findings-list { list-style: none; margin: 20px 0; padding: 0; }
+    .findings-list li { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+    .findings-list li:last-child { border-bottom: none; }
+    .finding-num { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); opacity: 0.4; flex-shrink: 0; width: 32px; }
+    .finding-text { font-size: 14px; color: #444; line-height: 1.65; }
+    .hmw-box .hmw-text { color:#fff; }
+
+    /* Step flow indicator */
+    .step-flow { display: flex; gap: 0; margin: 24px 0; }
+    .step-node { flex: 1; text-align: center; position: relative; }
+    .step-node:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 24px; transform: translateY(-50%); font-size: 18px; color: var(--accent); font-weight: 700; z-index: 1; }
+    .step-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; }
+    .step-label { font-size: 12px; color: #555; line-height: 1.4; }
+
+    /* Screen galleries */
+    .screens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; margin: 20px 0 8px; align-items: start; }
+    .shot { width: 100%; display: block; border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 6px 22px rgba(0,0,0,0.09); background: #fff; }
+    .gallery-caption { font-size: 12px; color: #999; margin: 4px 0 28px; line-height: 1.5; }
+
+    @media (max-width: 900px) {
+      .two-col-layout { grid-template-columns: 1fr !important; }
+      .sidebar-sticky { position: static !important; }
+    }
+    @media (max-width: 640px) {
+      .insight-grid, .insight-grid-2 { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .section-num { font-size: 60px; }
+      .screens-grid { grid-template-columns: 1fr; }
+      .step-flow { flex-direction: column; gap: 12px; }
+      .step-node:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -16px; transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:#0056dc;color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:280px;font-weight:700;opacity:0.05;font-family:'Poppins', sans-serif;line-height:1;pointer-events:none;user-select:none;">C</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.75;margin-bottom:16px;">UX/UI Designer · Baufest</p>
+    <h1 style="font-size:clamp(36px,6vw,64px);font-weight:700;line-height:1.1;margin-bottom:12px;">Cosmos</h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.85;margin-bottom:8px;"><span class="es">Plataforma empresarial — Propuestas de diseño</span><span class="en">Enterprise platform — Design proposals</span></p>
+    <p style="font-size:17px;opacity:0.75;max-width:640px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Propuestas UX/UI para dos flujos clave del portal empresarial Cosmos: un wizard de selección de cargos y pagos, y un flujo de registro externo de empresas.</span>
+      <span class="en">UX/UI proposals for two key flows of the Cosmos enterprise portal: a charge selection and payment wizard, and an external company registration flow.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:24px;">
+      <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 20px;">
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p>
+        <p style="font-weight:700;font-size:15px;">UX/UI Designer</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 20px;">
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p>
+        <p style="font-weight:700;font-size:15px;">Baufest / Cosmos</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 20px;">
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Tipo</span><span class="en">Type</span></p>
+        <p style="font-weight:700;font-size:15px;"><span class="es">Propuestas de diseño</span><span class="en">Design proposals</span></p>
+      </div>
+      <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:14px 20px;">
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.65;margin-bottom:4px;"><span class="es">Versión / Fecha</span><span class="en">Version / Date</span></p>
+        <p style="font-weight:700;font-size:15px;">V1.0 — Marzo 2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW PANEL: SIDEBAR + INTRO -->
+<div style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;" class="two-col-layout">
+
+  <!-- Sidebar -->
+  <div style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;" class="sidebar-sticky">
+
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Empresa</span><span class="en">Company</span></div>
+      <p style="font-size:13px;color:var(--muted);">Baufest / Cosmos</p>
+    </div>
+
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Rol</span><span class="en">Role</span></div>
+      <p style="font-size:13px;color:var(--muted);">UX/UI Designer</p>
+    </div>
+
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Industria</span><span class="en">Industry</span></div>
+      <p style="font-size:13px;color:var(--muted);">🚢 <span class="es">Logística / Empresas</span><span class="en">Logistics / Enterprise</span></p>
+    </div>
+
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Tipo</span><span class="en">Type</span></div>
+      <p style="font-size:13px;color:var(--muted);"><span class="es">Propuestas de diseño</span><span class="en">Design proposals</span></p>
+    </div>
+
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Versión</span><span class="en">Version</span></div>
+      <p style="font-size:13px;color:var(--muted);">V1.0 — Marzo 2026</p>
+    </div>
+
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Plataforma</span><span class="en">Platform</span></div>
+      <p style="font-size:13px;color:var(--muted);">Web (Desktop)</p>
+    </div>
+
+    <div style="border-left:3px solid var(--purple);padding-left:14px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Herramientas</span><span class="en">Tools</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;">
+        <span style="background:#e8eefb;color:#0056dc;font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Figma</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Context -->
+  <div class="fade-in">
+    <h2 style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">Contexto del proyecto</span><span class="en">Project context</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Cosmos es una plataforma empresarial desarrollada por Baufest para el sector de logística y comercio portuario. El portal centraliza operaciones de gestión de cargos, pagos y onboarding de empresas externas, brindando a los usuarios una experiencia digital B2B robusta y de nivel enterprise.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Cosmos is an enterprise platform developed by Baufest for the logistics and port trade sector. The portal centralizes charge management, payment, and external company onboarding operations, providing users with a robust B2B enterprise-grade digital experience.</p>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">Como parte del equipo de diseño de Baufest, elaboré las propuestas UX/UI para dos flujos clave de la plataforma: el <strong>Flujo Wizard 2.0</strong> (selección y confirmación de cargos pendientes) y el <strong>Registro Externo</strong> (incorporación de nuevas empresas al sistema). Ambas propuestas fueron entregadas en marzo de 2026 como documentos V1.0.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">As part of the Baufest design team, I developed UX/UI proposals for two key platform flows: the <strong>Wizard Flow 2.0</strong> (pending charge selection and confirmation) and <strong>External Registration</strong> (onboarding new companies into the system). Both proposals were delivered in March 2026 as V1.0 documents.</p>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);">Las propuestas definen pantallas de estado vacío, flujos de selección, modales de formulario, estados de confirmación y pantallas de éxito — construidas sobre la identidad visual de Cosmos y co-brandeo con Baufest.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);">The proposals define empty states, selection flows, form modals, confirmation states, and success screens — built on Cosmos's visual identity and Baufest co-branding.</p>
+  </div>
+</div>
+
+<!-- SECTION 00 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">00</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">El proyecto</span><span class="en">The project</span></h3>
+    <p class="section-text es">Cosmos es un portal web de escritorio orientado a empresas del sector logístico y portuario. Baufest actúa como equipo de diseño y desarrollo, produciendo las propuestas de experiencia de usuario que guían la implementación de cada nuevo módulo de la plataforma.</p>
+    <p class="section-text en">Cosmos is a desktop web portal aimed at companies in the logistics and port trade sector. Baufest acts as the design and development team, producing user experience proposals that guide the implementation of each new platform module.</p>
+
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-card-icon">🏢</div>
+        <div class="insight-card-title"><span class="es">Plataforma B2B enterprise</span><span class="en">B2B enterprise platform</span></div>
+        <p class="insight-card-text es">Portal web de escritorio para empresas del sector logístico, con UI en azul y blanco, diseñado para operadores y gestores de flota o cargos.</p>
+        <p class="insight-card-text en">Desktop web portal for logistics companies, with a blue-and-white UI designed for fleet operators and charge managers.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🎨</div>
+        <div class="insight-card-title"><span class="es">Rol de Baufest</span><span class="en">Baufest's role</span></div>
+        <p class="insight-card-text es">Baufest es el equipo externo de diseño UX/UI. Cada entregable de diseño es una "propuesta" formal que documenta flujos, pantallas y estados de la plataforma.</p>
+        <p class="insight-card-text en">Baufest is the external UX/UI design team. Each design deliverable is a formal "proposal" that documents platform flows, screens, and states.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">📄</div>
+        <div class="insight-card-title"><span class="es">Entregables V1.0</span><span class="en">V1.0 deliverables</span></div>
+        <p class="insight-card-text es">Las propuestas de Flujo Wizard y Registro Externo, ambas en versión 1.0, fueron entregadas en marzo de 2026 como documentos de propuesta formal.</p>
+        <p class="insight-card-text en">The Wizard Flow and External Registration proposals, both version 1.0, were delivered in March 2026 as formal proposal documents.</p>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <p class="quote-text es">"Cosmos es la plataforma central que conecta a las empresas del sector con los sistemas de gestión de cargos y logística portuaria — nuestra labor fue diseñar experiencias que hagan ese proceso claro y eficiente."</p>
+      <p class="quote-text en">"Cosmos is the central platform connecting sector companies to port logistics and charge management systems — our task was to design experiences that make that process clear and efficient."</p>
+      <p class="quote-attr">— <span class="es">Equipo Baufest UX/UI</span><span class="en">Baufest UX/UI Team</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Flujo Wizard 2.0 — Selección de cargos y pago</span><span class="en">Wizard Flow 2.0 — Charge selection and payment</span></h3>
+    <p class="section-text es">La propuesta del Flujo Wizard 2.0 define el recorrido que un usuario sigue para seleccionar, revisar y pagar los cargos pendientes. El flujo está dividido en cuatro pasos: selección de cargos, resumen, pago y confirmación.</p>
+    <p class="section-text en">The Wizard Flow 2.0 proposal defines the journey a user follows to select, review, and pay pending charges. The flow is divided into four steps: charge selection, summary, payment, and confirmation.</p>
+
+    <div class="step-flow">
+      <div class="step-node"><div class="step-circle">1</div><div class="step-label es">Selección<br>de cargos</div><div class="step-label en">Charge<br>selection</div></div>
+      <div class="step-node"><div class="step-circle">2</div><div class="step-label es">Resumen</div><div class="step-label en">Summary</div></div>
+      <div class="step-node"><div class="step-circle">3</div><div class="step-label es">Pago</div><div class="step-label en">Payment</div></div>
+      <div class="step-node"><div class="step-circle">4</div><div class="step-label es">Confirmación</div><div class="step-label en">Confirmation</div></div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Primer paso — Selección de cargos</span><span class="en">First step — Charge selection</span></h4>
+    <p class="sub-text"><span class="es">Estado vacío inicial, listado de cargos pendientes, menú de acciones y estados de confirmación.</span><span class="en">Initial empty state, list of pending charges, actions menu, and confirmation states.</span></p>
+    <div class="screens-grid">
+      <img src="cosmos_wiz_01.png" class="shot" loading="lazy" alt="Cosmos Wizard — selección de cargos, estado inicial">
+      <img src="cosmos_wiz_02.png" class="shot" loading="lazy" alt="Cosmos Wizard — listado de cargos pendientes">
+      <img src="cosmos_wiz_03.png" class="shot" loading="lazy" alt="Cosmos Wizard — cargos seleccionados">
+      <img src="cosmos_wiz_04.png" class="shot" loading="lazy" alt="Cosmos Wizard — confirmación de selección">
+      <img src="cosmos_wiz_05.png" class="shot" loading="lazy" alt="Cosmos Wizard — menú de acciones: agregar conceptos, ver liquidaciones, memos, facturas">
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Agregar conceptos, liquidaciones y memos</span><span class="en">Add concepts, settlements and memos</span></h4>
+    <p class="sub-text"><span class="es">Modal "Agregar los conceptos pendientes", verificación de liquidaciones y memos de devolución.</span><span class="en">"Add pending concepts" modal, settlement verification, and return memos.</span></p>
+    <div class="screens-grid">
+      <img src="cosmos_wiz_06.png" class="shot" loading="lazy" alt="Cosmos Wizard — modal agregar conceptos pendientes">
+      <img src="cosmos_wiz_07.png" class="shot" loading="lazy" alt="Cosmos Wizard — modal agregar conceptos, formulario">
+      <img src="cosmos_wiz_08.png" class="shot" loading="lazy" alt="Cosmos Wizard — modal agregar conceptos, estado">
+      <img src="cosmos_wiz_09.png" class="shot" loading="lazy" alt="Cosmos Wizard — modal agregar conceptos, estado">
+      <img src="cosmos_wiz_10.png" class="shot" loading="lazy" alt="Cosmos Wizard — listado con conceptos agregados">
+      <img src="cosmos_wiz_11.png" class="shot" loading="lazy" alt="Cosmos Wizard — verifica información de liquidaciones (modal)">
+      <img src="cosmos_wiz_12.png" class="shot" loading="lazy" alt="Cosmos Wizard — liquidaciones, vista">
+      <img src="cosmos_wiz_13.png" class="shot" loading="lazy" alt="Cosmos Wizard — verifica memos de devolución (modal)">
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Ver facturas pendientes</span><span class="en">View pending invoices</span></h4>
+    <p class="sub-text"><span class="es">Listado y modal "Verifica tus facturas pendientes".</span><span class="en">List and "Verify your pending invoices" modal.</span></p>
+    <div class="screens-grid">
+      <img src="cosmos_wiz_14.png" class="shot" loading="lazy" alt="Cosmos Wizard — facturas pendientes, listado">
+      <img src="cosmos_wiz_15.png" class="shot" loading="lazy" alt="Cosmos Wizard — verifica tus facturas pendientes (modal)">
+      <img src="cosmos_wiz_16.png" class="shot" loading="lazy" alt="Cosmos Wizard — facturas pendientes, estado">
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Segundo paso — Resumen del pago</span><span class="en">Second step — Payment summary</span></h4>
+    <p class="sub-text"><span class="es">Consolidado de los cargos seleccionados con total y detalle, y modal de confirmación antes de pagar.</span><span class="en">Consolidated selected charges with total and detail, and confirmation modal before paying.</span></p>
+    <div class="screens-grid">
+      <img src="cosmos_wiz_17.png" class="shot" loading="lazy" alt="Cosmos Wizard — resumen del pago">
+      <img src="cosmos_wiz_18.png" class="shot" loading="lazy" alt="Cosmos Wizard — resumen, ¿deseas confirmar tu pago? (modal)">
+      <img src="cosmos_wiz_19.png" class="shot" loading="lazy" alt="Cosmos Wizard — resumen del pago, estado">
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Tercer y cuarto paso — Pago y confirmación</span><span class="en">Third and fourth step — Payment and confirmation</span></h4>
+    <p class="sub-text"><span class="es">Pago con dos métodos (ASBANC y transferencia interbancaria) y pantalla de confirmación de la operación.</span><span class="en">Payment with two methods (ASBANC and interbank transfer) and operation confirmation screen.</span></p>
+    <div class="screens-grid">
+      <img src="cosmos_wiz_20.png" class="shot" loading="lazy" alt="Cosmos Wizard — pago, método ASBANC">
+      <img src="cosmos_wiz_21.png" class="shot" loading="lazy" alt="Cosmos Wizard — pago, confirmación">
+      <img src="cosmos_wiz_22.png" class="shot" loading="lazy" alt="Cosmos Wizard — pago, estado">
+      <img src="cosmos_wiz_23.png" class="shot" loading="lazy" alt="Cosmos Wizard — transferencia interbancaria">
+      <img src="cosmos_wiz_24.png" class="shot" loading="lazy" alt="Cosmos Wizard — transferencia interbancaria, formulario">
+      <img src="cosmos_wiz_25.png" class="shot" loading="lazy" alt="Cosmos Wizard — transferencia interbancaria, datos">
+      <img src="cosmos_wiz_26.png" class="shot" loading="lazy" alt="Cosmos Wizard — pago, resumen">
+      <img src="cosmos_wiz_27.png" class="shot" loading="lazy" alt="Cosmos Wizard — confirmación de la operación">
+    </div>
+
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-card-icon">📝</div>
+        <div class="insight-card-title"><span class="es">Agregar conceptos pendientes</span><span class="en">Add pending concepts</span></div>
+        <p class="insight-card-text es">Modal con formulario para seleccionar y agregar cargos al proceso de pago.</p>
+        <p class="insight-card-text en">Modal with form to select and add charges to the payment process.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">📈</div>
+        <div class="insight-card-title"><span class="es">Liquidaciones y memos</span><span class="en">Settlements and memos</span></div>
+        <p class="insight-card-text es">Sub-flujos de consulta de liquidaciones, memos de devolución y facturas pendientes asociados a los cargos.</p>
+        <p class="insight-card-text en">Sub-flows to consult settlements, return memos, and pending invoices associated with charges.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">💳</div>
+        <div class="insight-card-title"><span class="es">Pago y confirmación</span><span class="en">Payment and confirmation</span></div>
+        <p class="insight-card-text es">Dos métodos de pago documentados (ASBANC y transferencia interbancaria) y la pantalla de confirmación de la operación.</p>
+        <p class="insight-card-text en">Two documented payment methods (ASBANC and interbank transfer) and the operation confirmation screen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Registro Externo — Onboarding de empresas</span><span class="en">External Registration — Company onboarding</span></h3>
+    <p class="section-text es">La propuesta de Registro Externo define el flujo completo que sigue una empresa externa para darse de alta en Cosmos. El proceso está estructurado en cuatro pasos que guían al usuario desde la bienvenida hasta la confirmación de registro exitoso.</p>
+    <p class="section-text en">The External Registration proposal defines the complete flow an external company follows to register in Cosmos. The process is structured in four steps that guide the user from welcome to successful registration confirmation.</p>
+
+    <div class="step-flow">
+      <div class="step-node"><div class="step-circle">1</div><div class="step-label es">Bienvenida</div><div class="step-label en">Welcome</div></div>
+      <div class="step-node"><div class="step-circle">2</div><div class="step-label es">Datos de<br>la empresa</div><div class="step-label en">Company<br>data</div></div>
+      <div class="step-node"><div class="step-circle">3</div><div class="step-label es">Más datos<br>de la empresa</div><div class="step-label en">More company<br>data</div></div>
+      <div class="step-node"><div class="step-circle">4</div><div class="step-label es">Registro<br>completado</div><div class="step-label en">Registration<br>complete</div></div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">1er y 2do paso — Bienvenida y datos de la empresa</span><span class="en">1st and 2nd step — Welcome and company data</span></h4>
+    <p class="sub-text"><span class="es">Login, pantalla "Bienvenido a Cosmos", y formularios de datos de la empresa y cargos de responsabilidad.</span><span class="en">Login, "Welcome to Cosmos" screen, and company data and responsibility charges forms.</span></p>
+    <div class="screens-grid">
+      <img src="cosmos_reg_01.png" class="shot" loading="lazy" alt="Cosmos Registro — login y bienvenida">
+      <img src="cosmos_reg_02.png" class="shot" loading="lazy" alt="Cosmos Registro — 1. Datos de la empresa">
+      <img src="cosmos_reg_03.png" class="shot" loading="lazy" alt="Cosmos Registro — datos de la empresa, formulario">
+      <img src="cosmos_reg_04.png" class="shot" loading="lazy" alt="Cosmos Registro — 2. Cargos de responsabilidad">
+    </div>
+
+    <h4 class="sub-heading"><span class="es">3er y 4to paso — Más datos y registro completado</span><span class="en">3rd and 4th step — More data and registration complete</span></h4>
+    <p class="sub-text"><span class="es">Tercer formulario con datos adicionales y la pantalla de éxito "¡Registro completado!".</span><span class="en">Third form with additional data and the "Registration complete!" success screen.</span></p>
+    <div class="screens-grid">
+      <img src="cosmos_reg_05.png" class="shot" loading="lazy" alt="Cosmos Registro — 3. Más datos de la empresa">
+      <img src="cosmos_reg_06.png" class="shot" loading="lazy" alt="Cosmos Registro — más datos, formulario">
+      <img src="cosmos_reg_07.png" class="shot" loading="lazy" alt="Cosmos Registro — más datos, estado">
+      <img src="cosmos_reg_08.png" class="shot" loading="lazy" alt="Cosmos Registro — ¡Registro completado! pantalla de éxito">
+      <img src="cosmos_reg_09.png" class="shot" loading="lazy" alt="Cosmos Registro — formulario con selección">
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label es">pasos del flujo<br>de registro</div>
+        <div class="stat-label en">steps in the<br>registration flow</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">9</div>
+        <div class="stat-label es">pantallas<br>diseñadas</div>
+        <div class="stat-label en">screens<br>designed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label es">variantes de<br>pantalla de cierre</div>
+        <div class="stat-label en">variants of<br>closing screen</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Decisiones de diseño</span><span class="en">Design decisions</span></h3>
+    <p class="section-text es">Las propuestas reflejan decisiones de diseño concretas visibles en los flujos documentados: patrones de wizard paso a paso, estados claros de vacío y éxito, formularios estructurados, y CTAs bien definidos en cada pantalla.</p>
+    <p class="section-text en">The proposals reflect concrete design decisions visible in the documented flows: step-by-step wizard patterns, clear empty and success states, structured forms, and well-defined CTAs on each screen.</p>
+
+    <ul class="findings-list">
+      <li>
+        <span class="finding-num">01</span>
+        <span class="finding-text es"><strong>Patrón de wizard paso a paso:</strong> Ambos flujos utilizan un patrón wizard numerado y lineal que divide procesos complejos (selección de cargos, registro de empresa) en pasos manejables, reduciendo la carga cognitiva del usuario.</span>
+        <span class="finding-text en"><strong>Step-by-step wizard pattern:</strong> Both flows use a numbered, linear wizard pattern that breaks complex processes (charge selection, company registration) into manageable steps, reducing cognitive load on the user.</span>
+      </li>
+      <li>
+        <span class="finding-num">02</span>
+        <span class="finding-text es"><strong>Estado vacío explícito:</strong> El Flujo Wizard incluye una pantalla de estado vacío que comunica claramente al usuario que aún no hay conceptos seleccionados, evitando confusión y guiando hacia la acción principal.</span>
+        <span class="finding-text en"><strong>Explicit empty state:</strong> The Wizard Flow includes an empty state screen that clearly communicates that no concepts are selected yet, avoiding confusion and guiding towards the primary action.</span>
+      </li>
+      <li>
+        <span class="finding-num">03</span>
+        <span class="finding-text es"><strong>Modales para acciones secundarias:</strong> Las sub-acciones como "Ver información de liquidaciones" y "Ver memos de devolución" se presentan en flujos secundarios que no interrumpen el flujo principal del wizard.</span>
+        <span class="finding-text en"><strong>Modals for secondary actions:</strong> Sub-actions like "View settlement information" and "View return memos" are presented in secondary flows that don't interrupt the main wizard flow.</span>
+      </li>
+      <li>
+        <span class="finding-num">04</span>
+        <span class="finding-text es"><strong>Pantalla de éxito con confirmación visual:</strong> El Registro Externo culmina en una pantalla de éxito "¡Registro completado!" con confirmación visual en verde, cerrando el flujo con una señal positiva y clara para el usuario.</span>
+        <span class="finding-text en"><strong>Success screen with visual confirmation:</strong> External Registration culminates in a "Registration complete!" success screen with a green visual confirmation, closing the flow with a clear, positive signal for the user.</span>
+      </li>
+      <li>
+        <span class="finding-num">05</span>
+        <span class="finding-text es"><strong>Formularios estructurados en secciones:</strong> Los formularios del registro (Datos de la empresa, Cargos de responsabilidad, Más datos) están divididos en secciones nombradas que permiten al usuario comprender el avance y la naturaleza de cada bloque de información.</span>
+        <span class="finding-text en"><strong>Section-structured forms:</strong> Registration forms (Company data, Responsibility charges, More data) are divided into named sections that allow the user to understand progress and the nature of each information block.</span>
+      </li>
+      <li>
+        <span class="finding-num">06</span>
+        <span class="finding-text es"><strong>Variantes de pantalla de cierre:</strong> La propuesta documenta dos opciones para la pantalla de fin de registro, demostrando un proceso de diseño iterativo que ofrece alternativas antes de la decisión final de implementación.</span>
+        <span class="finding-text en"><strong>Closing screen variants:</strong> The proposal documents two options for the end-of-registration screen, demonstrating an iterative design process that presents alternatives before the final implementation decision.</span>
+      </li>
+    </ul>
+
+    <div class="hmw-box">
+      <div class="hmw-label"><span class="es">Enfoque de diseño</span><span class="en">Design focus</span></div>
+      <p class="hmw-text es">¿Cómo simplificamos la selección de cargos y el onboarding de empresas en una plataforma enterprise de alta complejidad, manteniendo claridad en cada paso del proceso?</p>
+      <p class="hmw-text en">How do we simplify charge selection and company onboarding in a high-complexity enterprise platform, maintaining clarity at every step of the process?</p>
+    </div>
+
+    <div class="insight-grid-2">
+      <div class="insight-card">
+        <div class="insight-card-icon">✅</div>
+        <div class="insight-card-title"><span class="es">Estados documentados</span><span class="en">Documented states</span></div>
+        <p class="insight-card-text es">Cada flujo documenta múltiples estados de pantalla: vacío, cargando, con datos, con error de formulario, confirmación y éxito — cubriendo el espectro completo de la experiencia real.</p>
+        <p class="insight-card-text en">Each flow documents multiple screen states: empty, loading, with data, with form error, confirmation, and success — covering the full spectrum of the real experience.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🖥️</div>
+        <div class="insight-card-title"><span class="es">UI enterprise de escritorio</span><span class="en">Desktop enterprise UI</span></div>
+        <p class="insight-card-text es">Las propuestas aprovechan el ancho de pantalla completo típico de las aplicaciones enterprise de escritorio, con layouts amplios, tablas de datos y navegación contextual.</p>
+        <p class="insight-card-text en">The proposals leverage the full screen width typical of desktop enterprise applications, with wide layouts, data tables, and contextual navigation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT PROJECT -->
+<div style="max-width:900px;margin:0 auto;padding:48px 24px 64px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="smartdocs.html" style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#0056dc'" onmouseout="this.style.color='#111'">SmartDocs — Gestión documental con IA →</a>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('lang-en');
+    this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN';
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>

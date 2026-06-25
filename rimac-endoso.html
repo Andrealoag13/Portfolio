@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rimac – Nueva propuesta de Endoso | Andrea López</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #5B4CFF;
+      --dark: #111;
+      --text: #333;
+      --muted: #777;
+      --border: #e5e5e5;
+      --accent: #C8102E;
+      --accent-light: #e53935;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text); background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    body .en { display: none; }
+    body.lang-en .es { display: none; }
+    body.lang-en .en { display: block; }
+    span.en, a.en { display: none; }
+    body.lang-en span.es, body.lang-en a.es { display: none; }
+    body.lang-en span.en, body.lang-en a.en { display: inline; }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    .process-section { border-top: 1px solid var(--border); padding: 64px 24px; }
+    .process-inner { max-width: 900px; margin: 0 auto; }
+    .section-num { font-family: 'Poppins', sans-serif; font-size: 96px; font-weight: 700; color: var(--accent); opacity: 0.08; line-height: 1; margin-bottom: -32px; }
+    .section-divider { height: 4px; background: var(--purple); border-radius: 2px; max-width: 48px; margin-bottom: 20px; }
+    .section-heading { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+    .section-text { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+    .sub-heading { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--dark); margin: 40px 0 10px; }
+
+    .insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+    .insight-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+    .insight-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; }
+    .insight-card-icon { font-size: 22px; margin-bottom: 10px; }
+    .insight-card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 8px; }
+    .insight-card-text { font-size: 13px; color: #555; line-height: 1.65; }
+    .quote-box { background: #fdeef0; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 24px 28px; margin: 24px 0; }
+    .quote-text { font-size: 16px; font-style: italic; color: #333; line-height: 1.7; margin-bottom: 10px; }
+    .quote-attr { font-size: 13px; color: #777; font-weight: 600; }
+    .stats-row { display: flex; gap: 0; margin: 24px 0; background: #f8f8f8; border-radius: 12px; overflow: hidden; }
+    .stat-item { flex: 1; text-align: center; padding: 28px 16px; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.4; }
+    .hmw-box { background: var(--dark); color: #fff; border-radius: 12px; padding: 32px 36px; margin: 24px 0; text-align:center; }
+    .hmw-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; margin-bottom: 12px; }
+    .hmw-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 600; line-height: 1.45; }
+    .hmw-text strong { color: var(--accent-light); font-weight:700; }
+    .artifact-box { background: #f8f8f8; border-radius: 12px; padding: 20px 24px; margin: 12px 0; display: flex; align-items: flex-start; gap: 16px; }
+    .artifact-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+    .artifact-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: #111; margin-bottom: 6px; }
+    .artifact-text { font-size: 13px; color: #555; line-height: 1.6; }
+    .findings-list { list-style: none; margin: 20px 0; padding: 0; }
+    .findings-list li { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+    .findings-list li:last-child { border-bottom: none; }
+    .finding-num { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); opacity: 0.4; flex-shrink: 0; width: 32px; }
+    .finding-text { font-size: 14px; color: #444; line-height: 1.65; }
+    .result-banner { background: var(--accent); color: #fff; border-radius: 12px; padding: 28px 32px; margin: 24px 0; }
+    .result-title { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .result-text { font-size: 14px; opacity: 0.95; line-height: 1.8; }
+
+    .case-img { width: 100%; border-radius: 12px; margin: 18px 0 6px; box-shadow: 0 6px 24px rgba(0,0,0,0.10); display: block; border: 1px solid var(--border); background:#fff; }
+    .img-caption { font-size: 12px; color: #999; text-align: center; margin-bottom: 24px; line-height: 1.5; }
+
+    /* Pillars */
+    .pillars { display:grid; grid-template-columns: repeat(2,1fr); gap:12px; margin:20px 0; }
+    .pillar { border:1.5px solid var(--border); border-radius:12px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start; }
+    .pillar-dot { width:10px; height:10px; border-radius:50%; margin-top:6px; flex-shrink:0; }
+    .pillar-t { font-weight:700; font-size:14px; color:#111; margin-bottom:4px; }
+    .pillar-d { font-size:13px; color:#666; line-height:1.6; }
+
+    /* Pyramid */
+    .pyramid { display:flex; flex-direction:column; align-items:center; gap:6px; margin:24px 0 8px; }
+    .tier { color:#fff; font-weight:700; font-family:'Poppins',sans-serif; text-align:center; padding:14px 8px; border-radius:6px; font-size:15px; }
+    .tier.t1 { width:42%; background:#F5A623; }
+    .tier.t2 { width:64%; background:#8E44AD; }
+    .tier.t3 { width:86%; background:#27AE60; }
+    .pyramid-cap { text-align:center; font-size:12px; color:#999; margin-bottom:8px; }
+
+    /* Two-card pros/cons */
+    .pc-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0; }
+    .pc-card { border:1.5px solid var(--border); border-radius:12px; padding:20px; }
+    .pc-card.primary { border-color: var(--accent); }
+    .pc-tag { display:inline-block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:4px 10px; border-radius:20px; margin-bottom:12px; background:#f0f0f0; color:#555; }
+    .pc-card.primary .pc-tag { background:var(--accent); color:#fff; }
+    .pc-sub { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin:12px 0 6px; }
+    .pc-sub.pro { color:#27AE60; }
+    .pc-sub.con { color:var(--accent); }
+    .pc-list { list-style:none; padding:0; margin:0; }
+    .pc-list li { font-size:13px; color:#555; line-height:1.55; padding:4px 0 4px 16px; position:relative; }
+    .pc-list li::before { content:"•"; position:absolute; left:2px; color:#bbb; }
+
+    @media (max-width: 760px) {
+      .main-layout { grid-template-columns: 1fr !important; }
+      .sidebar { position: static !important; }
+    }
+    @media (max-width: 640px) {
+      .insight-grid, .insight-grid-2, .pillars, .pc-grid { grid-template-columns: 1fr; }
+      .stats-row { flex-direction: column; }
+      .section-num { font-size: 60px; }
+      .tier.t1,.tier.t2,.tier.t3 { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;">
+  <div style="width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="index.html" style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:var(--dark);">Andrea López</a>
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="index.html" style="font-size:14px;font-weight:600;">← <span class="es">Volver</span><span class="en">Back</span></a>
+      <a href="about.html" style="font-size:14px;font-weight:600;"><span class="es">Sobre mí</span><span class="en">About</span></a>
+      <button id="lang-toggle" style="border:1.5px solid currentColor;padding:4px 12px;border-radius:4px;cursor:pointer;background:transparent;font-family:inherit;font-weight:600;font-size:13px;">EN</button>
+      <a href="ANDREA-LOPEZ-CV.pdf" target="_blank" style="background:var(--purple);color:#fff;padding:8px 18px;border-radius:6px;font-weight:600;font-size:13px;">CV</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:var(--accent);color:#fff;padding:120px 24px 80px;position:relative;overflow:hidden;">
+  <span style="position:absolute;right:-20px;bottom:-40px;font-size:240px;font-weight:700;opacity:0.07;font-family:'Poppins', sans-serif;line-height:1;pointer-events:none;user-select:none;">R</span>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <p style="font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:0.8;margin-bottom:16px;">Service Design · UX · Rimac Seguros</p>
+    <h1 style="font-size:clamp(34px,6vw,60px);font-weight:700;line-height:1.1;margin-bottom:12px;"><span class="es">Nueva propuesta de Endoso</span><span class="en">New Endorsement Proposal</span></h1>
+    <p style="font-size:20px;font-weight:600;opacity:0.9;margin-bottom:8px;"><span class="es">Seguro de vida — Endoso de pólizas de crédito</span><span class="en">Life insurance — Credit policy endorsement</span></p>
+    <p style="font-size:17px;opacity:0.85;max-width:660px;line-height:1.6;margin-bottom:40px;">
+      <span class="es">Una propuesta de servicio holística para que Rimac sea la aseguradora principal al momento de endosar las pólizas de los créditos en Perú — simple, educativa y principalmente digital.</span>
+      <span class="en">A holistic service proposal to make Rimac the go-to insurer when endorsing credit policies in Peru — simple, educational, and mostly digital.</span>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.7;margin-bottom:4px;"><span class="es">Rol</span><span class="en">Role</span></p>
+        <p style="font-weight:700;font-size:15px;">Service Designer</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.7;margin-bottom:4px;"><span class="es">Empresa</span><span class="en">Company</span></p>
+        <p style="font-weight:700;font-size:15px;">Rimac Seguros</p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.7;margin-bottom:4px;"><span class="es">Duración</span><span class="en">Duration</span></p>
+        <p style="font-weight:700;font-size:15px;"><span class="es">10 meses · 2021</span><span class="en">10 months · 2021</span></p>
+      </div>
+      <div>
+        <p style="font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:0.7;margin-bottom:4px;"><span class="es">Herramientas</span><span class="en">Tools</span></p>
+        <p style="font-weight:700;font-size:15px;">Figma · Mural · Excel</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<div class="main-layout" style="max-width:1100px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start;">
+  <div class="sidebar" style="background:#f8f8f8;padding:28px;border-radius:12px;position:sticky;top:80px;">
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Mi rol</span><span class="en">My role</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;">Service Designer</p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Industria</span><span class="en">Industry</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;">🛡️ <span class="es">Seguros · Financiero</span><span class="en">Insurance · Financial</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Duración</span><span class="en">Duration</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">10 meses (2021)</span><span class="en">10 months (2021)</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;margin-bottom:24px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:6px;"><span class="es">Artefactos</span><span class="en">Artifacts</span></div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.7;"><span class="es">Desk research, entrevistas a profundidad, encuestas, mapas de afinidad, trend analysis, HMWs, ideación, brainstorm, journey map, storyboard, service blueprint, priorizaciones, prototipado.</span><span class="en">Desk research, in-depth interviews, surveys, affinity maps, trend analysis, HMWs, ideation, brainstorm, journey map, storyboard, service blueprint, prioritizations, prototyping.</span></p>
+    </div>
+    <div style="border-left:3px solid var(--purple);padding-left:14px;">
+      <div style="font-family:'Poppins', sans-serif;font-weight:700;font-size:13px;color:var(--dark);margin-bottom:8px;"><span class="es">Herramientas</span><span class="en">Tools</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;">
+        <span style="background:#fdeef0;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Figma</span>
+        <span style="background:#fdeef0;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Mural</span>
+        <span style="background:#fdeef0;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">Excel</span>
+        <span style="background:#fdeef0;color:var(--accent);font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;">RRSS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="fade-in">
+    <h2 style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);margin-bottom:20px;"><span class="es">¿Cómo empezó?</span><span class="en">How did it start?</span></h2>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">En marzo del 2021, Rimac vio una oportunidad de negocio para el producto de vida gracias a la promulgación de la <strong>ley 31143</strong>, que da a los usuarios la libertad de elegir con qué aseguradora contratar el seguro de desgravamen de sus créditos.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;">In March 2021, Rimac saw a business opportunity for its life product thanks to the enactment of <strong>law 31143</strong>, which gives users the freedom to choose which insurer to contract the credit's life insurance with.</p>
+    <p class="es" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;"><strong>Objetivo:</strong> que Rimac sea la aseguradora principal para poder endosar las pólizas de los créditos en Perú.</p>
+    <p class="en" style="font-size:16px;line-height:1.85;color:var(--text);margin-bottom:16px;"><strong>Goal:</strong> make Rimac the main insurer for endorsing credit policies in Peru.</p>
+    <div style="background:#fdeef0;border-radius:10px;padding:20px 24px;margin-top:8px;">
+      <p style="font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;"><span class="es">La propuesta final</span><span class="en">The final proposal</span></p>
+      <p class="es" style="font-size:14px;color:#444;line-height:1.7;">Una propuesta holística en 4 pilares, principalmente digital, que tiene una respuesta rápida y efectiva de menos de una semana para realizar el endoso.</p>
+      <p class="en" style="font-size:14px;color:#444;line-height:1.7;">A holistic proposal across 4 pillars, mostly digital, with a fast and effective response of under a week to complete the endorsement.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 00 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">00</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Nuestro reto y contexto</span><span class="en">Our challenge and context</span></h3>
+    <div class="hmw-box">
+      <div class="hmw-label">How Might We</div>
+      <p class="hmw-text es">¿Cómo creamos una propuesta de endoso <strong>simple</strong> y <strong>atractiva</strong> con nuestro seguro de vida, para los usuarios con un crédito en el sistema financiero?</p>
+      <p class="hmw-text en">How might we create a <strong>simple</strong> and <strong>attractive</strong> endorsement proposal with our life insurance, for users with a credit in the financial system?</p>
+    </div>
+    <p class="section-text es" style="margin-top:20px;">El contexto nace de la ley 31143 (marzo 2021). Estos son sus tres ejes:</p>
+    <p class="section-text en" style="margin-top:20px;">The context comes from law 31143 (March 2021). These are its three pillars:</p>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-card-title es">1 · Se aprueba la ley 31143</div>
+        <div class="insight-card-title en">1 · Law 31143 is approved</div>
+        <p class="insight-card-text es">Regula la protección al consumidor en el sistema financiero, estableciendo bases sobre las tasas de interés y los seguros cobrados por las entidades.</p>
+        <p class="insight-card-text en">It regulates consumer protection in the financial system, setting rules over interest rates and the insurance charged by entities.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-title es">2 · ¿Qué significa?</div>
+        <div class="insight-card-title en">2 · What does it mean?</div>
+        <p class="insight-card-text es">Los usuarios tendrán la libertad de contratar el seguro de desgravamen con la empresa que ellos elijan, y no obligatoriamente con su banco.</p>
+        <p class="insight-card-text en">Users gain the freedom to contract the life/credit insurance with the company they choose, not necessarily with their bank.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-title es">3 · ¿Y en qué nos beneficia?</div>
+        <div class="insight-card-title en">3 · How does it benefit us?</div>
+        <p class="insight-card-text es">Se abre el negocio: cualquier persona con un crédito puede endosar su seguro de vida con Rimac de forma fácil, dándoles más respaldo.</p>
+        <p class="insight-card-text en">The business opens up: anyone with a credit can easily endorse their life insurance with Rimac, giving them more backing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">01</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading">Research</h3>
+    <h4 class="sub-heading"><span class="es">¿Qué hemos realizado?</span><span class="en">What did we do?</span></h4>
+    <p class="section-text es" style="margin-bottom:8px;">3 entrevistadores · 1 mistery shopper · 3 semanas.</p>
+    <p class="section-text en" style="margin-bottom:8px;">3 interviewers · 1 mystery shopper · 3 weeks.</p>
+    <div class="insight-grid-2">
+      <div class="insight-card">
+        <div class="insight-card-icon">🎙️</div>
+        <div class="insight-card-title es">Entrevistas con expertos</div>
+        <div class="insight-card-title en">Expert interviews</div>
+        <p class="insight-card-text es">Para entender cómo y cuándo se comunica el beneficio del endoso a los usuarios, y los pasos que siguen los asesores en este proceso.</p>
+        <p class="insight-card-text en">To understand how and when the endorsement benefit is communicated to users, and the steps advisors follow in this process.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">💬</div>
+        <div class="insight-card-title es">Entrevistas con usuarios</div>
+        <div class="insight-card-title en">User interviews</div>
+        <p class="insight-card-text es">Para conocer las necesidades de los usuarios del sector financiero peruano con créditos, en un escenario de endoso entre un seguro de vida y su crédito.</p>
+        <p class="insight-card-text en">To understand the needs of Peruvian financial-sector users with credits, in an endorsement scenario between life insurance and their credit.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🔎</div>
+        <div class="insight-card-title es">Desk Research</div>
+        <div class="insight-card-title en">Desk Research</div>
+        <p class="insight-card-text es">Para entender de manera inicial cómo está la comunicación e información digital del proceso de adquisición y endoso en los bancos escogidos (BBVA, Scotiabank y BCP).</p>
+        <p class="insight-card-text en">An initial view of how digital communication and information around acquisition and endorsement looks in the chosen banks (BBVA, Scotiabank, and BCP).</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🕵️</div>
+        <div class="insight-card-title es">Mistery Shopper</div>
+        <div class="insight-card-title en">Mystery Shopper</div>
+        <p class="insight-card-text es">Para conocer, mediante un usuario simulado, la comunicación paso a paso que tienen (o no) los bancos en el proceso de adquisición y endoso de un crédito.</p>
+        <p class="insight-card-text en">Through a simulated user, to learn the step-by-step communication banks do (or don't) have in the credit acquisition and endorsement process.</p>
+      </div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Hallazgos cualitativos — Conocer al usuario</span><span class="en">Qualitative findings — Knowing the user</span></h4>
+    <p class="section-text es" style="margin-bottom:8px;">Muestra al 100% · 33 personas. Exploramos tres dimensiones:</p>
+    <p class="section-text en" style="margin-bottom:8px;">100% sample · 33 people. We explored three dimensions:</p>
+    <ul class="findings-list">
+      <li><span class="finding-num">01</span><span class="finding-text es"><strong>Estilo de vida y motivaciones de adquisición del crédito:</strong> el cambio de status es un motor potente; muchos cambiarían de aseguradora si eso mejora su posición o conveniencia.</span><span class="finding-text en"><strong>Lifestyle and credit acquisition motivations:</strong> status change is a strong driver; many would switch insurer if it improves their position or convenience.</span></li>
+      <li><span class="finding-num">02</span><span class="finding-text es"><strong>Nivel de conocimiento sobre el seguro de desgravamen:</strong> bajo. Una gran parte no sabe qué es el seguro de desgravamen ni que puede invertirlo o cambiarlo.</span><span class="finding-text en"><strong>Knowledge level about the credit life insurance:</strong> low. A large share doesn't know what it is, or that they can change it.</span></li>
+      <li><span class="finding-num">03</span><span class="finding-text es"><strong>Experiencia en búsqueda, adquisición y desgravamen:</strong> el proceso se percibe poco transparente; valoran que se les responda de forma correcta y rápida que con cualquier otra entidad.</span><span class="finding-text en"><strong>Experience in search, acquisition and endorsement:</strong> the process feels opaque; they value a correct and faster response than with any other entity.</span></li>
+    </ul>
+
+    <h4 class="sub-heading"><span class="es">Hallazgos cualitativos — Mistery Shopper</span><span class="en">Qualitative findings — Mystery Shopper</span></h4>
+    <p class="section-text es" style="margin-bottom:8px;">Comparamos la transparencia y el momento idóneo para solicitar el cambio de seguro de desgravamen en BCP, Interbank y Scotiabank (créditos inmobiliario y vehicular).</p>
+    <p class="section-text en" style="margin-bottom:8px;">We compared transparency and the ideal moment to request the insurance change in BCP, Interbank, and Scotiabank (mortgage and vehicle loans).</p>
+    <img src="rimac_mistery.png" alt="Tabla Mistery Shopper — transparencia y momento idóneo para solicitar el cambio de seguro de desgravamen en BCP, Interbank y Scotiabank" class="case-img">
+    <p class="img-caption es">Hallazgos del Mistery Shopper por banco y canal (web, WhatsApp, central telefónica), y momento de solicitud (pre-aprobación / post-cierre de crédito).</p>
+    <p class="img-caption en">Mystery Shopper findings by bank and channel (web, WhatsApp, phone), and request moment (pre-approval / post credit close).</p>
+  </div>
+</div>
+
+<!-- SECTION 02 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">02</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Definición</span><span class="en">Definition</span></h3>
+
+    <h4 class="sub-heading">Insights</h4>
+    <div class="insight-grid-2">
+      <div class="insight-card">
+        <div class="insight-card-icon">🏠</div>
+        <div class="insight-card-title es">"Más dinero = más adquisiciones"</div>
+        <div class="insight-card-title en">"More money = more acquisitions"</div>
+        <p class="insight-card-text es">Mientras más tengan, más será su status. La libertad es un punto fuerte para los usuarios, que crean relaciones netamente superficiales con las entidades.</p>
+        <p class="insight-card-text en">The more they have, the higher their status. Freedom is a strong driver; users form mostly superficial relationships with entities.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🧑‍🤝‍🧑</div>
+        <div class="insight-card-title es">Aunque vaya en "conjunto", reconóceme como persona</div>
+        <div class="insight-card-title en">Even "in a group", recognize me as a person</div>
+        <p class="insight-card-text es">Existe una presión social fuerte, pero los usuarios esperan que los servicios reconozcan sus preferencias individuales.</p>
+        <p class="insight-card-text en">There's strong social pressure, but users expect services to recognize their individual preferences.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">🤝</div>
+        <div class="insight-card-title es">Si traicionas mi confianza una vez, lo recordaré</div>
+        <div class="insight-card-title en">Betray my trust once and I'll remember</div>
+        <p class="insight-card-text es">La relación usuario–banco nace de la confianza; esperan ser bien retribuidos y, cuando no lo son, perdonar no es la opción. ¿Un servicio confiable puede tener clientes leales?</p>
+        <p class="insight-card-text en">The user–bank relationship is born of trust; they expect to be well rewarded, and when they aren't, forgiving isn't an option. Can a trustworthy service have loyal clients?</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-icon">📣</div>
+        <div class="insight-card-title es">Los usuarios creen, pero no buscan</div>
+        <div class="insight-card-title en">Users believe, but don't search</div>
+        <p class="insight-card-text es">Consideran importante lo que se promociona, pero ellos no salen a buscar la promoción ni a considerarla por su cuenta.</p>
+        <p class="insight-card-text en">They consider what's promoted important, but they don't go out to look for or consider the promotion themselves.</p>
+      </div>
+    </div>
+
+    <h4 class="sub-heading">User Personas</h4>
+    <p class="section-text es" style="margin-bottom:8px;">Dos perfiles guiaron la propuesta: Diego Campos (27, #ElQueNoArriesgaNoGana) y Michelle Solórzano (34, #VerOnFamilia).</p>
+    <p class="section-text en" style="margin-bottom:8px;">Two profiles guided the proposal: Diego Campos (27) and Michelle Solórzano (34).</p>
+    <img src="rimac_personas.png" alt="User personas: Diego Campos (27) y Michelle Solórzano (34) con metas, motivaciones, dolores y qué buscan" class="case-img">
+    <p class="img-caption es">User personas con metas, motivaciones, dolores y necesidades, y el producto/servicio ideal para cada una.</p>
+    <p class="img-caption en">User personas with goals, motivations, pains and needs, and the ideal product/service for each.</p>
+
+    <h4 class="sub-heading"><span class="es">Nuestra propuesta de valor</span><span class="en">Our value proposition</span></h4>
+    <p class="section-text es">Como seguro de vida Rimac, queremos estar presentes en la toma de decisiones de los usuarios con créditos y que nos vean como una posibilidad de endoso, siendo <strong>pioneros en comunicación</strong>: educar sobre el tema y ofrecer un <strong>servicio personalizado</strong> cuando tengan que endosar con nosotros.</p>
+    <p class="section-text en">As Rimac life insurance, we want to be present in the decision-making of users with credits and be seen as an endorsement option, being <strong>pioneers in communication</strong>: educating on the topic and offering a <strong>personalized service</strong> when they endorse with us.</p>
+    <div class="pyramid">
+      <div class="tier t1">Servicio</div>
+      <div class="tier t2"><span class="es">Informativa</span><span class="en">Informative</span></div>
+      <div class="tier t3">Comunicacional</div>
+    </div>
+    <p class="pyramid-cap"><span class="es">Propuesta de endoso Rimac</span><span class="en">Rimac endorsement proposal</span></p>
+  </div>
+</div>
+
+<!-- SECTION 03 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">03</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Ideación</span><span class="en">Ideation</span></h3>
+    <p class="section-text es">Construimos dos escenarios de servicio sobre el mismo recorrido — <strong>Comunicamos → Informamos → Vendemos personalizadamente</strong> — mapeando las acciones del cliente antes/durante y después de adquirir el crédito.</p>
+    <p class="section-text en">We built two service scenarios over the same journey — <strong>Communicate → Inform → Sell personally</strong> — mapping the customer's actions before/during and after acquiring the credit.</p>
+
+    <h4 class="sub-heading"><span class="es">Escenario digital</span><span class="en">Digital scenario</span></h4>
+    <img src="rimac_escenario_digital.png" alt="Escenario digital: comunicamos, informamos, vendemos personalizadamente — acciones del cliente antes/durante y después del crédito" class="case-img">
+    <p class="img-caption es">Recorrido 100% digital: publicidad, contenido educativo y venta personalizada vía canales digitales.</p>
+    <p class="img-caption en">Fully digital journey: advertising, educational content, and personalized sale through digital channels.</p>
+
+    <h4 class="sub-heading"><span class="es">Escenario phygital</span><span class="en">Phygital scenario</span></h4>
+    <img src="rimac_escenario_phygital.png" alt="Escenario phygital: comunicamos, informamos, vendemos personalizadamente combinando canales físicos y digitales" class="case-img">
+    <p class="img-caption es">Recorrido phygital: combina touchpoints físicos y digitales a lo largo del mismo journey.</p>
+    <p class="img-caption en">Phygital journey: combines physical and digital touchpoints across the same journey.</p>
+  </div>
+</div>
+
+<!-- SECTION 04 -->
+<div class="process-section">
+  <div class="process-inner fade-in">
+    <div class="section-num">04</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">Prototipado y testing</span><span class="en">Prototyping and testing</span></h3>
+
+    <h4 class="sub-heading"><span class="es">Priorización de ideas</span><span class="en">Idea prioritization</span></h4>
+    <p class="section-text es" style="margin-bottom:8px;">¿Cuál de estos escenarios era el más factible de probar?</p>
+    <p class="section-text en" style="margin-bottom:8px;">Which of these scenarios was the most feasible to test?</p>
+    <div class="pc-grid">
+      <div class="pc-card primary">
+        <span class="pc-tag"><span class="es">Escenario digital · priorizado</span><span class="en">Digital scenario · prioritized</span></span>
+        <div class="pc-sub pro">Pros</div>
+        <ul class="pc-list">
+          <li><span class="es">Más barato de realizar; en algunos casos el costo era mínimo o nulo.</span><span class="en">Cheaper to run; in some cases the cost was minimal or none.</span></li>
+          <li><span class="es">Más rápido de implementar.</span><span class="en">Faster to implement.</span></li>
+          <li><span class="es">Por COVID, era el escenario más factible.</span><span class="en">Due to COVID, it was the most feasible scenario.</span></li>
+        </ul>
+        <div class="pc-sub con">Contras</div>
+        <ul class="pc-list">
+          <li><span class="es">No teníamos todos los perfiles necesarios para realizarlas.</span><span class="en">We didn't have all the profiles needed to run them.</span></li>
+        </ul>
+      </div>
+      <div class="pc-card">
+        <span class="pc-tag"><span class="es">Escenario phygital</span><span class="en">Phygital scenario</span></span>
+        <div class="pc-sub pro">Pros</div>
+        <ul class="pc-list">
+          <li><span class="es">Puede llegar a más personas.</span><span class="en">Can reach more people.</span></li>
+        </ul>
+        <div class="pc-sub con">Contras</div>
+        <ul class="pc-list">
+          <li><span class="es">Logística bastante compleja; no estaría disponible de inmediato.</span><span class="en">Quite complex logistics; wouldn't be available immediately.</span></li>
+          <li><span class="es">Costo alto de implementar, que puede variar.</span><span class="en">High implementation cost, which can vary.</span></li>
+          <li><span class="es">No podemos replicar el target con facilidad.</span><span class="en">We can't easily replicate the target.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Objetivos de los testings</span><span class="en">Testing objectives</span></h4>
+    <div class="result-banner" style="background:#27AE60;">
+      <div class="result-title es">Validar nuestra propuesta de valor</div>
+      <div class="result-title en">Validate our value proposition</div>
+    </div>
+    <div class="insight-grid-2">
+      <div class="insight-card"><p class="insight-card-text es">Saber cómo, dónde y cuándo nuestros usuarios desean los touchpoints del servicio.</p><p class="insight-card-text en">Learn how, where and when our users want the service touchpoints.</p></div>
+      <div class="insight-card"><p class="insight-card-text es">Afinar nuestra propuesta de valor.</p><p class="insight-card-text en">Refine our value proposition.</p></div>
+      <div class="insight-card"><p class="insight-card-text es">Validar nuestras hipótesis en algunos touchpoints (ilustración o imágenes, etc).</p><p class="insight-card-text en">Validate our hypotheses on some touchpoints (illustration or images, etc).</p></div>
+      <div class="insight-card"><p class="insight-card-text es">Tener más claro el roadmap de experimentos.</p><p class="insight-card-text en">Get a clearer roadmap of experiments.</p></div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">1er experimento</span><span class="en">1st experiment</span></h4>
+    <p class="section-text es">Sobre el recorrido Comunicamos → Informamos → Vendemos personalizadamente: creación de publicidad en Facebook, atención de inquietudes por WhatsApp, derivación a una asesora previamente capacitada, y seguimiento para asegurar una venta personalizada (estados personalizados, correos, etc).</p>
+    <p class="section-text en">Over the Communicate → Inform → Sell personally journey: Facebook advertising, handling queries via WhatsApp, handoff to a previously trained advisor, and follow-up to ensure a personalized sale (personalized statuses, emails, etc).</p>
+  </div>
+</div>
+
+<!-- SECTION 05 -->
+<div class="process-section" style="background:#f8f8f8;">
+  <div class="process-inner fade-in">
+    <div class="section-num">05</div>
+    <div class="section-divider"></div>
+    <h3 class="section-heading"><span class="es">MVP y resultados</span><span class="en">MVP and results</span></h3>
+
+    <h4 class="sub-heading"><span class="es">Pauta digital — ¿Qué realizamos?</span><span class="en">Digital campaign — What did we do?</span></h4>
+    <p class="section-text es"><strong>3ª iteración</strong> · 02/02/2022 → 05/03/2022. Probamos una "BD estática" para evaluar conversión, y si la landing servía para captar leads y convertir. 3 piezas (2 estáticas, 1 real), dirigidas al 100% de la base trabajada con Canal Digital &amp; Data Analytics. En curso reemplazamos una pieza estática por la "real" y reconfiguramos la analítica de la landing.</p>
+    <p class="section-text en"><strong>3rd iteration</strong> · 02/02/2022 → 05/03/2022. We tested a "static DB" to evaluate conversion, and whether the landing captured leads and converted. 3 pieces (2 static, 1 real), targeting 100% of the base worked with Digital Channel &amp; Data Analytics. Mid-campaign we replaced a static piece with the "real" one and re-set up the landing analytics.</p>
+
+    <h4 class="sub-heading"><span class="es">Pauta digital — ¿Qué concluimos?</span><span class="en">Digital campaign — What did we conclude?</span></h4>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-card-title es">Base mayor + campaña exitosa</div>
+        <div class="insight-card-title en">Bigger base + successful campaign</div>
+        <p class="insight-card-text es">Una base mayor sostiene una campaña de lead ads exitosa: obtuvimos ratios favorables — <strong>conversión 4.5%</strong> y <strong>conversión efectiva 14.5%</strong>.</p>
+        <p class="insight-card-text en">A bigger base sustains a successful lead-ads campaign: we got favorable ratios — <strong>4.5% conversion</strong> and <strong>14.5% effective conversion</strong>.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-title es">Si hay usuarios, hay referidos</div>
+        <div class="insight-card-title en">Users bring referrals</div>
+        <p class="insight-card-text es">Los propios leads son embajadores de la propuesta: gracias a sus referidos llegaron nuevos usuarios que adquirieron un seguro de vida para su endoso.</p>
+        <p class="insight-card-text en">Leads themselves became ambassadors: their referrals brought new users who acquired life insurance for their endorsement.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-title es">Reels</div>
+        <div class="insight-card-title en">Reels</div>
+        <p class="insight-card-text es">Los usuarios ven más los reels que las piezas estáticas: encuentran más cercanía en el mensaje hablado que en los textos de las piezas.</p>
+        <p class="insight-card-text en">Users watch reels more than static pieces: they find more closeness in the spoken message than in the static texts.</p>
+      </div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Comparativa de landings</span><span class="en">Landing comparison</span></h4>
+    <p class="section-text es">Diseñé el prototipo en baja fidelidad con el design system de RIMAC y lo testeé con usuarios. El feedback fue positivo, pero con cambios clave: un formulario directo al inicio y un storytelling que explicara el proceso (los usuarios lo percibían complejo). Así nació la segunda versión, trabajada junto al equipo de UX y UI.</p>
+    <p class="section-text en">I designed the low-fidelity prototype with RIMAC's design system and tested it with users. Feedback was positive, but with key changes: a form right at the top and storytelling to explain the process (users found it complex). That's how the second version was born, built with the UX and UI team.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:20px 0 8px;">
+      <div>
+        <span style="display:inline-block;background:#64748b;color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;">1ª <span class="es">versión</span><span class="en">version</span></span>
+        <img src="rimac_landing_v1.png" alt="Landing primera versión — informativa, formulario más abajo" style="width:100%;border-radius:10px;border:2px solid #64748b;box-shadow:0 6px 20px rgba(0,0,0,0.08);display:block;">
+        <p style="font-size:12px;color:#999;margin-top:8px;line-height:1.5;"><span class="es">Larga e informativa; el formulario aparecía más abajo en el scroll.</span><span class="en">Long and informative; the form appeared lower in the scroll.</span></p>
+      </div>
+      <div>
+        <span style="display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px;">2ª <span class="es">versión</span><span class="en">version</span></span>
+        <img src="rimac_landing_v2.png" alt="Landing segunda versión — formulario al inicio y storytelling" style="width:100%;border-radius:10px;border:2px solid var(--accent);box-shadow:0 6px 20px rgba(200,16,46,0.15);display:block;">
+        <p style="font-size:12px;color:#999;margin-top:8px;line-height:1.5;"><span class="es">Formulario al inicio + storytelling ilustrado del proceso de endoso.</span><span class="en">Form at the top + illustrated storytelling of the endorsement process.</span></p>
+      </div>
+    </div>
+
+    <h4 class="sub-heading"><span class="es">Landing informativa — 2ª versión</span><span class="en">Informative landing — 2nd version</span></h4>
+    <p class="section-text es"><strong>Etapa MVP.</strong> Objetivo: validar si el cambio de posición del formulario sigue trayendo leads de valor para el endoso. Estructura: header + formulario, WhatsApp flotante, storytelling, beneficios, planes VC, preguntas y respuestas, y footer. Esperábamos que los usuarios entendieran mejor la información con una historia y que las cards fueran más fáciles de visualizar (scroll horizontal).</p>
+    <p class="section-text en"><strong>MVP stage.</strong> Goal: validate whether moving the form position still brings valuable endorsement leads. Structure: header + form, floating WhatsApp, storytelling, benefits, VC plans, FAQ, and footer. We expected users to understand the info better through a story and the cards to be easier to scan (horizontal scroll).</p>
+
+    <h4 class="sub-heading"><span class="es">Landing Page — ¿Qué concluimos?</span><span class="en">Landing page — What did we conclude?</span></h4>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-card-title es">Leads de valor</div>
+        <div class="insight-card-title en">Valuable leads</div>
+        <p class="insight-card-text es">La landing trae leads de calidad: al informar sobre la propuesta de valor, el usuario deja su dato cuando verdaderamente está interesado.</p>
+        <p class="insight-card-text en">The landing brings quality leads: by informing about the value proposition, users leave their data when truly interested.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-title es">95% mobile</div>
+        <div class="insight-card-title en">95% mobile</div>
+        <p class="insight-card-text es">El 95% de los usuarios consulta la landing desde el celular; por eso enfocamos el contenido en fondo y forma para una lectura simple en dispositivos móviles.</p>
+        <p class="insight-card-text en">95% of users access the landing from mobile; so we focused content in substance and form for simple reading on mobile devices.</p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-card-title es">WhatsApp</div>
+        <div class="insight-card-title en">WhatsApp</div>
+        <p class="insight-card-text es">Confirmamos que WhatsApp no solo sirve para captación de leads, sino también para conversión: es ideal mantenerlo.</p>
+        <p class="insight-card-text en">We confirmed WhatsApp serves not only for lead capture but also conversion: it's ideal to keep it.</p>
+      </div>
+    </div>
+
+    <div class="stats-row" style="margin-top:32px;">
+      <div class="stat-item"><div class="stat-num">225</div><div class="stat-label">leads</div></div>
+      <div class="stat-item"><div class="stat-num">16</div><div class="stat-label es">ventas</div><div class="stat-label en">sales</div></div>
+      <div class="stat-item"><div class="stat-num">13</div><div class="stat-label es">endosadas</div><div class="stat-label en">endorsed</div></div>
+      <div class="stat-item"><div class="stat-num">$85k</div><div class="stat-label es">suma asegurada promedio</div><div class="stat-label en">average insured sum</div></div>
+    </div>
+    <p class="section-text es" style="text-align:center;margin-top:4px;">+ 5 posibles cierres adicionales.</p>
+    <p class="section-text en" style="text-align:center;margin-top:4px;">+ 5 possible additional closes.</p>
+
+    <div class="result-banner" style="text-align:center;display:flex;align-items:center;gap:20px;justify-content:center;flex-wrap:wrap;">
+      <div style="font-family:'Poppins',sans-serif;font-weight:700;font-size:40px;line-height:1;">#1</div>
+      <div style="text-align:left;max-width:520px;">
+        <p class="result-text es" style="font-size:18px;font-weight:600;opacity:1;">Fuimos la primera campaña informativa que no solo generó leads, sino que también <strong>CONVIRTIÓ</strong>.</p>
+        <p class="result-text en" style="font-size:18px;font-weight:600;opacity:1;">We were the first informative campaign that not only generated leads, but also <strong>CONVERTED</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEXT PROJECT -->
+<div style="max-width:900px;margin:0 auto;padding:48px 24px 40px;text-align:center;">
+  <p style="font-size:12px;text-transform:uppercase;letter-spacing:3px;color:#999;margin-bottom:12px;"><span class="es">Siguiente proyecto</span><span class="en">Next project</span></p>
+  <a href="banco-pichincha.html" style="font-family:'Poppins', sans-serif;font-size:28px;font-weight:700;color:var(--dark);display:block;margin-bottom:8px;transition:color 0.2s;" onmouseover="this.style.color='#C8102E'" onmouseout="this.style.color='#111'">Banco Pichincha — Agencias 2.0 →</a>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:#111;color:#fff;padding:32px 24px;text-align:center;">
+  <p style="font-family:'Poppins', sans-serif;font-weight:700;font-size:18px;color:#fff;margin-bottom:6px;">Andrea López</p>
+  <p style="font-size:13px;color:#999;margin-bottom:14px;">Senior Service Designer · Senior UX</p>
+  <a href="index.html" style="font-size:14px;font-weight:600;color:#fff;">← <span class="es">Volver al portafolio</span><span class="en">Back to portfolio</span></a>
+</footer>
+
+<script>
+  document.getElementById('lang-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('lang-en');
+    this.textContent = document.body.classList.contains('lang-en') ? 'ES' : 'EN';
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0, rootMargin: '0px 0px 300px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<script>
+(function(){try{
+  var k='al-lang', saved=localStorage.getItem(k), btn=document.getElementById('lang-toggle');
+  if(saved==='en'){document.body.classList.add('lang-en'); if(btn) btn.textContent='ES';}
+  if(btn) btn.addEventListener('click', function(){
+    localStorage.setItem(k, document.body.classList.contains('lang-en')?'en':'es');
+  });
+}catch(e){}})();
+</script>
+</body>
+</html>
